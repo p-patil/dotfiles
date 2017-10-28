@@ -54,7 +54,7 @@ filetype plugin on                  " enable filetype-specific plugins
 
 " Color settings
 set rtp+=~/.vim                     " colorschemes and stuff for neovim
-colorscheme molokai
+colorscheme molokai                 " Located at https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
 
 if has('mouse')
     set mouse=a                     " enable mouse mode if avail
