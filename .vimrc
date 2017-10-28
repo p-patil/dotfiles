@@ -129,4 +129,3 @@ vmap <Leader>P "+P
 
 " Use asterisk to search for word under cursor
 nnoremap * *``
-
