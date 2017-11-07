@@ -118,10 +118,13 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 2)<CR>
 " Ctrl+x to unhighlight searched text
 nnoremap <silent> <C-x> :nohl<CR><C-l>
 
+" Easier buffer switching
+:nnoremap <A-tab> <C-6>
+
 " Use space instead of colon for saving, quitting, copy-pasting, etc.
 let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
+nnoremap <Leader>q :qall<CR>
 nnoremap <Leader>W :wq<CR>
 nmap <Leader>y "+yy
 vmap <Leader>y "+y
@@ -130,6 +133,10 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+
+" Easier buffer switching (and set bufmru mappings)
+:nnoremap <Leader>b :buffers<CR>:buffer<Space>
+:nnoremap <A-Tab> :b#<CR>
 
 " Use asterisk to search for word under cursor
 nnoremap * *``
