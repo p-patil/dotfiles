@@ -109,7 +109,9 @@ alias e="/usr/bin/nvim"
 alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard by default
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
+ascii="/home/piyush/scripts/ascii_table_ref/print_ascii_table"
 go="/home/piyush/scripts/go"
+exit_codes_help="/home/piyush/scripts/exit_codes_help"
 ls_l_help="/home/piyush/scripts/ls_l_help"
 music="/home/piyush/projects/Music-Player-Basic/main.py"
 off_mon="/home/piyush/scripts/monitor/off"
