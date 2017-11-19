@@ -61,7 +61,7 @@ filetype plugin on                  " enable filetype-specific plugins
 set rtp+=~/.vim                     " colorschemes and stuff for neovim
 let python_highlight_all=1
 let g:polyglot_disabled=['python']
-colorscheme molokai
+colorscheme molokai                 " Located at https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
 hi Normal ctermbg=black ctermfg=white
 
 if has('mouse')
