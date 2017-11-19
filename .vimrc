@@ -1,7 +1,9 @@
+set nocompatible
+
 " Plugins
 "" Install with:
-""" vim: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-""" neovim: curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+""" for vi(m): curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+""" for neovim: curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 " Helper function for conditionally loading plugins
 function! Cond(cond, ...)
@@ -47,18 +49,20 @@ if (has('nvim'))
     inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 endif
 
+" General settings
+
 " Syntax
 syntax on
 filetype on                         " detect the type of file
 filetype indent on                  " enable filetype-specific indenting
 filetype plugin on                  " enable filetype-specific plugins
 
-
-" General settings
-
 " Color settings
 set rtp+=~/.vim                     " colorschemes and stuff for neovim
-colorscheme molokai                 " Located at https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
+let python_highlight_all=1
+let g:polyglot_disabled=['python']
+colorscheme molokai
+hi Normal ctermbg=black ctermfg=white
 
 if has('mouse')
     set mouse=a                     " enable mouse mode if avail
