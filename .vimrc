@@ -97,6 +97,7 @@ set tabstop=4
 set softtabstop=0
 set expandtab
 set shiftwidth=4
+autocmd Filetype tex set shiftwidth=0 " Don't autoindent for .tex files
 set smarttab
 set hlsearch
 

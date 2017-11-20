@@ -105,7 +105,9 @@ export PATH=$PATH:/home/piyush/aur_builds/slack-desktop/pkg/slack-desktop/usr/bi
 
 export TERM="xterm-256color"
 
+# Local-specific stuff
 alias e="/usr/bin/nvim"
+alias vim="/usr/bin/nvim"
 alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard by default
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
