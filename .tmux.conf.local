@@ -274,5 +274,11 @@ unbind C-l
 bind -r p previous-window
 bind -r n next-window
 set -g mode-keys vi
+
 # Copy/paste
+bind P paste-buffer
+bind -t vi-copy y copy-selection
+bind -t vi-copy Y copy-line
+bind -t vi-copy y copy-pipe "xclip -sel clip -i"
+bind -t vi-copy Y copy-pipe "xclip -sel clip -i"
 bind -t vi-copy MouseDragEnd1Pane copy-pipe "xclip -sel clip -i"
