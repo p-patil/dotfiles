@@ -12,15 +12,13 @@ set $mod Mod4
 set $movemod Mod1
 
 # Bind volume keys
-#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +3%
-#bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -3%
-#bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 bindsym XF86AudioRaiseVolume exec /home/piyush/scripts/control_volume --raise 3
 bindsym XF86AudioLowerVolume exec /home/piyush/scripts/control_volume --lower 3
 bindsym XF86AudioMute exec /home/piyush/scripts/control_volume --mute
 
 # Bind microphone key
-bindsym XF86AudioMicMute exec "pactl set-source-mute 1 toggle"
+#bindsym XF86AudioMicMute exec "pactl set-source-mute 1 toggle"
+bindsym XF86AudioMicMute exec /home/piyush/scripts/toggle_mic
 
 # Bind brightness keys
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
@@ -76,6 +74,7 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen
+bindsym $mod+Shift+f fullscreen global
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -173,6 +172,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command ~/scripts/status_bar/status_bar
+        status_command py3status -c ~/.config/i3/i3status.conf
+        #status_command ~/scripts/status_bar/status_bar # Use this for customizing the status bar, but be warned that it's quite CPU intensive
         position top
 }

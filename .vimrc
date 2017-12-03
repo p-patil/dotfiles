@@ -15,13 +15,14 @@ call plug#begin()
 
 "" Shared between vim and neovim
 Plug 'craigemery/vim-autotag'
+Plug 'mbbill/undotree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-expand-region'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-surround'
+Plug 'w0rp/ale'
 
 "" Vim plugins
 " Plug 'example', Cond(!has('nvim'))
@@ -37,7 +38,7 @@ call plug#end()
 
 "" Vim plugins
 if (!has('nvim'))
-    " Put plugin settings here
+    " Put vim-only plugins here
 endif
 
 "" Neovim plugins
@@ -47,6 +48,16 @@ if (has('nvim'))
     let g:deoplete#enable_smart_case = 1
     set completeopt-=preview                " disable preview window
     inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+    
+    """ undotree
+    if has("persistent_undo")
+        set undodir=~/.vim/.undodir/
+        set undofile
+    endif
+
+    """ ale
+    let g:ale_sign_column_always=1
+    "let g:ale_change_sign_column_color=1
 endif
 
 " General settings
@@ -87,7 +98,6 @@ set smartcase
 set incsearch
 set showmatch		  " Show matching brackets
 set cursorline
-set breakindent       " Smart text wrapping
 set linebreak
 set scrolloff=5       " always show 5 lines above and below cursor
 set sidescrolloff=5   " always show 10 characters to left and right of line
@@ -120,11 +130,15 @@ noremap <silent> D :call smooth_scroll#down(&scroll, 0, 1)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 2)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 2)<CR>
 
+" Easily open window in new tab, to simulate quick fullscreen
+noremap tt :tab split<CR>
+noremap tq :tabc <CR>
+
 " Ctrl+x to unhighlight searched text
 nnoremap <silent> <C-x> :nohl<CR><C-l>
 
 " Easier buffer switching
-:nnoremap <A-tab> <C-6>
+nnoremap <A-tab> <C-6>
 
 " Use space instead of colon for saving, quitting, copy-pasting, etc.
 let mapleader = "\<Space>"
@@ -138,6 +152,9 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+
+" Key to toggle undo tree
+nnoremap <Leader>u :UndotreeToggle <CR>
 
 " Easier buffer switching (and set bufmru mappings)
 :nnoremap <Leader>b :buffers<CR>:buffer<Space>
