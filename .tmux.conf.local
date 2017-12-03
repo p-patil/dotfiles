@@ -276,7 +276,6 @@ bind -r n next-window
 set -g mode-keys vi
 
 # Copy/paste
-bind P paste-buffer
 bind -t vi-copy y copy-selection
 bind -t vi-copy Y copy-line
 bind -t vi-copy y copy-pipe "xclip -sel clip -i"
