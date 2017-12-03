@@ -22,6 +22,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-surround'
+Plug 'vim-scripts/vim_movement'
 Plug 'w0rp/ale'
 
 "" Vim plugins
