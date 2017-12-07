@@ -86,7 +86,8 @@ endif
 
 " Set default directories for installs and swap files
 set directory=~/.vim
-set backupdir=~/.vimtmp
+set directory^=$HOME/.vim/tmp//
+set backupdir=$HOME/.vim/tmp//
 
 set hidden            " Hides unloaded buffers instead of closing - this allows for switching between buffers without saving
 set wildmenu
