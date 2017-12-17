@@ -99,18 +99,25 @@ zle -N zle-keymap-select
 # Reduce lag on pressing <ES>
 export KEYTIMEOUT=0.1
 
+# Set default editor
+export EDITOR="/usr/bin/nvim"
+
+# Set default terminal to open in i3
+export TERMINAL="/usr/bin/xterm"
+
 export PATH=$PATH:/opt/google/chrome
 export PATH=$PATH:/opt/sublime_text_3
-export PATH=$PATH:/home/piyush/aur_builds/slack-desktop/pkg/slack-desktop/usr/bin
-
-export TERM="xterm-256color"
+export PATH=$PATH:/opt/slack-desktop/pkg/slack-desktop/usr/bin
+export PATH=$PATH:/opt/Trello
+export PATH=$PATH:/opt/firefox
+export PATH=$PATH:/opt/tor-browser_en-US
 
 # Local-specific stuff
 alias e="/usr/bin/nvim"
 alias vim="/usr/bin/nvim"
 alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard by default
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
-alias screenshot="import ~/downloads/screenshot.png"
+alias screenshot="import /tmp/screenshot.png && xclip -selection \"clipboard\" -target \"image/png\" -i < /tmp/screenshot.png"
 
 alias ascii="/home/piyush/scripts/ascii_table_ref/print_ascii_table"
 alias go="/home/piyush/scripts/go"
@@ -128,3 +135,4 @@ alias save="/home/piyush/projects/Session-Storer/save"
 alias scrambler="/home/piyush/scripts/scrambler/scrambler"
 sudo="/home/piyush/scripts/sudo_open" # Don't alias since it'll conflict with existing sudo
 alias switch_mouse="/home/piyush/scripts/mouse/switch"
+alias tor="/opt/tor-browser_en-US/start-tor-browser.desktop"

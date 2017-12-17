@@ -14,15 +14,14 @@ endfunction
 call plug#begin()
 
 "" Shared between vim and neovim
-Plug 'craigemery/vim-autotag'
+"Plug 'craigemery/vim-autotag'
+Plug 'easymotion/vim-easymotion'
 Plug 'mbbill/undotree'
 Plug 'jiangmiao/auto-pairs'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
-Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/vim_movement'
 Plug 'w0rp/ale'
 
 "" Vim plugins
@@ -32,10 +31,18 @@ Plug 'w0rp/ale'
 Plug 'Shougo/deoplete.nvim', Cond(has('nvim'), { 'do': ':UpdateRemotePlugins' })
 Plug 'artur-shaik/vim-javacomplete2', Cond(has('nvim'))
 Plug 'zchee/deoplete-jedi', Cond(has('nvim'))
+
 call plug#end()
 
 " Plugin settings
 "" Shared between vim and neovim
+
+""" easymotion settings
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
+nmap s <Plug>(easymotion-bd-w)
+nmap <Leader>j <Plug>(easymotion-jumptoanywhere)
+nmap <Leader>k <Plug>(easymotion-iskeyword-bd-w)
 
 "" Vim plugins
 if (!has('nvim'))
@@ -58,7 +65,6 @@ if (has('nvim'))
 
     """ ale
     let g:ale_sign_column_always=1
-    "let g:ale_change_sign_column_color=1
 endif
 
 " General settings
@@ -70,7 +76,7 @@ filetype indent on                  " enable filetype-specific indenting
 filetype plugin on                  " enable filetype-specific plugins
 
 " Color settings
-set rtp+=~/.vim                     " colorschemes and stuff for neovim
+set rtp+=$HOME/.vim                     " colorschemes and stuff for neovim
 let python_highlight_all=1
 let g:polyglot_disabled=['python']
 colorscheme molokai                 " Located at https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
@@ -85,7 +91,7 @@ if !has('nvim')
 endif
 
 " Set default directories for installs and swap files
-set directory=~/.vim
+set directory=$HOME/.vim
 set directory^=$HOME/.vim/tmp//
 set backupdir=$HOME/.vim/tmp//
 

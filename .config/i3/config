@@ -17,7 +17,6 @@ bindsym XF86AudioLowerVolume exec /home/piyush/scripts/control_volume --lower 3
 bindsym XF86AudioMute exec /home/piyush/scripts/control_volume --mute
 
 # Bind microphone key
-#bindsym XF86AudioMicMute exec "pactl set-source-mute 1 toggle"
 bindsym XF86AudioMicMute exec /home/piyush/scripts/toggle_mic
 
 # Bind brightness keys
