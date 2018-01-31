@@ -152,7 +152,7 @@ nnoremap <A-tab> <C-6>
 let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :qall<CR>
-nnoremap <Leader>W :wq<CR>
+nnoremap <Leader><Leader>w :wq<CR>
 nmap <Leader>y "+yy
 vmap <Leader>y "+y
 vmap <Leader>d "+d
