@@ -18,6 +18,7 @@ call plug#begin()
 Plug 'easymotion/vim-easymotion'
 Plug 'mbbill/undotree'
 Plug 'jiangmiao/auto-pairs'
+Plug 'othree/eregex.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-smooth-scroll'
@@ -43,6 +44,11 @@ let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
 nmap s <Plug>(easymotion-bd-w)
 nmap <Leader>j <Plug>(easymotion-jumptoanywhere)
 nmap <Leader>k <Plug>(easymotion-iskeyword-bd-w)
+
+""" eregex settings
+let g:eregex_default_enable = 0 " Enable
+let g:eregex_force_case = 1
+nnoremap <leader>/ :call eregex#toggle()<CR>
 
 "" Vim plugins
 if (!has('nvim'))
