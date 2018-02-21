@@ -20,11 +20,18 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(z vi-mode fzf-zsh)
+plugins=(z vi-mode fzf-zsh zsh-autosuggestions zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Auto-suggestions key bindings
+bindkey '^[[Z' autosuggest-accept # Bind Ctrl+Tab to accept suggestion
+
+# Virtualenv stuff
+export WORKON_HOME=~/.virtualenvs
+source /usr/bin/virtualenvwrapper.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -65,6 +72,12 @@ fi
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 alias ascii="/home/piyush/scripts/ascii_table_ref/print_ascii_table"
+function cdl() {
+    cd $1 && ls
+}
+function cdll() {
+    cd $1 && ls -alh
+}
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
 alias go="/home/piyush/scripts/go"
@@ -103,7 +116,16 @@ function mkcd() {
     mkdir "$1"
     cd "$1"
 }
-alias music="/home/piyush/projects/Music-Player-Basic/main.py"
+function music() {
+    OLD_DIR=$PWD
+
+    cd /home/piyush/projects/Music-Player-Basic
+    workon Music-Player-Basic
+    python main.py
+
+    deactivate
+    cd "$OLD_DIR"
+}
 alias off_mon="/home/piyush/scripts/monitor/off"
 alias on_mon="/home/piyush/scripts/monitor/on"
 alias push_dotfiles="/home/piyush/scripts/push_dotfiles"
@@ -113,7 +135,16 @@ alias reset_mouse="/home/piyush/scripts/mouse/reset"
 alias restart="/home/piyush/scripts/restart"
 alias restore="/home/piyush/projects/Session-Storer/restore"
 alias save="/home/piyush/projects/Session-Storer/save"
-alias scrambler="/home/piyush/scripts/scrambler/scrambler"
+function scrambler() {
+    OLD_DIR=$PWD
+
+    cd /home/piyush/projects/scripts/scrambler
+    workon scrambler
+    ./scrambler "$@"
+
+    deactivate
+    cd "$OLD_DIR"
+}
 alias screenshot="import /tmp/screenshot.png && xclip -selection \"clipboard\" -target \"image/png\" -i < /tmp/screenshot.png"
 alias switch_mouse="/home/piyush/scripts/mouse/switch"
 alias tor="(cd /opt/tor-browser_en-US && /opt/tor-browser_en-US/start-tor-browser.desktop)"
@@ -136,5 +167,8 @@ function zle-line-init zle-keymap-select {
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-
+# fzf stuff
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# bd
+. $HOME/.zsh/plugins/bd/bd.zsh
