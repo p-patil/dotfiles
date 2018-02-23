@@ -20,7 +20,7 @@ HYPHEN_INSENSITIVE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(z vi-mode fzf-zsh zsh-autosuggestions zsh-completions)
+plugins=(z vi-mode fzf-zsh zsh-autosuggestions zsh-completions per-directory-history)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -158,17 +158,10 @@ alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard
 # Add vim bindings
 bindkey -v
 
-# Display vim mode
-function zle-line-init zle-keymap-select {
-    RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-    RPS2=$RPS1
-    zle reset-prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
-
 # fzf stuff
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # bd
 . $HOME/.zsh/plugins/bd/bd.zsh
+
+# NOTE: Additional installs, not found here, correspond to .zsh scripts in ~/.oh-my-zsh/custom
