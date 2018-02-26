@@ -104,6 +104,7 @@ set backupdir=$HOME/.vim/tmp//
 set hidden            " Hides unloaded buffers instead of closing - this allows for switching between buffers without saving
 set wildmenu
 set relativenumber    " Make line numbering relative
+set nu
 set cindent
 set cinkeys-=0#
 set indentkeys-=0#

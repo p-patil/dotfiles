@@ -81,6 +81,7 @@ function cdll() {
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
 alias go="/home/piyush/scripts/go"
+# Function for easy symmetric, password-based decryption of a file with GPG.
 function gpg_decrypt() {
     if [[ "$1" == *".gpg" ]];
     then
@@ -99,6 +100,7 @@ function gpg_decrypt() {
         echo "Decrypting with GPG failed"
     fi
 }
+# Function for easy symmetric, password-based encryption of a file with GPG.
 function gpg_encrypt() {
     FILE_NAME="$1.gpg"
 
@@ -112,9 +114,15 @@ function gpg_encrypt() {
         echo "Encrypting with GPG failed"
     fi
 }
+# Function to create and then automatically change into a directory.
 function mkcd() {
     mkdir "$1"
     cd "$1"
+}
+# Function to automatically install the set packages after creating any virtualenv. NOTE: the
+# original mkvirtualenv function in /usr/bin/virtualenvwrapper.sh has been renamed.
+function mkvirtualenv() {
+    mkvirtualenv_original -i neovim $@
 }
 function music() {
     OLD_DIR=$PWD
