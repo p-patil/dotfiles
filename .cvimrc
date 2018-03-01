@@ -1,0 +1,12 @@
+" Settings
+let homedirectory = "/home/piyush"
+let barposition = "bottom"
+
+" Options
+set smoothscroll
+
+" Key bindings go here
+
+" Store path to this file, and tell cvim to load configuration from here
+let configpath = "~/.cvimrc"
+set localconfig
