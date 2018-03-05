@@ -156,17 +156,23 @@ nnoremap <silent> <C-x> :nohl<CR><C-l>
 nnoremap <A-tab> <C-6>
 
 " Use space instead of colon for saving, quitting, copy-pasting, etc.
+if has('nvim')
+    function! ClipboardYank()
+      call system('xclip -i -selection clipboard', @@)
+    endfunction
+    function! ClipboardPaste()
+      let @@ = system('xclip -o -selection clipboard')
+    endfunction
+endif
+
 let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :qall<CR>
 nnoremap <Leader><Leader>w :wq<CR>
-nmap <Leader>y "+yy
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
+nmap <Leader>y y:call ClipboardYank()<cr>
+vmap <Leader>y y:call ClipboardYank()<cr>
+vmap <Leader>d d:call ClipboardYank()<cr>
+nmap <Leader>p :call ClipboardPaste()<cr>p
 
 " Key to toggle undo tree
 nnoremap <Leader>u :UndotreeToggle <CR>

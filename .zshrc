@@ -14,20 +14,20 @@ ZSH_THEME="ys"
 HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to enable command auto-correction.
- ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(z vi-mode fzf-zsh zsh-autosuggestions zsh-completions per-directory-history)
+plugins=(z vi-mode zsh-autosuggestions zsh-completions per-directory-history)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# Auto-suggestions key bindings
-bindkey '^[[Z' autosuggest-accept # Bind Ctrl+Tab to accept suggestion
+# zsh-autosuggestions key bindings
+bindkey '^[[Z' autosuggest-accept # Bind Shift+Tab to accept suggestion
 
 # Virtualenv stuff
 export WORKON_HOME=~/.virtualenvs
@@ -47,6 +47,12 @@ export KEYTIMEOUT=0.1
 ## Set default editor
 export EDITOR="/usr/bin/nvim"
 
+## For SSH agent
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval `ssh-agent -s` &> /dev/null
+    ssh-add ~/.ssh/id_rsa &> /dev/null
+fi
+
 ## Set PATH
 if [[ $PATH != *"/opt/sublime_text"* ]]; then
     export PATH=$PATH:/opt/sublime_text_3
@@ -63,8 +69,8 @@ fi
 if [[ $PATH != *"/opt/tor-browser_en-US"* ]]; then
     export PATH=$PATH:/opt/tor-browser_en-US
 fi
-if [[ $PATH != *"/opt/chromium-vaapi"* ]]; then
-    export PATH=$PATH:/opt/chromium-vaapi
+if [[ $PATH != *"/opt/google/chrome"* ]]; then
+    export PATH=$PATH:/opt/google/chrome
 fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -124,6 +130,10 @@ function mkcd() {
 function mkvirtualenv() {
     mkvirtualenv_original -i neovim $@
 }
+alias mount_sdb1="/home/piyush/scripts/mount/mount_sdb1"
+alias mount_sdc1="/home/piyush/scripts/mount/mount_sdc1"
+alias umount_sdb1="/home/piyush/scripts/mount/umount_sdb1"
+alias umount_sdc1="/home/piyush/scripts/mount/umount_sdc1"
 function music() {
     OLD_DIR=$PWD
 
@@ -168,6 +178,7 @@ bindkey -v
 
 # fzf stuff
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND="ag --hidden --ignore .git -f -g"
 
 # bd
 . $HOME/.zsh/plugins/bd/bd.zsh
