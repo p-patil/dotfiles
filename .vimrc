@@ -78,8 +78,14 @@ endif
 " Syntax
 syntax on
 filetype on                         " detect the type of file
-filetype indent on                  " enable filetype-specific indenting
 filetype plugin on                  " enable filetype-specific plugins
+let file_name = fnamemodify(bufname("%"), ":t")
+let file_ext = matchstr(file_name, '.*\.tex')
+if empty(file_ext)
+    filetype indent on              " enable filetype-specific indenting, but not for tex files
+    set cindent
+    set indentkeys-=0#
+endif
 
 " Color settings
 set rtp+=$HOME/.vim                     " colorschemes and stuff for neovim
@@ -105,9 +111,7 @@ set hidden            " Hides unloaded buffers instead of closing - this allows 
 set wildmenu
 set relativenumber    " Make line numbering relative
 set nu
-set cindent
 set cinkeys-=0#
-set indentkeys-=0#
 set showcmd		      " Display typed characters in Normal mode
 set smartcase
 set incsearch
@@ -122,7 +126,6 @@ set tabstop=4
 set softtabstop=0
 set expandtab
 set shiftwidth=4
-autocmd Filetype tex set shiftwidth=0 " Don't autoindent for .tex files
 set smarttab
 set hlsearch
 
