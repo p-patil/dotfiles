@@ -50,8 +50,8 @@ export EDITOR="/usr/bin/nvim"
 ## For SSH agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval `ssh-agent -s` &> /dev/null
-    ssh-add ~/.ssh/id_rsa &> /dev/null
 fi
+ssh-add ~/.ssh/id_rsa &> /dev/null
 
 ## Set PATH
 if [[ $PATH != *"/opt/sublime_text"* ]]; then
