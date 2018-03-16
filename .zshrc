@@ -166,6 +166,8 @@ function scrambler() {
 alias screenshot="import /tmp/screenshot.png && xclip -selection \"clipboard\" -target \"image/png\" -i < /tmp/screenshot.png"
 alias switch_mouse="/home/piyush/scripts/mouse/switch"
 alias tor="(cd /opt/tor-browser_en-US && /opt/tor-browser_en-US/start-tor-browser.desktop)"
+alias ts_enable="xinput enable $(sed -nE "s/.*Touchscreen\s+id=([0-9]+).*/\1/p" <(xinput))"
+alias ts_disable="xinput disable $(sed -nE "s/.*Touchscreen\s+id=([0-9]+).*/\1/p" <(xinput))"
 alias trello="/opt/Trello/Trello"
 alias vlc="vlc --play-and-exit"
 alias wifi_connect="/home/piyush/scripts/wifi/wifi_connect"
