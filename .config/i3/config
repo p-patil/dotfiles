@@ -41,8 +41,6 @@ focus_follows_mouse no
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-#bindsym $movemod+Tab exec /home/piyush/scripts/i3_scripts/focus-last.py --switch 2> /tmp/run-i3-focus-last-errors_$(head /dev/urandom | tr -dc "a-zA-Z0-9" | head -c 16).txt
-
 # start a terminal
 bindsym $mod+Return exec kitty
 

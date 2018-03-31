@@ -12,4 +12,3 @@ fi
 /home/piyush/scripts/touchscreen --disable
 
 exec i3
-# exec i3 && /home/piyush/scripts/i3_scripts/focus-last.py 2> /tmp/start-i3-focus-last-errors_$(head /dev/urandom | tr -dc "a-zA-Z0-9" | head -c 16).txt
