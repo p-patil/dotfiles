@@ -138,7 +138,7 @@ function music() {
 alias off_mon="/home/piyush/scripts/monitor/off"
 alias on_mon="/home/piyush/scripts/monitor/on"
 alias push_dotfiles="/home/piyush/scripts/push_dotfiles"
-alias quick_man="/home/piyush/scripts/quick_man/quick_man"
+alias quick_man="/home/piyush/scripts/quick_man"
 alias remap_keys="/home/piyush/scripts/remap_keys"
 alias reset_mouse="/home/piyush/scripts/mouse/reset"
 alias restart="/home/piyush/scripts/restart"
