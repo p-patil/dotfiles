@@ -14,7 +14,6 @@ endfunction
 call plug#begin()
 
 "" Shared between vim and neovim
-"Plug 'craigemery/vim-autotag'
 Plug 'easymotion/vim-easymotion'
 Plug 'mbbill/undotree'
 Plug 'jiangmiao/auto-pairs'

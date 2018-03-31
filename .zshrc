@@ -54,20 +54,11 @@ fi
 ssh-add ~/.ssh/id_rsa &> /dev/null
 
 ## Set PATH
-if [[ $PATH != *"/opt/sublime_text"* ]]; then
-    export PATH=$PATH:/opt/sublime_text_3
-fi
-if [[ $PATH != *"/opt/slack-desktop/pkg/slack-desktop/usr/bin"* ]]; then
-    export PATH=$PATH:/opt/slack-desktop/pkg/slack-desktop/usr/bin
-fi
-if [[ $PATH != *"/opt/Trello"* ]]; then
-    export PATH=$PATH:/opt/Trello
+if [[ $PATH != *"/opt/aur_builds/trello"* ]]; then
+    export PATH=$PATH:/opt/aur_builds/trello
 fi
 if [[ $PATH != *"/opt/firefox"* ]]; then
     export PATH=$PATH:/opt/firefox
-fi
-if [[ $PATH != *"/opt/tor-browser_en-US"* ]]; then
-    export PATH=$PATH:/opt/tor-browser_en-US
 fi
 if [[ $PATH != *"/opt/google/chrome"* ]]; then
     export PATH=$PATH:/opt/google/chrome
@@ -87,6 +78,7 @@ function cdll() {
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
 alias go="/home/piyush/scripts/go"
+alias gp="/usr/bin/git --all --prune --rebase"
 # Function for easy symmetric, password-based decryption of a file with GPG.
 function gpg_decrypt() {
     if [[ "$1" == *".gpg" ]];
@@ -120,6 +112,7 @@ function gpg_encrypt() {
         echo "Encrypting with GPG failed"
     fi
 }
+alias load_vbox_modules="modprobe vboxdrv vboxnetadp vboxnetfltvboxpci"
 # Function to create and then automatically change into a directory.
 function mkcd() {
     mkdir "$1"
@@ -132,8 +125,6 @@ function mkvirtualenv() {
 }
 alias mount_sdb1="/home/piyush/scripts/mount/mount_sdb1"
 alias mount_sdc1="/home/piyush/scripts/mount/mount_sdc1"
-alias umount_sdb1="/home/piyush/scripts/mount/umount_sdb1"
-alias umount_sdc1="/home/piyush/scripts/mount/umount_sdc1"
 function music() {
     OLD_DIR=$PWD
 
@@ -165,10 +156,10 @@ function scrambler() {
 }
 alias screenshot="import /tmp/screenshot.png && xclip -selection \"clipboard\" -target \"image/png\" -i < /tmp/screenshot.png"
 alias switch_mouse="/home/piyush/scripts/mouse/switch"
-alias tor="(cd /opt/tor-browser_en-US && /opt/tor-browser_en-US/start-tor-browser.desktop)"
-alias ts_enable="xinput enable $(sed -nE "s/.*Touchscreen\s+id=([0-9]+).*/\1/p" <(xinput))"
-alias ts_disable="xinput disable $(sed -nE "s/.*Touchscreen\s+id=([0-9]+).*/\1/p" <(xinput))"
-alias trello="/opt/Trello/Trello"
+alias ts_enable="/home/piyush/scripts/touchscreen --enable"
+alias ts_disable="/home/piyush/scripts/touchscreen --disable"
+alias umount_sdb1="/home/piyush/scripts/mount/umount_sdb1"
+alias umount_sdc1="/home/piyush/scripts/mount/umount_sdc1"
 alias vlc="vlc --play-and-exit"
 alias wifi_connect="/home/piyush/scripts/wifi/wifi_connect"
 alias wifi_restart="/home/piyush/scripts/wifi/wifi_restart"
