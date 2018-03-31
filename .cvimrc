@@ -5,6 +5,7 @@ let barposition = "bottom"
 " Options
 set smoothscroll
 set nativelinkorder
+set noautofocus
 
 " Key bindings go here
 map F createActiveTabbedHint
