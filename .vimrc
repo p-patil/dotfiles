@@ -20,6 +20,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'othree/eregex.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
+Plug 'Shougo/unite.vim'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
@@ -156,6 +157,12 @@ nnoremap <silent> <C-x> :nohl<CR><C-l>
 
 " Easier buffer switching
 nnoremap <A-tab> <C-6>
+
+" Fuzzy search in file
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#source('file,file/new,buffer,file_rec,line', 'matchers', 'matcher_fuzzy')
+nnoremap \ :<C-u>Unite -buffer-name=search -start-insert line<cr>
 
 " Use space instead of colon for saving, quitting, copy-pasting, etc.
 if has('nvim')

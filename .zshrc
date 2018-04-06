@@ -78,7 +78,7 @@ function cdll() {
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
 alias go="/home/piyush/scripts/go"
-alias gp="/usr/bin/git --all --prune --rebase"
+alias gp="/usr/bin/git pull --all --prune --rebase"
 # Function for easy symmetric, password-based decryption of a file with GPG.
 function gpg_decrypt() {
     if [[ "$1" == *".gpg" ]];
