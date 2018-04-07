@@ -12,7 +12,6 @@ function! Cond(cond, ...)
 endfunction
 
 call plug#begin()
-
 "" Shared between vim and neovim
 Plug 'easymotion/vim-easymotion'
 Plug 'mbbill/undotree'
@@ -24,7 +23,6 @@ Plug 'Shougo/unite.vim'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
-
 "" Vim plugins
 " Plug 'example', Cond(!has('nvim'))
 
