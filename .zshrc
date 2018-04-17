@@ -170,10 +170,11 @@ alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard
 bindkey -v
 
 # fzf stuff
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND="ag --hidden --ignore .git -f -g"
 
 # bd
 . $HOME/.zsh/plugins/bd/bd.zsh
 
 # NOTE: Additional installs, not found here, correspond to .zsh scripts in ~/.oh-my-zsh/custom
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
