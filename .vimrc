@@ -112,27 +112,28 @@ set directory^=$HOME/.vim/tmp//
 set backupdir=$HOME/.vim/tmp//
 
 " Misc. options
-set hidden            " Hides unloaded buffers instead of closing - this allows for switching between buffers without saving
-set wildmenu
-set relativenumber    " Make line numbering relative
-set nu                " But display the current line number next to the line, instead of 0
 set cinkeys-=0#
-set showcmd		      " Display typed characters in Normal mode
-set smartcase
-set incsearch         " Start searching as the search query is typed
-set showmatch		  " Show matching brackets
 set cursorline        " Highlight the line where the cursor is
+set hidden            " Hides unloaded buffers instead of closing - this allows for switching between buffers without saving
+set incsearch         " Start searching as the search query is typed
 set linebreak
+set noconfirm         " Don't display 'Enter to continue' prompts
+set nu                " But display the current line number next to the line, instead of 0
+set relativenumber    " Make line numbering relative
 set scrolloff=5       " always show 5 lines above and below cursor
+set showcmd		      " Display typed characters in Normal mode
+set showmatch		  " Show matching brackets
 set sidescrolloff=5   " always show 10 characters to left and right of line
+set smartcase
+set wildmenu
 
 " Tab stuff
-set tabstop=4
-set softtabstop=0
 set expandtab
+set hlsearch
 set shiftwidth=4
 set smarttab
-set hlsearch
+set softtabstop=0
+set tabstop=4
 
 " Don't move the cursor back a character when returning to normal mode from insert mode
 imap <Esc> <Esc>l
@@ -191,10 +192,18 @@ nnoremap <Leader>u :UndotreeToggle <CR>
 nnoremap <Leader>/ :M/
 
 " Fuzzy search (depends on fzf.vim)
-:nnoremap \ :BLines<CR>
+
+"" Search in current buffer
+:nnoremap \ :BLines<CR> 
+
+"" Search in all open buffers
 :nnoremap <Leader>\ :Lines<CR>
-:nnoremap <Leader>a :Ag<CR>
-:nnoremap <C-p> :Files<CR>
+
+"" Search recursively in files in current directory, using ag
+:nnoremap <Leader>a :Ag<CR> 
+
+"" Search recursively over files names in current directory
+:nnoremap <C-p> :Files<CR> 
 
 " Use asterisk to search for word under cursor
 nnoremap * *``
