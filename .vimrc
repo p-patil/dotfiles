@@ -120,7 +120,7 @@ set linebreak
 set noconfirm         " Don't display 'Enter to continue' prompts
 set nu                " But display the current line number next to the line, instead of 0
 set relativenumber    " Make line numbering relative
-set scrolloff=5       " always show 5 lines above and below cursor
+set scrolloff=4       " always show 5 lines above and below cursor
 set showcmd		      " Display typed characters in Normal mode
 set showmatch		  " Show matching brackets
 set sidescrolloff=5   " always show 10 characters to left and right of line

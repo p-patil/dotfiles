@@ -161,13 +161,14 @@ alias ts_disable="/home/piyush/scripts/touchscreen --disable"
 alias umount_sdb1="/home/piyush/scripts/mount/umount_sdb1"
 alias umount_sdc1="/home/piyush/scripts/mount/umount_sdc1"
 alias vlc="vlc --play-and-exit"
+alias wat="/opt/wat"
 alias wifi_connect="/home/piyush/scripts/wifi/wifi_connect"
 alias wifi_restart="/home/piyush/scripts/wifi/wifi_restart"
 sudo="/home/piyush/scripts/sudo_open" # Don't alias since it'll conflict with existing sudo
 alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard by default
 
 # Add vim bindings
-bindkey -v
+#bindkey -v
 
 # fzf stuff
 export FZF_DEFAULT_COMMAND="ag --hidden --ignore .git -f -g"
