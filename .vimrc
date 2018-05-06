@@ -138,30 +138,35 @@ set tabstop=4
 " Don't move the cursor back a character when returning to normal mode from insert mode
 imap <Esc> <Esc>l
 
-" Swap commands for moving visual lines and moving over actual lines
+" Motion-related key mappings
+
+"" Swap commands for moving visual lines and moving over actual lines
 noremap j gj
 noremap k gk
 noremap gj j
 noremap gk k
 
-" Map to scrolling
+"" Map to scrolling
 noremap J <C-e>
 noremap K <C-y>
 
-" Map to smooth scrolling
+"" Map to smooth scrolling
 noremap <silent> U :call smooth_scroll#up(&scroll, 0, 1)<CR>
 noremap <silent> D :call smooth_scroll#down(&scroll, 0, 1)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 2)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 2)<CR>
 
-" Easily open window in new tab, to simulate quick fullscreen of a window
+" Misc. key mappings
+
+"" Easily open window in new tab, to simulate quick fullscreen of a window
 noremap tt :tab split<CR>
 noremap tq :tabc <CR>
 
-" Ctrl+x to unhighlight searched text
+"" Ctrl+x to unhighlight searched text
 nnoremap <silent> <C-x> :nohl<CR><C-l>
 
-" Use space instead of colon for saving, quitting, copy-pasting, etc.
+"" TODO(piyush) this might be redundant given the leader mappings one section below
+"" Use space instead of colon for saving, quitting, copy-pasting, etc.
 if has('nvim')
     function! ClipboardYank()
       call system('xclip -i -selection clipboard', @@)
@@ -171,7 +176,7 @@ if has('nvim')
     endfunction
 endif
 
-" Easier leader mappings
+"" Easier leader mappings
 let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :qall<CR>
@@ -181,15 +186,36 @@ vmap <Leader>y y:call ClipboardYank()<cr>
 vmap <Leader>d d:call ClipboardYank()<cr>
 nmap <Leader>p :call ClipboardPaste()<cr>p
 
-" Key to toggle undo tree (depends on Undotree)
+"" Sometimes I don't want to override the default register when editing text.
+nnoremap dx "_dd
+
+"" Debugging-related stuff
+function! TodoComment(remove)
+    call NERDComment('n', 'append')
+    let line=getline('.')
+    if a:remove
+        call setline('.', line . 'TODO(piyush) remove')
+    else
+        call setline('.', line . 'TODO(piyush)')
+    endif
+endfunction
+map td :call TodoComment(0)<CR><C-o>I <C-o>==<C-o>A
+map tr :call TodoComment(1)<CR><C-o>I <C-o>==<Esc>
+
+"" Key to toggle undo tree (depends on Undotree)
 nnoremap <Leader>u :UndotreeToggle <CR>
 
-" Easier buffer switching (and set bufmru mappings)
+"" Regex search (depends on eregex)
+nnoremap <Leader>/ :M/
+
+" Use asterisk to search for word under cursor
+nnoremap * *``
+
+" Buffer- and file-related key mappings
+
+"" Easier buffer switching (and set bufmru mappings)
 :nnoremap <Leader>b :Buffers<CR>
 :nnoremap <A-Tab> :b#<CR>
-
-" Regex search (depends on eregex)
-nnoremap <Leader>/ :M/
 
 " Fuzzy search (depends on fzf.vim)
 
@@ -204,6 +230,3 @@ nnoremap <Leader>/ :M/
 
 "" Search recursively over files names in current directory
 :nnoremap <C-p> :Files<CR> 
-
-" Use asterisk to search for word under cursor
-nnoremap * *``

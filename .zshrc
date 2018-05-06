@@ -20,7 +20,12 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(z vi-mode zsh-autosuggestions zsh-completions per-directory-history)
+if [[ $TERM != "xterm-termite" ]]
+then
+    plugins=(z vi-mode zsh-autosuggestions zsh-completions per-directory-history)
+else
+    plugins=(z zsh-autosuggestions zsh-completions per-directory-history)
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -135,6 +140,9 @@ function music() {
     deactivate
     cd "$OLD_DIR"
 }
+function move_workspace() {
+    i3 workspace "$1" && i3 move workspace to output "$2"
+}
 alias off_mon="/home/piyush/scripts/monitor/off"
 alias on_mon="/home/piyush/scripts/monitor/on"
 alias push_dotfiles="/home/piyush/scripts/push_dotfiles"
@@ -168,7 +176,10 @@ sudo="/home/piyush/scripts/sudo_open" # Don't alias since it'll conflict with ex
 alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard by default
 
 # Add vim bindings
-#bindkey -v
+if [[ $TERM != "xterm-termite" ]]
+then
+    bindkey -v
+fi
 
 # fzf stuff
 export FZF_DEFAULT_COMMAND="ag --hidden --ignore .git -f -g"
