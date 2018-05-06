@@ -190,17 +190,14 @@ nmap <Leader>p :call ClipboardPaste()<cr>p
 nnoremap dx "_dd
 
 "" Debugging-related stuff
-function! TodoComment(remove)
+function! TodoComment(comment)
     call NERDComment('n', 'append')
     let line=getline('.')
-    if a:remove
-        call setline('.', line . 'TODO(piyush) remove')
-    else
-        call setline('.', line . 'TODO(piyush)')
-    endif
+    call setline('.', line . a:comment)
 endfunction
-map td :call TodoComment(0)<CR><C-o>I <C-o>==<C-o>A
-map tr :call TodoComment(1)<CR><C-o>I <C-o>==<Esc>
+nnoremap <expr> td getline('.')=~'^\s*$' ?":call TodoComment('TODO(piyush)')<CR><C-o>I <C-o>==<C-o>A":":call TodoComment('TODO(piyush)')<CR><C-o>A"
+map tr :call TodoComment('TODO(piyush) remove')<CR><C-o>I <C-o>==<Esc>
+nnoremap <expr> tr getline('.')=~'^\s*$' ?":call TodoComment('TODO(piyush) remove')<CR><C-o>I <C-o>==<Esc>":":call TodoComment('TODO(piyush) remove')<CR><Esc>"
 
 "" Key to toggle undo tree (depends on Undotree)
 nnoremap <Leader>u :UndotreeToggle <CR>
