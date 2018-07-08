@@ -1,0 +1,218 @@
+# Essential Arch install
+- base, base-devel
+    - Installed with: pacman
+    - Description: Basic installation
+
+## Wifi stuff
+- iw, wpa_supplicant, dialog, wpa_actiond
+    - Installed with: pacman
+    - Description: For network configuration. The "dialog" package is necessary for wifi-menu. Netctl comes with "base" package. The "wpa_actiond" package is needed for the netctl-auto@wlp4s0.service systemd unit.
+- openconnect
+    - Installed with: pacman
+    - Description: Client program for Cisco's AnyConnect VPN, needed to access UC Berkeley campus VPN.
+- openbsd-netcat
+    - Installed with: pacman
+    - Description: Network utility for writing to and reading from network connections, using the TCP and UDP protocols.
+- nmap
+    - Installed with: pacman
+    - Description: Advanced and versatile port scanner.
+## Display stuff
+- xorg, xorg-server, xorg-xinit
+    - Installed with: pacman
+    - Description: For using X server as the display server 
+- mesa, libva-intel-driver, xf86-video-intel
+    - Installed with: pacman
+    - Description: The package "mesa" provides the DRI driver (for 3-D acceleration) for Intel video cards. The package "libva-intel-driver" is the VA-API implementation for hardware acceleration.
+
+## Window manager stuff
+- i3
+    - Installed with: pacman
+    - Description: Window manager.
+- py3status
+    - Installed with: AUR package
+    - Description: i3 status bar.
+- pulseaudio, pulseaudio-alsa, alsa-utils
+    - Installed with: pacman
+    - Description: Sound server.
+- i3ipc
+    - Installed with: pip
+    - Description: Python package for communicating with i3 using its IPC interface. Required by scratchpad_async on i3status bar.
+
+# Functionality packages
+
+- exfat-utils, fuse-exfat
+    - Installed with: pacman
+    - Description: Allows for mounting exfat filesystems.
+
+- nftables
+    - Installed with: pacman
+    - Description: iptables replacement, for setting up firewall using the pre-compiled netfilter system, already in the kernel, as a backend.
+
+- lshw
+    - Installed with: pacman
+    - Description: Lists hardware information.
+
+## Terminal
+- alacritty
+    - Installed with: AUR package (https://aur.archlinux.org/alacritty-scrollback-git)
+    - Description: Terminal emulator, optimized for speed (uses OpenGL for GPU access when rendering, and fast parser written in Rust) and with a minimalist philosophy. This AUR package is a fork which adds scrollback as a feature, as this is not supported by default.
+- kitty
+    - Installed with: pacman
+    - Description: Terminal emulator, also offloads some rendering work to GPU for performance gains, but is additionally full of features, such as an intuitive tabbing and window system.
+    - NOTE: Currently, fonts are broken on kitty for some reason (something to do with a system update).
+- termite
+     - Installed with: pacman
+     - Description: TODO
+- noto-fonts
+    - Installed with: pacman
+    - Description: Family of "Noto" fonts, which is what is used by the kitty.conf.
+- xorg-fonts-misc
+    - Installed with: pacman
+    - Some default fonts for xterm.
+
+- cronie
+    - Installed with: pacman
+    - Description: Background for executing commands at fixed time intervals, using crontab.
+
+## Programming languages and development stuff
+
+### Python
+- python
+    - Installed with: pacman
+    - Description: The Python programming language.
+- python-pip
+    - Installed with: pacman
+    - Description: Pip package manager for python.
+- python-pylint
+    - Installed with: pacman
+    - Description: Python linter. Necessary for Neovim plugin Ale.
+
+- git
+    - Installed with: pacman
+    - Description: Git version control system.
+
+- cgdb
+    - Installed with: pacman
+    - Curses-based visual interface that wraps around GDB (the GNU debugger for C and C++).
+
+### Java
+- jdk
+    - Installed with: AUR package (https://aur.archlinux.org/jdk.git)
+    - Description: The Oracle Java development kit for the Java programming language.
+
+# Extra
+
+## Google Chrome
+- chromium
+    - Installed with: AUR package (https://aur.archlinux.org/packages/chromium-vaapi/)
+    - Description: Chromium, built from source, to include VA-API and other hardware acceleration components.
+- pepper-flash
+    - Installed with: pacman
+    - Description: Chrome flash plugin.
+- chromium-widevine
+    - Installed with: AUR package (https://aur.archlinux.org/packages/chromium-widevine/)
+    - Description: Plugin to allow viewing of certain content (e.g. Netflix).
+- google-chrome
+    - Installed with: AUR package (https://aur.archlinux.org/packages/google-chrome/)
+    - Description: TODO remove. Closed source Chrome build for linux.
+
+## Desktop applications
+
+- trello
+    - Installed with: AUR package (https://aur.archlinux.org/packages/trello/)
+
+- slack-desktop
+    - Installed with: AUR package (https://aur.archlinux.org/packages/slack-desktop/)
+    - Description: Desktop application for Slack.
+
+- evince
+    - Installed with: AUR package (https://aur.archlinux.org/packages/evince-no-gnome/)
+
+- rtorrent
+    - Installed with: pacman
+    - Description: Command-line torrent client.
+
+## Command line stuff
+
+- neovim
+    - Installed with: pacman
+    - Description: Text editor, forked and newer version of vim.
+
+- gvim
+    - Installed with: pacman
+    - Description: GUI (i.e. non-terminal-based) vim.
+
+- rsync
+    - Installed with: pacman
+    - Description: Versatile and efficient file copying, for both local-remote and local settings, tool.
+
+- the_silver_searcher
+    - Installed with: pacman
+    - Description: Provides the "ag" tool, for quickly searching text.
+
+- vlc
+    - Installed with: pacman
+    - Description: Media player.
+
+- imagemagick
+    - Installed with: pacman
+    - Description: Diverse and powerful image processing utility.
+
+- feh
+    - Installed with: pacman
+    - Description: Lightweight but powerful image viewer.
+
+- xclip
+    - Installed with: pacman
+    - Description: Utility for copying to and from the system keyboard
+
+- htop
+    - Installed with: pacman
+    - Description: Top command with a better UI.
+
+- zip, unzip
+    - Installed with: pacman
+    - Description: Compression and uncompression utilities for .zip file format.
+
+## Building Latex files
+- texlive-most
+    - Installed with: pacman
+    - Description: Provides latex libraries and the pdflatex tool for building PDFs from tex files.
+
+## Printing
+- cups, cups-pdf
+    - Installed with: pacman
+    - Description: A standards-based, open source printing system for Unix operating systems.
+- brother-hl2280dw
+    - Installed with: AUR package (https://aur.archlinux.org/packages/brother-hl2280dw/)
+    - Description: Driver for Brother HL2280DW printer.
+
+## Kernel development
+- qemu qemu-arch-extra
+    - Installed with: pacman
+    - Description: Hypervisor for running virtual machines, designed for performance. Can be paired with KVM to attain near native performance.
+- vido
+    - Installed with: pip
+    - Description: Wrapper around qemu, provides easy command to use as a kernel launcher. So, vido can be used similar to sudo, i.e. to wrap around commands, which are then run inside a new (optionally custom) kernel.
+
+## Battery hardware stuff
+- tlp, acpi_call
+    - Installed with: pacman
+    - Description: TODO
+    - Note: Also enabled the systemd units tlp.service and tlp-sleep.service.
+
+- aws-cli
+    - Installed with: pacman
+    - Description: Command-line tool for managing AWS ec2 instances.
+
+- tmux
+    - Installed with: pacman
+    - Description: Terminal multiplexer.
+
+- ntfs-3g
+    - Installed with: pacman
+    - Description: Open source implementation of Microsoft NTFS, which allows for mounting NTFS filesystems (e.g. Windows partitions) with read and write permissions.
+
+- lsof
+    - Installed with: pacman
+    - Description: TODO

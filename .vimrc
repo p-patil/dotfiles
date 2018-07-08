@@ -196,7 +196,6 @@ function! TodoComment(comment)
     call setline('.', line . a:comment)
 endfunction
 nnoremap <expr> td getline('.')=~'^\s*$' ?":call TodoComment('TODO(piyush)')<CR><C-o>I <C-o>==<C-o>A":":call TodoComment('TODO(piyush)')<CR><C-o>A"
-map tr :call TodoComment('TODO(piyush) remove')<CR><C-o>I <C-o>==<Esc>
 nnoremap <expr> tr getline('.')=~'^\s*$' ?":call TodoComment('TODO(piyush) remove')<CR><C-o>I <C-o>==<Esc>":":call TodoComment('TODO(piyush) remove')<CR><Esc>"
 
 "" Key to toggle undo tree (depends on Undotree)

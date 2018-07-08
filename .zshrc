@@ -73,19 +73,99 @@ fi
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-alias ascii="/home/piyush/scripts/ascii_table_ref/print_ascii_table"
-function cdl() {
+
+## Function for printing (or grepping, if passed the search pattern) an ASCII table.
+function ascii() {
+    CONTROL_CHAR_OUTPUT=$(column -s "," -t < /home/piyush/scripts/ascii_table_ref/control_chars.csv | sed -E "s/(.*)/\t\1/")
+    CONTROL_CHAR_HEADER=$(echo "$CONTROL_CHAR_OUTPUT" | sed -n "1 p")
+    CONTROL_CHAR_OUTPUT=$(echo "$CONTROL_CHAR_OUTPUT" | sed -n "2,$ p")
+    if [[ $# -gt "0" ]]
+    then
+        CONTROL_CHAR_OUTPUT=$(echo "$CONTROL_CHAR_OUTPUT" | grep "$@")
+    fi
+
+    PRINTABLE_CHAR_OUTPUT=$(column -s "," -t < /home/piyush/scripts/ascii_table_ref/printable_chars.csv | sed -E "s/(.*)/\t\1/")
+    PRINTABLE_CHAR_HEADER=$(echo "$PRINTABLE_CHAR_OUTPUT" | sed -n "1 p")
+    PRINTABLE_CHAR_OUTPUT=$(echo "$PRINTABLE_CHAR_OUTPUT" | sed -n "2,$ p")
+    if [[ $# -gt "0" ]]
+    then
+        PRINTABLE_CHAR_OUTPUT=$(echo "$PRINTABLE_CHAR_OUTPUT" | grep "$@")
+    fi
+
+    EXTENDED_CHAR_OUTPUT=$(column -s "," -t < /home/piyush/scripts/ascii_table_ref/extended_chars.csv | sed -E "s/(.*)/\t\1/")
+    EXTENDED_CHAR_HEADER=$(echo "$EXTENDED_CHAR_OUTPUT" | sed -n "1 p")
+    EXTENDED_CHAR_OUTPUT=$(echo "$EXTENDED_CHAR_OUTPUT" | sed -n "2,$ p")
+    if [[ $# -gt "0" ]]
+    then
+        EXTENDED_CHAR_OUTPUT=$(echo "$EXTENDED_CHAR_OUTPUT" | grep "$@")
+    fi
+
+    if [[ ! "$CONTROL_CHAR_OUTPUT" =~ "^\s*$" ]]
+    then
+        echo "Control Characters"
+        echo "$CONTROL_CHAR_HEADER"
+        echo "$CONTROL_CHAR_OUTPUT"
+    fi
+
+    if [[ ! "$PRINTABLE_CHAR_OUTPUT" =~ "^\s*$" ]]
+    then
+        echo "Printable Characters"
+        echo "$PRINTABLE_CHAR_HEADER"
+        echo "$PRINTABLE_CHAR_OUTPUT"
+    fi
+
+    if [[ ! "$EXTENDED_CHAR_OUTPUT" =~ "^\s*$" ]]
+    then
+        echo "Extended Characters"
+        echo "$EXTENDED_CHAR_HEADER"
+        echo "$EXTENDED_CHAR_OUTPUT"
+    fi
+}
+
+function cl() {
     cd $1 && ls
 }
+
 function cdll() {
     cd $1 && ls -alh
 }
+
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
-alias go="/home/piyush/scripts/go"
+
+function go() {
+    if [[ $# -eq 0 ]]
+    then
+        echo "Usage: go <command"
+        exit
+    fi
+
+    SPACES_REGEX=" |'"
+    COMMAND=""
+    for ARG in "$@"
+    do
+        if [[ "$ARG" =~ "$SPACES_REGEX" ]]
+        then
+            ARG=$(printf %q "$ARG")
+        fi
+
+        COMMAND="$COMMAND $ARG"
+    done
+
+    COMMAND="$COMMAND &> /dev/null &"
+    bash -c "$COMMAND"
+}
+
 alias gp="/usr/bin/git pull --all --prune --rebase"
-# Function for easy symmetric, password-based decryption of a file with GPG.
+
+## Function for easy symmetric, password-based decryption of a file with GPG.
 function gpg_decrypt() {
+    if [[ $# -eq 0 ]]
+    then
+        echo "Usage: gpg_decrypt <file name>"
+        exit
+    fi
+
     if [[ "$1" == *".gpg" ]];
     then
         FILE_NAME="${1: : -4}"
@@ -103,8 +183,15 @@ function gpg_decrypt() {
         echo "Decrypting with GPG failed"
     fi
 }
-# Function for easy symmetric, password-based encryption of a file with GPG.
+
+## Function for easy symmetric, password-based encryption of a file with GPG.
 function gpg_encrypt() {
+    if [[ $# -eq 2 ]]
+    then
+        echo "Usage: gpg_decrypt <file name>"
+        exit
+    fi
+
     FILE_NAME="$1.gpg"
 
     echo "Attempting to create encrypted file \"$FILE_NAME\""
@@ -117,19 +204,22 @@ function gpg_encrypt() {
         echo "Encrypting with GPG failed"
     fi
 }
-alias load_vbox_modules="modprobe vboxdrv vboxnetadp vboxnetfltvboxpci"
-# Function to create and then automatically change into a directory.
+
+## Function to create and then automatically change into a directory.
 function mkcd() {
     mkdir "$1"
     cd "$1"
 }
-# Function to automatically install the set packages after creating any virtualenv. NOTE: the
-# original mkvirtualenv function in /usr/bin/virtualenvwrapper.sh has been renamed.
+
+## Function to automatically install the set packages after creating any virtualenv. NOTE: the
+## original mkvirtualenv function in /usr/bin/virtualenvwrapper.sh has been renamed.
 function mkvirtualenv() {
     mkvirtualenv_original -i neovim $@
 }
+
 alias mount_sdb1="/home/piyush/scripts/mount/mount_sdb1"
 alias mount_sdc1="/home/piyush/scripts/mount/mount_sdc1"
+
 function music() {
     OLD_DIR=$PWD
 
@@ -140,9 +230,11 @@ function music() {
     deactivate
     cd "$OLD_DIR"
 }
+
 function move_workspace() {
     i3 workspace "$1" && i3 move workspace to output "$2"
 }
+
 alias off_mon="/home/piyush/scripts/monitor/off"
 alias on_mon="/home/piyush/scripts/monitor/on"
 alias push_dotfiles="/home/piyush/scripts/push_dotfiles"
@@ -152,6 +244,7 @@ alias reset_mouse="/home/piyush/scripts/mouse/reset"
 alias restart="/home/piyush/scripts/restart"
 alias restore="/home/piyush/projects/Session-Storer/restore"
 alias save="/home/piyush/projects/Session-Storer/save"
+
 function scrambler() {
     OLD_DIR=$PWD
 
@@ -162,6 +255,7 @@ function scrambler() {
     deactivate
     cd "$OLD_DIR"
 }
+
 alias screenshot="import /tmp/screenshot.png && xclip -selection \"clipboard\" -target \"image/png\" -i < /tmp/screenshot.png"
 alias switch_mouse="/home/piyush/scripts/mouse/switch"
 alias ts_enable="/home/piyush/scripts/touchscreen --enable"
@@ -170,8 +264,8 @@ alias umount_sdb1="/home/piyush/scripts/mount/umount_sdb1"
 alias umount_sdc1="/home/piyush/scripts/mount/umount_sdc1"
 alias vlc="vlc --play-and-exit"
 alias wat="/opt/wat"
-alias wifi_connect="/home/piyush/scripts/wifi/wifi_connect"
-alias wifi_restart="/home/piyush/scripts/wifi/wifi_restart"
+alias connect_wifi="/home/piyush/scripts/wifi/wifi_connect"
+alias wr="/home/piyush/scripts/wifi/wifi_restart"
 sudo="/home/piyush/scripts/sudo_open" # Don't alias since it'll conflict with existing sudo
 alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard by default
 
