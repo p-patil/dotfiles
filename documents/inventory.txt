@@ -83,6 +83,8 @@
 - python-pip
     - Installed with: pacman
     - Description: Pip package manager for python.
+    - Packages installed with pip:
+        - requests
 - python-pylint
     - Installed with: pacman
     - Description: Python linter. Necessary for Neovim plugin Ale.
@@ -173,6 +175,10 @@
 - zip, unzip
     - Installed with: pacman
     - Description: Compression and uncompression utilities for .zip file format.
+
+- espeak
+    - Installed with: pacman
+    - Description: Command-line text-to-speech.
 
 ## Building Latex files
 - texlive-most

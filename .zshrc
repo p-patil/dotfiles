@@ -137,7 +137,7 @@ function go() {
     if [[ $# -eq 0 ]]
     then
         echo "Usage: go <command"
-        exit
+        return
     fi
 
     SPACES_REGEX=" |'"
@@ -153,7 +153,7 @@ function go() {
     done
 
     COMMAND="$COMMAND &> /dev/null &"
-    bash -c "$COMMAND"
+    eval "$COMMAND"
 }
 
 alias gp="/usr/bin/git pull --all --prune --rebase"
@@ -163,7 +163,7 @@ function gpg_decrypt() {
     if [[ $# -eq 0 ]]
     then
         echo "Usage: gpg_decrypt <file name>"
-        exit
+        return
     fi
 
     if [[ "$1" == *".gpg" ]];
@@ -189,7 +189,7 @@ function gpg_encrypt() {
     if [[ $# -eq 2 ]]
     then
         echo "Usage: gpg_decrypt <file name>"
-        exit
+        return
     fi
 
     FILE_NAME="$1.gpg"
@@ -244,6 +244,16 @@ alias reset_mouse="/home/piyush/scripts/mouse/reset"
 alias restart="/home/piyush/scripts/restart"
 alias restore="/home/piyush/projects/Session-Storer/restore"
 alias save="/home/piyush/projects/Session-Storer/save"
+
+function say() {
+    if [[ $# -eq 0 ]]
+    then
+        echo "Usage: say \"<words>\""
+        return
+    fi
+
+    espeak "\"$@\"" &> /dev/null
+}
 
 function scrambler() {
     OLD_DIR=$PWD
