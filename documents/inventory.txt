@@ -83,8 +83,7 @@
 - python-pip
     - Installed with: pacman
     - Description: Pip package manager for python.
-    - Packages installed with pip:
-        - requests
+    - To see packages installed with pip, run `pip freeze`
 - python-pylint
     - Installed with: pacman
     - Description: Python linter. Necessary for Neovim plugin Ale.
@@ -221,4 +220,8 @@
 
 - lsof
     - Installed with: pacman
-    - Description: TODO
+    - Description: Displays information about the files that have been opened by running processes.
+
+- traceroute
+    - Installed with: pacman
+    - Description: Sends and receives IP packets. Similar to tracepath, but manipulates raw packets instead of going through the sockets API, which means it requires root priviledges, but also that it is more powerful, allowing for the option of which protocol to use (IP vs TCP vs UDP, etc.), setting limits for minimum and maximum TTL, and other fine-grained control.
