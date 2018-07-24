@@ -300,7 +300,7 @@ function volume() {
         echo "WARNING: Setting volume to above 100%"
     fi
 
-    pactl set-sink-volume 0 "$1%"
+    pactl set-sink-volume 0 "$1%" > /dev/null
 }
 
 alias vlc="vlc --play-and-exit"
