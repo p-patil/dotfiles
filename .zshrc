@@ -146,6 +146,7 @@ function cdll() {
     cd $1 && ls -alh
 }
 
+alias connect_wifi="/home/piyush/scripts/wifi/wifi_connect"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
 
@@ -288,9 +289,22 @@ alias ts_enable="/home/piyush/scripts/touchscreen --enable"
 alias ts_disable="/home/piyush/scripts/touchscreen --disable"
 alias umount_sdb1="/home/piyush/scripts/mount/umount_sdb1"
 alias umount_sdc1="/home/piyush/scripts/mount/umount_sdc1"
+
+function volume() {
+    if [[ $# -eq 0 ]] || [[ ! $1 =~ "^[0-9]+$" ]]
+    then
+        echo "Usage: volume <PERCENTAGE>"
+        return
+    elif [[ $1 -gt 100 ]]
+    then
+        echo "WARNING: Setting volume to above 100%"
+    fi
+
+    pactl set-sink-volume 0 "$1%"
+}
+
 alias vlc="vlc --play-and-exit"
 alias wat="/opt/wat"
-alias connect_wifi="/home/piyush/scripts/wifi/wifi_connect"
 alias wr="/home/piyush/scripts/wifi/wifi_restart"
 sudo="/home/piyush/scripts/sudo_open" # Don't alias since it'll conflict with existing sudo
 alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard by default
