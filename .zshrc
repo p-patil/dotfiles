@@ -20,12 +20,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-if [[ $TERM != "xterm-termite" ]]
-then
-    plugins=(z vi-mode zsh-autosuggestions zsh-completions per-directory-history)
-else
-    plugins=(z zsh-autosuggestions zsh-completions per-directory-history)
-fi
+plugins=(z fzf-zsh vi-mode zsh-autosuggestions zsh-completions per-directory-history)
 
 source $ZSH/oh-my-zsh.sh
 

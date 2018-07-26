@@ -179,12 +179,20 @@
     - Installed with: pacman
     - Description: Command-line text-to-speech.
 
+- android-tools
+    - Installed with: pacman
+    - Description: Provides the android debug bridge (adb) tool, which can be used to manipulate connected (via USB) android devices.
+
+- docker
+    - Installed with: pacman
+    - Description: Containerization tool.
+
 ## Building Latex files
 - texlive-most
     - Installed with: pacman
     - Description: Provides latex libraries and the pdflatex tool for building PDFs from tex files.
 
-## Printing
+## Printer stuff
 - cups, cups-pdf
     - Installed with: pacman
     - Description: A standards-based, open source printing system for Unix operating systems.
@@ -200,7 +208,7 @@
     - Installed with: pip
     - Description: Wrapper around qemu, provides easy command to use as a kernel launcher. So, vido can be used similar to sudo, i.e. to wrap around commands, which are then run inside a new (optionally custom) kernel.
 
-## Battery hardware stuff
+## Battery and hardware stuff
 - tlp, acpi_call
     - Installed with: pacman
     - Description: TODO
