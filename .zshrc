@@ -277,8 +277,8 @@ function open_pdfs() {
         PAGE_NUM=$(echo "$PAGE_NUM_AND_WORKSPACE" | cut -d "," -f 1)
         WORKSPACE=$(echo "$PAGE_NUM_AND_WORKSPACE" | cut -d "," -f 2)
 
-        (i3 workspace "$WORKSPACE" && evince -p "$PAGE_NUM" "$FILE") &> /dev/null &
-        sleep 0.1 # Wait a bit for the workspace to change before proceeding
+        (i3 workspace "$WORKSPACE" && evince --page-index="$PAGE_NUM" "$FILE") &> /dev/null &
+        sleep 0.5 # Wait a bit for the workspace to change before proceeding
     done < "$CACHE_FILE"
 }
 
