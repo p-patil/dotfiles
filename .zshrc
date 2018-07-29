@@ -249,6 +249,39 @@ function move_workspace() {
 
 alias off_mon="/home/piyush/scripts/monitor/off"
 alias on_mon="/home/piyush/scripts/monitor/on"
+
+function open_pdfs() {
+    # Allow caller to pass a file with PDFs to open.
+    if [[ $# -gt 0 ]]
+    then
+        CACHE_FILE=$1
+    else
+        CACHE_FILE="~/scripts/saver/evince/cache.txt"
+    fi
+
+    # Expand home directory if it exists (this is a bit hacky).
+    HOME_ESCAPED=$(echo "$HOME" | sed "s|/|\\\/|g")
+    CACHE_FILE=$(echo "$CACHE_FILE" | sed -E "s/\~/$HOME_ESCAPED/")
+
+    # Verify that cache file exists.
+    if [[ ! -f "$CACHE_FILE" ]]
+    then
+        echo "ERROR: Cache file \"$CACHE_FILE\" isn't a regular file or doesn't exist"
+        return
+    fi
+
+    # Iterate over the lines of the cache file, opening PDFs with evince in the background.
+    while read -r FILE; read -r PAGE_NUM_AND_WORKSPACE
+    do
+        # Parse page number to open to and workspace to put PDF in
+        PAGE_NUM=$(echo "$PAGE_NUM_AND_WORKSPACE" | cut -d "," -f 1)
+        WORKSPACE=$(echo "$PAGE_NUM_AND_WORKSPACE" | cut -d "," -f 2)
+
+        (i3 workspace "$WORKSPACE" && evince -p "$PAGE_NUM" "$FILE") &> /dev/null &
+        sleep 0.1 # Wait a bit for the workspace to change before proceeding
+    done < "$CACHE_FILE"
+}
+
 alias push_dotfiles="/home/piyush/scripts/push_dotfiles"
 alias quick_man="/home/piyush/scripts/quick_man"
 alias remap_keys="/home/piyush/scripts/remap_keys"
