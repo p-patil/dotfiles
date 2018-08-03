@@ -247,8 +247,8 @@ function move_workspace() {
     i3 workspace "$1" && i3 move workspace to output "$2"
 }
 
-alias off_mon="/home/piyush/scripts/monitor/off"
-alias on_mon="/home/piyush/scripts/monitor/on"
+alias off_mon="/home/piyush/scripts/monitor/off.py"
+alias on_mon="/home/piyush/scripts/monitor/on.py"
 
 function open_pdfs() {
     # Allow caller to pass a file with PDFs to open.
@@ -282,11 +282,11 @@ function open_pdfs() {
     done < "$CACHE_FILE"
 }
 
-alias push_dotfiles="/home/piyush/scripts/push_dotfiles"
-alias quick_man="/home/piyush/scripts/quick_man"
-alias remap_keys="/home/piyush/scripts/remap_keys"
-alias reset_mouse="/home/piyush/scripts/mouse/reset"
-alias restart="/home/piyush/scripts/restart"
+alias push_dotfiles="/home/piyush/scripts/push_dotfiles.sh"
+alias quick_man="/home/piyush/scripts/quick_man.py"
+alias remap_keys="/home/piyush/scripts/remap_keys.sh"
+alias reset_mouse="/home/piyush/scripts/mouse/switch.sh --right"
+alias restart="/home/piyush/scripts/restart.py"
 alias restore="/home/piyush/projects/Session-Storer/restore"
 alias save="/home/piyush/projects/Session-Storer/save"
 
@@ -303,7 +303,7 @@ function say() {
 function scrambler() {
     OLD_DIR=$PWD
 
-    cd /home/piyush/projects/scripts/scrambler
+    cd /home/piyush/projects/scripts/scrambler.py
     workon scrambler
     ./scrambler "$@"
 
@@ -312,9 +312,9 @@ function scrambler() {
 }
 
 alias screenshot="import /tmp/screenshot.png && xclip -selection \"clipboard\" -target \"image/png\" -i < /tmp/screenshot.png"
-alias switch_mouse="/home/piyush/scripts/mouse/switch"
-alias ts_enable="/home/piyush/scripts/touchscreen --enable"
-alias ts_disable="/home/piyush/scripts/touchscreen --disable"
+alias switch_mouse="/home/piyush/scripts/mouse/switch.sh --left"
+alias ts_enable="/home/piyush/scripts/touchscreen.sh --enable"
+alias ts_disable="/home/piyush/scripts/touchscreen.sh --disable"
 alias umount_sdb1="/home/piyush/scripts/mount/umount_sdb1"
 alias umount_sdc1="/home/piyush/scripts/mount/umount_sdc1"
 
@@ -334,7 +334,6 @@ function volume() {
 alias vlc="vlc --play-and-exit"
 alias wat="/opt/wat"
 alias wr="/home/piyush/scripts/wifi/wifi_restart"
-sudo="/home/piyush/scripts/sudo_open" # Don't alias since it'll conflict with existing sudo
 alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard by default
 
 # Add vim bindings
