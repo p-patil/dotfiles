@@ -25,7 +25,7 @@ bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -3%
 bindsym XF86AudioMute exec amixer set Master toggle
 
 # Bind microphone key
-bindsym XF86AudioMicMute exec /home/piyush/scripts/toggle_mic
+bindsym XF86AudioMicMute exec /home/piyush/scripts/toggle_mic.py
 
 # Bind brightness keys
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5

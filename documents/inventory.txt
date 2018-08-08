@@ -139,10 +139,6 @@
     - Installed with: pacman
     - Description: Text editor, forked and newer version of vim.
 
-- gvim
-    - Installed with: pacman
-    - Description: GUI (i.e. non-terminal-based) vim.
-
 - rsync
     - Installed with: pacman
     - Description: Versatile and efficient file copying, for both local-remote and local settings, tool.
