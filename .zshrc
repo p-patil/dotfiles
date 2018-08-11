@@ -217,6 +217,34 @@ function gpg_encrypt() {
     fi
 }
 
+## Pretty printed version of "ls -lah".
+unalias l # First remove zsh's default alias
+function l() {
+    # ls long form column names, in order and comma-separated.
+    COL_HEADERS="PERMISSIONS,NUM LINKS,OWNER,GROUP,SIZE,LAST MODIFIED,NAME"
+
+    # Delimit the columns with "|", since the column command will try to use whitespace, which is
+    # ambiguous, to detect columns.
+
+    # Regexes to capture the columns
+    PERM='[-dlrwxstT]{10}'
+    NUM_LINKS='[0-9]+'
+    OWNER='[a-z][-a-z0-9]*'
+    GROUP='[_a-z][-0-9_a-z]*'
+    SIZE='[0-9]+(\.[0-9]+)?[A-Z]?'
+    LM='[a-zA-Z]{3}\s+[0-9]{1,2}\s+([0-9]{2}:[0-9]{2}|[0-9]{4})'
+    NAME='.*'
+
+    # Delete the "total" line, then intersperse columns with "|"
+    LS_OUTPUT=$(
+        ls -lah "$@" | sed "1 d" |
+        sed -E "s/^($PERM)\s+($NUM_LINKS)\s+($OWNER)\s+($GROUP)\s+($SIZE)\s+($LM)\s+($NAME)$/\1|\2|\3|\4|\5|\7|\9/"
+    )
+
+    # Use the column command to format as an evenly spaced table with headers.
+    echo "$LS_OUTPUT" | column --table --separator "|" --table-columns "$COL_HEADERS" --table-wrap "NAME"
+}
+
 ## Function to create and then automatically change into a directory.
 function mkcd() {
     mkdir "$1"
