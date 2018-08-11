@@ -101,6 +101,11 @@
     - Installed with: AUR package (https://aur.archlinux.org/jdk.git)
     - Description: The Oracle Java development kit for the Java programming language.
 
+### Vim
+- ctags
+    - Installed with: pacman
+    - Description: Generates a tag file for a project root directory that tracks where the definitions of all expressions in source code are.
+
 # Extra
 
 ## Google Chrome

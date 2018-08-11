@@ -18,6 +18,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'mbbill/undotree'
 Plug 'othree/eregex.vim'
 Plug 'scrooloose/nerdcommenter'
@@ -53,6 +54,9 @@ let g:eregex_force_case = 1
 
 """ fzf settings
 let $FZF_DEFAULT_COMMAND=""
+
+""" gutentags settings
+let g:gutentags_cache_dir = '~/.tags'     " Directory where tags files are stored (as opposed to in the root project directory)
 
 "" Vim plugins
 if (!has('nvim'))
@@ -93,8 +97,8 @@ endif
 
 " Color settings
 set rtp+=$HOME/.vim                     " colorschemes and stuff for neovim
-let python_highlight_all=1
-let g:polyglot_disabled=['python']
+let python_highlight_all = 1
+let g:polyglot_disabled = ['python']
 colorscheme molokai                 " Located at https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
 hi Normal ctermbg=black ctermfg=white
 
@@ -226,3 +230,11 @@ nnoremap * *``
 
 "" Search recursively over files names in current directory
 :nnoremap <C-p> :Files<CR> 
+
+" ctags key bindings
+
+"" Map spacebar + d to jump to defining tag of term under cursor.
+nnoremap <Leader>d <C-]>
+
+"" Map spacebar + t to jump back from a tag to previous cursor location.
+nnoremap <Leader>t <C-t>
