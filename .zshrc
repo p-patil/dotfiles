@@ -148,7 +148,7 @@ alias e="/usr/bin/nvim"
 function go() {
     if [[ $# -eq 0 ]]
     then
-        echo "Usage: go <command"
+        echo "Usage: go <command>"
         return
     fi
 
@@ -221,7 +221,7 @@ function gpg_encrypt() {
 unalias l # First remove zsh's default alias
 function l() {
     # ls long form column names, in order and comma-separated.
-    COL_HEADERS="PERMISSIONS,NUM LINKS,OWNER,GROUP,SIZE,LAST MODIFIED,NAME"
+    COL_HEADERS="PERMISSIONS,NUM. LINKS,OWNER,GROUP,SIZE,LAST MODIFIED,NAME"
 
     # Delimit the columns with "|", since the column command will try to use whitespace, which is
     # ambiguous, to detect columns.
@@ -237,7 +237,7 @@ function l() {
 
     # Delete the "total" line, then intersperse columns with "|"
     LS_OUTPUT=$(
-        ls -lah "$@" | sed "1 d" |
+        /usr/bin/ls --color -lah "$@" | sed "1 d" |
         sed -E "s/^($PERM)\s+($NUM_LINKS)\s+($OWNER)\s+($GROUP)\s+($SIZE)\s+($LM)\s+($NAME)$/\1|\2|\3|\4|\5|\7|\9/"
     )
 
@@ -341,6 +341,7 @@ function scrambler() {
 
 alias screenshot="import /tmp/screenshot.png && xclip -selection \"clipboard\" -target \"image/png\" -i < /tmp/screenshot.png"
 alias switch_mouse="/home/piyush/scripts/mouse/switch.sh --left"
+alias sz="source $HOME/.zshrc"
 alias ts_enable="/home/piyush/scripts/touchscreen.sh --enable"
 alias ts_disable="/home/piyush/scripts/touchscreen.sh --disable"
 alias umount_sdb1="/home/piyush/scripts/mount/umount_sdb1"

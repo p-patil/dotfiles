@@ -201,6 +201,7 @@ function! TodoComment(comment)
 endfunction
 nnoremap <expr> td getline('.')=~'^\s*$' ?":call TodoComment('TODO(piyush)')<CR><C-o>I <C-o>==<C-o>A":":call TodoComment('TODO(piyush)')<CR><C-o>A"
 nnoremap <expr> tr getline('.')=~'^\s*$' ?":call TodoComment('TODO(piyush) remove')<CR><C-o>I <C-o>==<Esc>":":call TodoComment('TODO(piyush) remove')<CR><Esc>"
+nnoremap <expr> tu getline('.')=~'^\s*$' ?":call TodoComment('TODO(piyush) uncomment')<CR><C-o>I <C-o>==<Esc>":":call TodoComment('TODO(piyush) uncomment')<CR><Esc>"
 
 "" Key to toggle undo tree (depends on Undotree)
 nnoremap <Leader>u :UndotreeToggle <CR>
@@ -238,3 +239,6 @@ nnoremap <Leader>d <C-]>
 
 "" Map spacebar + t to jump back from a tag to previous cursor location.
 nnoremap <Leader>t <C-t>
+
+" Save session
+nnoremap <Leader>s :mksession! session.vim<CR>
