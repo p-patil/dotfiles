@@ -255,3 +255,6 @@ function! DeleteHiddenBuffers()
     endfor
 endfunction
 command! Bdh call DeleteHiddenBuffers()
+
+" Command to see changes to file since last save
+command! Df :w ! diff -C 1 % -

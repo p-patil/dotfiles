@@ -226,6 +226,9 @@
 - ntfs-3g
     - Installed with: pacman
     - Description: Open source implementation of Microsoft NTFS, which allows for mounting NTFS filesystems (e.g. Windows partitions) with read and write permissions.
+- ntfsprogs
+    - Installed with: pacman
+    - Description: A collection of free Unix utilities for handling NTFS file systems. In particular, provides the ntfsfix tool, which is useful in repairing NTFS file systems.
 
 - lsof
     - Installed with: pacman
@@ -234,3 +237,7 @@
 - traceroute
     - Installed with: pacman
     - Description: Sends and receives IP packets. Similar to tracepath, but manipulates raw packets instead of going through the sockets API, which means it requires root priviledges, but also that it is more powerful, allowing for the option of which protocol to use (IP vs TCP vs UDP, etc.), setting limits for minimum and maximum TTL, and other fine-grained control.
+
+- dtrx
+     - Installed with: AUR package (https://aur.archlinux.org/dtrx.git)
+     - Description: Intelligent archive extracter.
