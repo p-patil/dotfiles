@@ -16,6 +16,7 @@
 - nmap
     - Installed with: pacman
     - Description: Advanced and versatile port scanner.
+
 ## Display stuff
 - xorg, xorg-server, xorg-xinit
     - Installed with: pacman
@@ -241,3 +242,7 @@
 - dtrx
      - Installed with: AUR package (https://aur.archlinux.org/dtrx.git)
      - Description: Intelligent archive extracter.
+
+- gparted
+    - Installed with: pacman
+    - Description: GUI for managing disk partitions.
