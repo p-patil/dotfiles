@@ -22,6 +22,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'mbbill/undotree'
 Plug 'othree/eregex.vim'
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-surround'
@@ -64,6 +65,10 @@ let g:gutentags_cache_dir = '~/.tags'
 nnoremap <Leader>d <C-]>
 """" Map spacebar + t to jump back from a tag to previous cursor location.
 nnoremap <Leader>t <C-t>
+
+""" nerdtree settings
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim if the only open window left is nerdtree
 
 "" Vim plugins
 if (!has('nvim'))
@@ -218,7 +223,7 @@ set directory^=$HOME/.vim/tmp//
 set backupdir=$HOME/.vim/tmp//
 
 "" Misc. options
-set cinkeys-=0#
+set cinkeys-=0#     " Don't unindent when typing # in insert mode
 set cursorline      " Highlight the line where the cursor is
 set hidden          " Hides unloaded buffers instead of closing - this allows for switching between buffers without saving
 set hlsearch        " Highlight search matches
@@ -228,13 +233,16 @@ set noconfirm       " Don't display 'Enter to continue' prompts
 set nu              " But display the current line number next to the line, instead of 0
 set relativenumber  " Make line numbering relative
 set scrolloff=4     " always show 5 lines above and below cursor
-set showcmd		    " Display typed characters in Normal mode
-set showmatch	    " Show matching brackets
+set showcmd		      " Display typed characters in Normal mode
+set showmatch	      " Show matching brackets
 set sidescrolloff=5 " always show 10 characters to left and right of line
 set smartcase       " All-lowercase patterns are case-insensitive, but otherwise case-sensitive
 set wildmenu        " Command-line completion
 
-"" Tab (character, not the window) stuff
+"" Wrap git commit messages to 72 characters
+au FileType gitcommit set tw=72
+
+"" Tab (character, not window) stuff
 set expandtab     " Use spaces when tab key is pressed
 set shiftwidth=4  " The amount to indent or de-indent with >> or << operators
 set smarttab      " Intelligent auto-indenting
