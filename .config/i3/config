@@ -16,13 +16,13 @@ set $movemod Mod1
 #bindsym XF86AudioLowerVolume exec /home/piyush/scripts/control_volume --lower 3
 #bindsym XF86AudioMute exec /home/piyush/scripts/control_volume --mute
 
-#bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 3%+
-#bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 3%-
-#bindsym XF86AudioMute exec amixer set Master toggle
-
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +3%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -3%
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 3%+
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 3%-
 bindsym XF86AudioMute exec amixer set Master toggle
+
+#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +3%
+#bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -3%
+#bindsym XF86AudioMute exec amixer set Master toggle
 
 # Bind microphone key
 bindsym XF86AudioMicMute exec /home/piyush/scripts/toggle_mic.py

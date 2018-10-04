@@ -11,4 +11,7 @@ fi
 /home/piyush/scripts/natural_scrolling.sh --enable
 /home/piyush/scripts/touchscreen.sh --disable
 
+# udisks2 front-end for automounting
+udiskie &
+
 exec i3
