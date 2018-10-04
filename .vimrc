@@ -1,4 +1,5 @@
 set nocompatible
+let mapleader = "\<Space>" " At the top so can be used for mappings below
 
 " VIM-PLUG PLUGINS
 "" Install with:
@@ -68,6 +69,7 @@ nnoremap <Leader>t <C-t>
 
 """ nerdtree settings
 map <C-n> :NERDTreeToggle<CR>
+map <Leader>r :NERDTreeFind<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim if the only open window left is nerdtree
 
 "" Vim plugins
@@ -261,7 +263,6 @@ noremap tt :tab split<CR>
 noremap tq :tabc <CR>
 
 "" Easier leader mappings that use space instead of colon for saving, quitting, copy-pasting, etc.
-let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :qall<CR>
 nnoremap <Leader><Leader>w :wq<CR>
