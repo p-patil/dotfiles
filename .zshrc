@@ -31,7 +31,13 @@ bindkey '^[[Z' autosuggest-accept # Bind Shift+Tab to accept suggestion
 
 # Virtualenv stuff
 export WORKON_HOME=~/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
+if [[ -f /usr/bin/virtualenvwrapper.sh ]]; then
+    source /usr/bin/virtualenvwrapper.sh
+elif [[ -f /usr/local/bin/virtualenvwrapper.sh ]]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+else
+    echo "Couldn't find virtualenvwrapper.sh in /usr/bin or /usr/local/bin"
+fi
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
