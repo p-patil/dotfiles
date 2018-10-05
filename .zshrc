@@ -262,12 +262,6 @@ function mkcd() {
     cd "$1"
 }
 
-## Function to automatically install the set packages after creating any virtualenv. NOTE: the
-## original mkvirtualenv function in /usr/bin/virtualenvwrapper.sh has been renamed.
-function mkvirtualenv() {
-    mkvirtualenv_original -i neovim $@
-}
-
 alias mount_sdb1="/home/piyush/scripts/mount/mount_sdb1"
 alias mount_sdc1="/home/piyush/scripts/mount/mount_sdc1"
 
