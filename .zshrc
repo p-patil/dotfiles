@@ -30,8 +30,14 @@ source $ZSH/oh-my-zsh.sh
 bindkey '^[[Z' autosuggest-accept # Bind Shift+Tab to accept suggestion
 
 # Virtualenv stuff
-export WORKON_HOME=~/.virtualenvs
-source /usr/bin/virtualenvwrapper.sh
+export WORKON_HOME="$HOME/.virtualenvs"
+if [[ -f "/usr/bin/virtualenvwrapper.sh" ]]; then
+    source "/usr/bin/virtualenvwrapper.sh"
+elif [[ -f "/usr/local/bin/virtualenvwrapper.sh" ]]; then
+    source "/usr/local/bin/virtualenvwrapper.sh"
+else
+    echo "virtualenvwrapper.sh not found in /usr/bin or /usr/local/bin"
+fi
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -55,13 +61,13 @@ ssh-add ~/.ssh/id_rsa &> /dev/null
 
 ## Set PATH
 if [[ $PATH != *"/opt/aur_builds/trello"* ]]; then
-    export PATH=$PATH:/opt/aur_builds/trello
+    export PATH="/opt/aur_builds/trello:$PATH"
 fi
 if [[ $PATH != *"/opt/firefox"* ]]; then
-    export PATH=$PATH:/opt/firefox
+    export PATH="/opt/firefox:$PATH"
 fi
 if [[ $PATH != *"/opt/google/chrome"* ]]; then
-    export PATH=$PATH:/opt/google/chrome
+    export PATH="/opt/google/chrome:$PATH"
 fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -262,12 +268,6 @@ function mkcd() {
     cd "$1"
 }
 
-## Function to automatically install the set packages after creating any virtualenv. NOTE: the
-## original mkvirtualenv function in /usr/bin/virtualenvwrapper.sh has been renamed.
-function mkvirtualenv() {
-    mkvirtualenv_original -i neovim $@
-}
-
 alias mount_sdb1="/home/piyush/scripts/mount/mount_sdb1"
 alias mount_sdc1="/home/piyush/scripts/mount/mount_sdc1"
 
@@ -288,6 +288,7 @@ function move_workspace() {
 
 alias off_mon="/home/piyush/scripts/monitor/off.py"
 alias on_mon="/home/piyush/scripts/monitor/on.py"
+alias on_tv="xrandr --output eDP1 --primary --auto --output HDMI2 --right-of eDP1 --mode 1920x1080"
 
 function open_pdfs() {
     # Allow caller to pass a file with PDFs to open.
