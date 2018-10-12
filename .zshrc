@@ -289,6 +289,7 @@ function move_workspace() {
 alias off_mon="/home/piyush/scripts/monitor/off.py"
 alias on_mon="/home/piyush/scripts/monitor/on.py"
 alias on_tv="xrandr --output eDP1 --primary --auto --output HDMI2 --right-of eDP1 --mode 1920x1080"
+alias off_tv="xrandr --output eDP1 --primary --auto --output HDMI2 --off"
 
 function open_pdfs() {
     # Allow caller to pass a file with PDFs to open.
@@ -374,7 +375,7 @@ function volume() {
 
 alias vlc="vlc --play-and-exit"
 alias wat="/opt/wat"
-alias wr="/home/piyush/scripts/wifi/wifi_restart"
+alias wr="sudo systemctl restart netctl-auto@wlp4s0.service"
 alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard by default
 
 # Add vim bindings
