@@ -69,7 +69,7 @@ nnoremap <Leader>t <C-t>
 
 """ nerdtree settings
 map <C-n> :NERDTreeToggle<CR>
-map <Leader>n :NERDTreeFind<CR>
+map <Leader>N :NERDTreeFind<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim if the only open window left is nerdtree
 
 "" Vim plugins
