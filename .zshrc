@@ -223,6 +223,26 @@ function gpg_encrypt() {
     fi
 }
 
+function hib() {
+    WINDOWS="/dev/nme0n1p3"
+    ARCH="/dev/nme0n1p7"
+    KALI="dev/nvme0n1p9"
+
+    MOUNTED=$(mount)
+
+    for FS in "$WINDOWS" "$ARCH" "$KALI"; do
+        if [[ $MOUNTED == *"$FS"* ]]; then
+            sudo umount "$FS"
+        fi
+    done
+
+    if [[ $(uname -a) == *"Ubuntu"* ]]; then
+        sudo pm-hibernate
+    else
+        sudo systemctl hibernate
+    fi
+}
+
 ## Pretty printed version of "ls -lah".
 unalias l # First remove zsh's default alias
 function l() {
@@ -297,7 +317,7 @@ function open_pdfs() {
     then
         CACHE_FILE=$1
     else
-        CACHE_FILE="~/scripts/saver/evince/cache.txt"
+        CACHE_FILE="~/.cache/piyush_evince_cache.txt"
     fi
 
     # Expand home directory if it exists (this is a bit hacky).
@@ -321,6 +341,34 @@ function open_pdfs() {
         (i3 workspace "$WORKSPACE" && evince --page-index="$PAGE_NUM" "$FILE") &> /dev/null &
         sleep 0.5 # Wait a bit for the workspace to change before proceeding
     done < "$CACHE_FILE"
+}
+
+# Mount partition by its partition label.
+function plmount() {
+    if [[ $# -eq 1 ]]; then
+        PARTLABEL=$1
+        MOUNT_POINT="/mnt/$PARTLABEL"
+        echo "Using default mount point $MOUNT_POINT"
+    elif [[ $# -eq 2 ]]; then
+        PARTLABEL=$1
+        MOUNT_POINT=$2
+    else
+        echo "Usage: plmount <PARTLABEL> [<MOUNT POINT>]"
+        return
+    fi
+
+    OUTPUT=$(lsblk -o NAME,PARTLABEL | grep -iE "^.*\s+arch$")
+    if [[ -z $OUTPUT ]]; then
+        echo "No matches found for partlabel $PARTLABEL"
+        return
+    elif [[ $(echo "$OUTPUT" | wc -l) -gt 1 ]]; then
+        echo "Multiple matches:"
+        echo "$OUTPUT"
+        return
+    fi
+
+    NAME=$(echo "$OUTPUT" | cut -d " " -f 1 | strings)
+    sudo mount "/dev/$NAME" "$MOUNT_POINT"
 }
 
 alias push_dotfiles="/home/piyush/scripts/push_dotfiles.sh"
@@ -393,3 +441,12 @@ export FZF_DEFAULT_COMMAND="ag --hidden --ignore .git -f -g"
 # NOTE: Additional installs, not found here, correspond to .zsh scripts in ~/.oh-my-zsh/custom
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Ubuntu specific stuff
+if [[ $(uname -a) == *"Ubuntu"* ]]; then
+    alias nuro_vpn="nmcli con up id \"Nuro VPN\" --ask"
+    alias nuro_vpn_down="nmcli con down id \"Nuro VPN\""
+
+    alias on_tv="xrandr --output eDP-1 --primary --auto --output HDMI-2 --right-of eDP-1 --mode 1920x1080"
+    alias off_tv="xrandr --output eDP-1 --primary --auto --output HDMI-2 --off"
+fi

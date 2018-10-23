@@ -24,6 +24,7 @@
 - mesa, libva-intel-driver, xf86-video-intel
     - Installed with: pacman
     - Description: The package "mesa" provides the DRI driver (for 3-D acceleration) for Intel video cards. The package "libva-intel-driver" is the VA-API implementation for hardware acceleration.
+    - Note: This laptop (Thinkpad T470) has an Intel GPU named "HD Graphics 520" (codename Skylake), which is among the 9th generation of Intel GPUs.
 
 ## Window manager stuff
 - i3
@@ -188,6 +189,10 @@
 - docker
     - Installed with: pacman
     - Description: Containerization tool.
+
+- smplayer
+    - Installed with: pacman
+    - Description: GUI front-end for mplayer, which is a movie player with support for most audio and video formats.
 
 ## Building Latex files
 - texlive-most
