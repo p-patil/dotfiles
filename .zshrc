@@ -31,13 +31,14 @@ bindkey '^[[Z' autosuggest-accept # Bind Shift+Tab to accept suggestion
 
 # Virtualenv stuff
 export WORKON_HOME="$HOME/.virtualenvs"
-if [[ -f "/usr/bin/virtualenvwrapper.sh" ]]; then
-    source "/usr/bin/virtualenvwrapper.sh"
-elif [[ -f "/usr/local/bin/virtualenvwrapper.sh" ]]; then
-    source "/usr/local/bin/virtualenvwrapper.sh"
-else
-    echo "virtualenvwrapper.sh not found in /usr/bin or /usr/local/bin"
-fi
+for BIN_DIR in "/usr/bin" "/usr/local/bin" "$HOME/.local/bin" "END_OF_LOOP"; do
+    if [[ -f "$BIN_DIR/virtualenvwrapper.sh" ]]; then
+        source "$BIN_DIR/virtualenvwrapper.sh"
+        break
+    elif [[ "$BIN_DIR" == "END_OF_LOOP" ]]; then # Didn't find script in any directory
+        echo "Couldn't find virtualenvwrapper.sh in /usr/bin, /usr/local/bin, or ~/.local/bin"
+    fi
+done
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
