@@ -140,6 +140,22 @@ function ascii() {
     fi
 }
 
+# Quick function for easy arithmetic computation.
+function c() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: c <EXPR>"
+        echo "EXPR is any valid elementary arithmetic expression, extended to include any of the builtin functions in Python's math module."
+        echo "Make sure to wrap the argument in single quotes to prevent command line expansion."
+        return
+    fi
+
+    # Replace ^ with ** so we can pass the expression through python.
+    EXPR="$*"
+    EXPR=${EXPR//\^/\*\*}
+
+    python -c "from math import *; print($EXPR)"
+}
+
 function cl() {
     cd $1 && ls
 }
