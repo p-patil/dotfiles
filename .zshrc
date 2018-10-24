@@ -24,6 +24,9 @@ plugins=(z fzf-zsh vi-mode zsh-autosuggestions zsh-completions per-directory-his
 
 source $ZSH/oh-my-zsh.sh
 
+# z plugin
+. $HOME/scripts/z.sh
+
 # User configuration
 
 # zsh-autosuggestions key bindings
