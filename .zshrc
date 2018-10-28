@@ -266,11 +266,13 @@ function hib() {
 ## Pretty printed version of "ls -lah".
 unalias l # First remove zsh's default alias
 function l() {
-    column --table &> /dev/null
-    if [[ $? -eq 0 ]]; then
-        GNU_COLUMN=true
-    else
-        GNU_COLUMN=false
+    if [[ -z "$GNU_COLUMN" ]]; then
+        timeout 0.3 column --table &> /dev/null
+        if [[ $? -eq 124 ]]; then
+            export GNU_COLUMN=true
+        else
+            export GNU_COLUMN=false
+        fi
     fi
 
     # ls long form column names, in order and comma-separated.
