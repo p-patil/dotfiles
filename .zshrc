@@ -24,6 +24,9 @@ plugins=(z fzf-zsh vi-mode zsh-autosuggestions zsh-completions per-directory-his
 
 source $ZSH/oh-my-zsh.sh
 
+# z plugin
+. "$ZSH/plugins/z/z.sh"
+
 # User configuration
 
 # zsh-autosuggestions key bindings
@@ -140,6 +143,22 @@ function ascii() {
     fi
 }
 
+# Quick function for easy arithmetic computation.
+function c() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: c <EXPR>"
+        echo "EXPR is any valid elementary arithmetic expression, extended to include any of the builtin functions in Python's math module."
+        echo "Make sure to wrap the argument in single quotes to prevent command line expansion."
+        return
+    fi
+
+    # Replace ^ with ** so we can pass the expression through python.
+    EXPR="$*"
+    EXPR=${EXPR//\^/\*\*}
+
+    python -c "from math import *; print($EXPR)"
+}
+
 function cl() {
     cd $1 && ls
 }
@@ -247,8 +266,18 @@ function hib() {
 ## Pretty printed version of "ls -lah".
 unalias l # First remove zsh's default alias
 function l() {
+    column --table &> /dev/null
+    if [[ $? -eq 0 ]]; then
+        GNU_COLUMN=true
+    else
+        GNU_COLUMN=false
+    fi
+
     # ls long form column names, in order and comma-separated.
     COL_HEADERS="PERMISSIONS,NUM. LINKS,OWNER,GROUP,SIZE,LAST MODIFIED,NAME"
+    if ! $GNU_COLUMN; then
+        COL_HEADERS=${COL_HEADERS//,/|}
+    fi
 
     # Delimit the columns with "|", since the column command will try to use whitespace, which is
     # ambiguous, to detect columns.
@@ -266,12 +295,18 @@ function l() {
     LS_OUTPUT=$(/bin/ls --color -lah "$@")
 
     ## If the first line is a "total" line, delete it.
-    if [[ $(echo "$LS_OUTPUT" | head -n 1) =~ ^"total "[0-9]+[A-Z]*$ ]]; then
-        LS_OUTPUT=$(echo "$LS_OUTPUT" | sed "1 d")
+    if [[ "$SHELL" == *"/zsh"* ]]; then
+        setopt extended_glob
+        LS_OUTPUT=${LS_OUTPUT#total [0-9]##[A-Z]#
+}
+    else
+        shopt -s extglob
+        LS_OUTPUT=${LS_OUTPUT#total +([0-9])*([A-Z])
+}
     fi
 
     ## Delimit columns with "|"
-    LS_OUTPUT=$(echo "$LS_OUTPUT" | sed -E "s/^($PERM)\s+($NUM_LINKS)\s+($OWNER)\s+($GROUP)\s+($SIZE)\s+($LM)\s+($NAME)$/\1|\2|\3|\4|\5|\7|\9/")
+    LS_OUTPUT=$(sed -E "s/^($PERM)\s+($NUM_LINKS)\s+($OWNER)\s+($GROUP)\s+($SIZE)\s+($LM)\s+($NAME)$/\1|\2|\3|\4|\5|\7|\9/" <<< "$LS_OUTPUT")
 
     ERROR_CODE=$?
     if [[ $ERROR_CODE -ne 0 ]]; then
@@ -280,7 +315,13 @@ function l() {
     fi
 
     # Use the column command to format as an evenly spaced table with headers.
-    echo "$LS_OUTPUT" | column --table --separator "|" --table-columns "$COL_HEADERS" --table-wrap "NAME"
+    if $GNU_COLUMN; then
+        column --table --separator "|" --table-columns "$COL_HEADERS" --table-wrap "NAME" <<< "$LS_OUTPUT"
+    else
+        LS_OUTPUT="$COL_HEADERS
+$LS_OUTPUT"
+        column -t -s "|" <<< "$LS_OUTPUT"
+    fi
 }
 
 ## Function to create and then automatically change into a directory.

@@ -15,6 +15,7 @@ endfunction
 call plug#begin()
 
 "" Shared between vim and neovim
+Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -22,6 +23,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mbbill/undotree'
 Plug 'othree/eregex.vim'
+Plug 'pseewald/vim-anyfold'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
@@ -59,6 +61,10 @@ let g:eregex_force_case = 1
 """ fzf settings
 let $FZF_DEFAULT_COMMAND=""
 
+""" gitgutter settings
+set updatetime=500
+let g:gitgutter_max_signs = 700
+
 """ gutentags settings
 """" Directory where tags files are stored (as opposed to in the root project directory)
 let g:gutentags_cache_dir = '~/.tags'
@@ -71,6 +77,10 @@ nnoremap <Leader>t <C-t>
 map <C-n> :NERDTreeToggle<CR>
 map <Leader>N :NERDTreeFind<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim if the only open window left is nerdtree
+
+""" vim-anyfold settings
+let g:anyfold_activate=1
+set foldlevel=99
 
 "" Vim plugins
 if (!has('nvim'))
@@ -206,8 +216,8 @@ endif
 set rtp+=$HOME/.vim
 let python_highlight_all = 1
 let g:polyglot_disabled = ['python']
-colorscheme molokai " Located at https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
 hi Normal ctermbg=black ctermfg=white
+colorscheme molokai " Located at https://raw.githubusercontent.com/tomasr/molokai/master/colors/molokai.vim
 
 "" Enable mouse mode if available
 if has('mouse')
@@ -278,9 +288,6 @@ if has('nvim')
       let @@ = system('xclip -o -selection clipboard')
     endfunction
 endif
-
-"" Sometimes I don't want to override the default register when editing text.
-nnoremap dx "_dd
 
 "" Command to see changes to file since last save
 command! Df :w ! diff -C 1 % -
