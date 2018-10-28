@@ -16,6 +16,14 @@
 - nmap
     - Installed with: pacman
     - Description: Advanced and versatile port scanner.
+- net-tools, ppp
+    - Installed with: pacman
+    - Description: net-tools provides ifconfig and route. Both are dependencies of NetExtender installation.
+- netExtenderClient
+    - Installed with:
+        1. cd /opt/netExtenderClient
+        2. sudo ./install
+
 
 ## Display stuff
 - xorg, xorg-server, xorg-xinit
