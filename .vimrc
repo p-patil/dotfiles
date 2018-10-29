@@ -272,6 +272,12 @@ imap <Esc> <Esc>l
 noremap tt :tab split<CR>
 noremap tq :tabc <CR>
 
+"" Omit the <C-w> when switching between windows.
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
 "" Easier leader mappings that use space instead of colon for saving, quitting, copy-pasting, etc.
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :qall<CR>
