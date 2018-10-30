@@ -144,7 +144,7 @@ function ascii() {
 }
 
 # Quick function for easy arithmetic computation.
-function c() {
+function calculator() {
     if [[ $# -eq 0 ]]; then
         echo "Usage: c <EXPR>"
         echo "EXPR is any valid elementary arithmetic expression, extended to include any of the builtin functions in Python's math module."
@@ -158,6 +158,7 @@ function c() {
 
     python -c "from __future__ import division; from math import *; print($EXPR)"
 }
+alias c="noglob calculator" # Don't expand special characters that collide with mathematical operators, most notably "*".
 
 function cl() {
     cd $1 && ls
