@@ -156,7 +156,7 @@ function c() {
     EXPR="$*"
     EXPR=${EXPR//\^/\*\*}
 
-    python -c "from math import *; print($EXPR)"
+    python -c "from __future__ import division; from math import *; print($EXPR)"
 }
 
 function cl() {
@@ -184,7 +184,7 @@ function go() {
     do
         if [[ "$ARG" =~ "$SPACES_REGEX" ]]
         then
-            ARG=$(printf %q "$ARG")
+2369,20            ARG=$(printf %q "$ARG")
         fi
 
         COMMAND="$COMMAND $ARG"
