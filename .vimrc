@@ -156,11 +156,14 @@ nnoremap * *``
 
 
 
-" BUFFER- AND FILE-RELATED
+" BUFFER-, TAB-, AND FILE-RELATED
 
 "" Easier buffer switching (and set bufmru mappings)
 :nnoremap <Leader>b :Buffers<CR>
 :nnoremap <A-Tab> :b#<CR>
+
+"" Previous tab
+nnoremap gr gT
 
 " Save session
 nnoremap <Leader>s :mksession! session.vim<CR>
