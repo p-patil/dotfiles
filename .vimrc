@@ -105,6 +105,7 @@ if (has('nvim'))
 
     """ ale
     let g:ale_sign_column_always=1
+    let g:ale_fixers = {'python': ['autopep8'], 'c++': ['clang-format']}
 endif
 
 
