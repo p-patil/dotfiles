@@ -105,6 +105,7 @@ if (has('nvim'))
 
     """ ale
     let g:ale_sign_column_always=1
+    let g:ale_fixers = {'python': ['autopep8'], 'c++': ['clang-format']}
 endif
 
 
@@ -156,11 +157,14 @@ nnoremap * *``
 
 
 
-" BUFFER- AND FILE-RELATED
+" BUFFER-, TAB-, AND FILE-RELATED
 
 "" Easier buffer switching (and set bufmru mappings)
 :nnoremap <Leader>b :Buffers<CR>
 :nnoremap <A-Tab> :b#<CR>
+
+"" Previous tab
+nnoremap gr gT
 
 " Save session
 nnoremap <Leader>s :mksession! session.vim<CR>
@@ -271,6 +275,12 @@ imap <Esc> <Esc>l
 "" Easily open window in new tab, to simulate quick fullscreen of a window
 noremap tt :tab split<CR>
 noremap tq :tabc <CR>
+
+"" Omit the <C-w> when switching between windows.
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
 
 "" Easier leader mappings that use space instead of colon for saving, quitting, copy-pasting, etc.
 nnoremap <Leader>w :w<CR>

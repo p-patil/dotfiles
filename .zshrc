@@ -144,7 +144,7 @@ function ascii() {
 }
 
 # Quick function for easy arithmetic computation.
-function c() {
+function calculator() {
     if [[ $# -eq 0 ]]; then
         echo "Usage: c <EXPR>"
         echo "EXPR is any valid elementary arithmetic expression, extended to include any of the builtin functions in Python's math module."
@@ -156,8 +156,9 @@ function c() {
     EXPR="$*"
     EXPR=${EXPR//\^/\*\*}
 
-    python -c "from math import *; print($EXPR)"
+    python -c "from __future__ import division; from math import *; print($EXPR)"
 }
+alias c="noglob calculator" # Don't expand special characters that collide with mathematical operators, most notably "*".
 
 function cl() {
     cd $1 && ls
@@ -184,7 +185,7 @@ function go() {
     do
         if [[ "$ARG" =~ "$SPACES_REGEX" ]]
         then
-            ARG=$(printf %q "$ARG")
+2369,20            ARG=$(printf %q "$ARG")
         fi
 
         COMMAND="$COMMAND $ARG"
@@ -493,4 +494,6 @@ if [[ $(uname -a) == *"Ubuntu"* ]]; then
 
     alias on_tv="xrandr --output eDP-1 --primary --auto --output HDMI-2 --right-of eDP-1 --mode 1920x1080"
     alias off_tv="xrandr --output eDP-1 --primary --auto --output HDMI-2 --off"
+
+    export ARCH="/mnt/arch/home/piyush"
 fi
