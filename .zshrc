@@ -419,7 +419,7 @@ function plmount() {
 alias push_dotfiles="/home/piyush/scripts/push_dotfiles.sh"
 alias quick_man="/home/piyush/scripts/quick_man.py"
 alias remap_keys="/home/piyush/scripts/remap_keys.sh"
-alias reset_mouse="/home/piyush/scripts/mouse/switch.sh --right"
+alias reset_mouse="/home/piyush/scripts/switch_mouse.sh --right"
 alias restart="/home/piyush/scripts/restart.py"
 alias restore="/home/piyush/projects/Session-Storer/restore"
 alias save="/home/piyush/projects/Session-Storer/save"
@@ -446,7 +446,7 @@ function scrambler() {
 }
 
 alias screenshot="import /tmp/screenshot.png && xclip -selection \"clipboard\" -target \"image/png\" -i < /tmp/screenshot.png"
-alias switch_mouse="/home/piyush/scripts/mouse/switch.sh --left"
+alias switch_mouse="/home/piyush/scripts/switch_mouse.sh --left"
 alias sz="source $HOME/.zshrc"
 alias ts_enable="/home/piyush/scripts/touchscreen.sh --enable"
 alias ts_disable="/home/piyush/scripts/touchscreen.sh --disable"
