@@ -340,7 +340,7 @@ function music() {
     OLD_DIR=$PWD
 
     cd /home/piyush/projects/Music-Player-Basic
-    workon Music-Player-Basic
+    workon music-player
     python main.py
 
     deactivate

@@ -148,6 +148,21 @@
     - Installed with: pacman
     - Description: Command-line torrent client.
 
+- spotify-stable
+    - Installed with: AUR package (https://aur.archlinux.org/spotify-stable.git)
+    - Dependencies (manually installed)
+        - zenity
+            - Installed with: pacman
+            - Description: Required to play local files.
+        - ffmpeg-compat-54
+            - Installed with: AUR package (https://aur.archlinux.org/ffmpeg-compat-54.git)
+            - Description: Required to play local files.
+        - libavutil-52
+            - Installed with: AUR package (https://aur.archlinux.org/libavutil-52.git)
+            - Description: Dependency of ffmpeg-compat-54.
+    - Description: Semi-official desktop application for spotify, developed by Spotify engineers in their spare time (not officially backed by Spotify).
+    - Note: A couple of invocations of `makepkg` error out due to being unable to verify certain PGP signatures. The keys can be manually added with `gpg --recv-keys <KEY>`.
+
 ## Command line stuff
 
 - neovim
@@ -201,6 +216,11 @@
 - smplayer
     - Installed with: pacman
     - Description: GUI front-end for mplayer, which is a movie player with support for most audio and video formats.
+
+- python-eyed3
+    - Installed with: pacman
+    - Description: Utility for adding ID3 tags (such as artist) to MP3 files. Also a python module.
+    - Note: The command line utility is invoked with `eyeD3`.
 
 ## Building Latex files
 - texlive-most
