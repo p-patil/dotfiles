@@ -221,6 +221,9 @@
     - Installed with: pacman
     - Description: Utility for adding ID3 tags (such as artist) to MP3 files. Also a python module.
     - Note: The command line utility is invoked with `eyeD3`.
+- grako
+    - Installed with: pip
+    - Description: Python module that provides a parser generator for EBNF (extended Backus-Naur form) grammars. eyeD3 uses it as a plugin.
 
 ## Building Latex files
 - texlive-most
