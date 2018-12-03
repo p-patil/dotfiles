@@ -283,7 +283,7 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 
 "" Easier leader mappings that use space instead of colon for saving, quitting, copy-pasting, etc.
-nnoremap <Leader>w :w<CR>
+nnoremap <Leader>w :wall<CR>
 nnoremap <Leader>q :qall<CR>
 nnoremap <Leader><Leader>w :wq<CR>
 nmap <Leader>y y:call ClipboardYank()<cr>
