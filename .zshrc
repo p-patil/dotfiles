@@ -156,7 +156,7 @@ function calculator() {
     EXPR="$*"
     EXPR=${EXPR//\^/\*\*}
 
-    python -c "from __future__ import division; from math import *; print($EXPR)"
+    python3 -c "from __future__ import division; from math import *; print($EXPR)"
 }
 alias c="noglob calculator" # Don't expand special characters that collide with mathematical operators, most notably "*".
 
