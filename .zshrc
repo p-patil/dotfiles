@@ -185,7 +185,7 @@ function go() {
     do
         if [[ "$ARG" =~ "$SPACES_REGEX" ]]
         then
-2369,20            ARG=$(printf %q "$ARG")
+            ARG=$(printf %q "$ARG")
         fi
 
         COMMAND="$COMMAND $ARG"
@@ -195,7 +195,10 @@ function go() {
     eval "$COMMAND"
 }
 
-alias gp="/usr/bin/git pull --all --prune --rebase"
+# Git aliases
+alias ga="git commit --amend --no-edit"
+alias gaa="git commit -a --amend --no-edit"
+alias gp="git pull --all --prune --rebase"
 
 ## Function for easy symmetric, password-based decryption of a file with GPG.
 function gpg_decrypt() {
