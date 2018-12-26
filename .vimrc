@@ -301,3 +301,12 @@ endif
 
 "" Command to see changes to file since last save
 command! Df :w ! diff -C 1 % -
+
+"" Shortcut to redirect output of a vim command, e.g. to file. NOTE: There
+"" cannot be a space between the '>' and file name.
+funct! Redir(command, to)
+  exec 'redir '.a:to
+  exec a:command
+  redir END
+endfunct
+command! -nargs=+ R call call(function('Redir'), split(<q-args>, '\s\(\S\+\s*$\)\@='))

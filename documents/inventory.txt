@@ -111,6 +111,11 @@
     - Installed with: AUR package (https://aur.archlinux.org/jdk.git)
     - Description: The Oracle Java development kit for the Java programming language.
 
+### Haskell
+- ghc
+    - Installed with: pacman
+    - Description: The most popular, open-source Haskell compiler.
+
 ### Vim
 - ctags
     - Installed with: pacman

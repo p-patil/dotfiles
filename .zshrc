@@ -169,6 +169,84 @@ function cdll() {
 }
 
 alias connect_wifi="/home/piyush/scripts/wifi/wifi_connect"
+
+# Convenience function to get shell color codes.
+function color() {
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: color [--foreground | --background] <color name>"
+        return
+    elif [[ $# -eq 1 ]]; then
+        NAME=${1:-}
+        NAME="$NAME:l"
+        TYPE="foreground"
+    elif [[ $# -eq 2 ]]; then
+        NAME="$2"
+        if [[ "$1" == "--foreground" ]]; then
+            TYPE="foreground"
+        elif [[ "$1" == "--background" ]]; then
+            TYPE="background"
+        elif [[ ! "$1" =~ "--"* ]] && [[ ! "$2" =~ "--"* ]]; then
+            TYPE="foreground"
+            NAME="$1 $2"
+        else
+            echo "Usage: color [--foreground | --background] <color name>"
+            return
+        fi
+    else
+        echo "Usage: color [--foreground | --background] <color name>"
+        return
+    fi
+
+    if [[ "$TYPE" == "foreground" ]]; then
+        case "$NAME" in
+            "black") CODE="30" ;;
+            "red") CODE="31" ;;
+            "green") CODE="32" ;;
+            "yellow") CODE="33" ;;
+            "blue") CODE="34" ;;
+            "magenta") CODE="35" ;;
+            "cyan") CODE="36" ;;
+            "light grey") CODE="37" ;;
+            "dark grey") CODE="90" ;;
+            "light red") CODE="91" ;;
+	        "light green") CODE="92" ;;
+            "light yellow") CODE="93" ;;
+            "light blue") CODE="94" ;;
+            "light magenta") CODE="95" ;;
+            "light cyan") CODE="96" ;;
+            "white") CODE="97" ;;
+            *) CODE=""
+        esac
+    else # Background
+        case "$NAME" in
+            "black") CODE=40 ;;
+            "red") CODE=41 ;;
+            "green") CODE=42 ;;
+            "yellow") CODE=43 ;;
+            "blue") CODE=44 ;;
+            "magenta") CODE=45 ;;
+            "cyan") CODE=46 ;;
+            "light gray") CODE=47 ;;
+            "dark gray") CODE=100 ;;
+            "light red") CODE=101 ;;
+            "light green") CODE=102 ;;
+            "light yellow") CODE=103 ;;
+            "light blue") CODE=104 ;;
+            "light magenta") CODE=105 ;;
+            "light cyan") CODE=106 ;;
+            "white code")=107 ;;
+            *) CODE=""
+        esac
+    fi
+
+    if [[ -z "$CODE" ]]; then
+        echo "Invalid color \"$NAME\""
+        return
+    fi
+
+    echo -e '\e[0;'$CODE"m"
+}
+
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
 
