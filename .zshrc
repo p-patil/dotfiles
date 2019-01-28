@@ -162,6 +162,7 @@ function big() {
 
     if [[ ! -d "$SEARCH_PATH" ]]; then
         echo "Directory does not exist"
+	return
     fi
 
     du -sh $SEARCH_PATH/* | sort -hr | head -n "$NUM"
