@@ -143,6 +143,26 @@ function ascii() {
     fi
 }
 
+# Alias to list large files in current directory.
+function big() {
+    SEARCH_PATH="."
+    NUM=10
+    while [[ "${1:-}" != "" ]]; do
+        case "$1" in
+            "-n")
+                shift
+                NUM=$1
+            ;;
+            *)
+                SEARCH_PATH=$1
+            ;;
+        esac
+        shift
+    done
+
+    du -sh $SEARCH_PATH/* | sort -hr | head -n "$NUM"
+}
+
 # Quick function for easy arithmetic computation.
 function calculator() {
     if [[ $# -eq 0 ]]; then
