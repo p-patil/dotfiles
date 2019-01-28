@@ -160,6 +160,10 @@ function big() {
         shift
     done
 
+    if [[ ! -d "$SEARCH_PATH" ]]; then
+        echo "Directory does not exist"
+    fi
+
     du -sh $SEARCH_PATH/* | sort -hr | head -n "$NUM"
 }
 
