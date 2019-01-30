@@ -168,6 +168,9 @@
     - Description: Semi-official desktop application for spotify, developed by Spotify engineers in their spare time (not officially backed by Spotify).
     - Note: A couple of invocations of `makepkg` error out due to being unable to verify certain PGP signatures. The keys can be manually added with `gpg --recv-keys <KEY>`.
 
+- youtube-dl
+    - Installed with: sudo pacman -S youtube-dl ffmpeg
+
 ## Command line stuff
 
 - neovim
@@ -229,6 +232,11 @@
 - grako
     - Installed with: pip
     - Description: Python module that provides a parser generator for EBNF (extended Backus-Naur form) grammars. eyeD3 uses it as a plugin.
+
+- Google play music manager
+    - Installed with: AUR package (https://aur.archlinux.org/google-musicmanager.git)
+    - Dependency: libidn11
+        - Manually installed with: sudo pacman -U /opt/aur_builds/google-musicmanager/libidn11-1.33-1-x86_64.pkg.tar.xz
 
 ## Building Latex files
 - texlive-most
