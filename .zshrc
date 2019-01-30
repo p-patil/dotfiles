@@ -363,10 +363,13 @@ function hib() {
         fi
     done
 
-    if [[ $(uname -a) == *"Ubuntu"* ]]; then
+    NAME=$(uname -a)
+    if [[ $NAME == *"Ubuntu"* ]]; then
         sudo pm-hibernate
-    else
+    elif [[ $NAME == *"arch-64"* ]]; then
         sudo systemctl hibernate
+    else
+        echo "Unknown OS"
     fi
 }
 
