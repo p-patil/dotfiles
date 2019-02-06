@@ -135,11 +135,11 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 2)<CR>
 "" Regex search (depends on eregex)
 nnoremap <Leader>/ :M/
 
+"" Make * only highlight word under cursor, don't jump to next match.
+nnoremap * *N
+
 "" Ctrl+x to unhighlight searched text
 nnoremap <silent> <C-x> :nohl<CR><C-l>
-
-" Use asterisk to search for word under cursor
-nnoremap * *``
 
 "" Fuzzy search (depends on fzf.vim) stuff below
 
