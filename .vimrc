@@ -135,8 +135,14 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 2)<CR>
 "" Regex search (depends on eregex)
 nnoremap <Leader>/ :M/
 
-"" Make * only highlight word under cursor, don't jump to next match or scroll.
-nnoremap * viw"zy :let @/="<C-r>z"<CR> :set hlsearch<CR>
+"" Only highlight word under cursor, don't jump to next match or scroll.
+"" Explanation - First set a mark at the current cursor position. Then visually
+"" select the word under the cursor and yank into register z. Then move back
+"" to the mark to restore cursor position. NOTE: For an unknown reason, `x
+"" causes us to move 2 characters ahead of the mark instead of the mark
+"" itself, hence the hh to cancel that out. Then, paste from register z into
+"" the search register, and highlight the matches.
+nnoremap * mxviw"zy`xhh :let @/='<C-r>z'<CR> :set hlsearch<CR>
 
 "" Ctrl+x to unhighlight searched text
 nnoremap <silent> <C-x> :nohl<CR><C-l>
