@@ -142,7 +142,7 @@ nnoremap <Leader>/ :M/
 "" causes us to move 2 characters ahead of the mark instead of the mark
 "" itself, hence the hh to cancel that out. Then, paste from register z into
 "" the search register, and highlight the matches.
-nnoremap * mxviw"zy`xhh :let @/='<C-r>z'<CR> :set hlsearch<CR>
+nnoremap * mxviw"zy`xhh :let @/='\<<C-r>z\>'<CR> :set hlsearch<CR>
 
 "" Ctrl+x to unhighlight searched text
 nnoremap <silent> <C-x> :nohl<CR><C-l>
