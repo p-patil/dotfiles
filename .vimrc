@@ -15,13 +15,13 @@ endfunction
 call plug#begin()
 
 "" Shared between vim and neovim
-Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mbbill/undotree'
+Plug 'mhinz/vim-signify'
 Plug 'othree/eregex.vim'
 Plug 'pseewald/vim-anyfold'
 Plug 'scrooloose/nerdcommenter'
@@ -60,10 +60,6 @@ let g:eregex_force_case = 1
 
 """ fzf settings
 let $FZF_DEFAULT_COMMAND=""
-
-""" gitgutter settings
-set updatetime=500
-let g:gitgutter_max_signs = 700
 
 """ gutentags settings
 """" Directory where tags files are stored (as opposed to in the root project directory)
