@@ -78,6 +78,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:anyfold_activate=1
 set foldlevel=99
 
+""" vim-signify settings
+let g:signify_realtime = 1
+
 "" Vim plugins
 if (!has('nvim'))
     " None so far; put vim-only plugins here
