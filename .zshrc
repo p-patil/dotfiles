@@ -525,6 +525,34 @@ function plmount() {
     sudo mount "/dev/$NAME" "$MOUNT_POINT"
 }
 
+function program() {
+    USAGE="program <LANGUAGE>\nSupported languages: C, C++, Java, Python"
+    if [[ $# -ne 1 ]]; then
+        echo "$USAGE"
+        return
+    fi
+
+    LANG=$1:l
+    case $LANG in
+        c )
+            cat $HOME/scripts/base\ language\ programs/c | nvim -c "set filetype=c" -
+            ;;
+        c | cpp )
+            cat $HOME/scripts/base\ language\ programs/cpp | nvim -c "set filetype=cpp" -
+            ;;
+        java )
+            cat $HOME/scripts/base\ language\ programs/java | nvim -c "set filetype=java" -
+            ;;
+        python )
+            cat $HOME/scripts/base\ language\ programs/python | nvim -c "set filetype=python" -
+            ;;
+        * )
+            echo "Unsupported language"
+            return
+    esac
+}
+alias p="nocorrect program"
+
 alias push_dotfiles="/home/piyush/scripts/push_dotfiles.sh"
 alias quick_man="/home/piyush/scripts/quick_man.py"
 alias remap_keys="/home/piyush/scripts/remap_keys.sh"

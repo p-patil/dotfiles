@@ -3,6 +3,10 @@
     - Installed with: pacman
     - Description: Basic installation
 
+- archlinux-keyring
+    - Description: Keyring (set of keys) used for pacman's web-of-trust model.
+    - Installed with: pacman
+
 ## Wifi stuff
 - iw, wpa_supplicant, dialog, wpa_actiond
     - Installed with: pacman
@@ -83,6 +87,10 @@
 - cronie
     - Installed with: pacman
     - Description: Background for executing commands at fixed time intervals, using crontab.
+
+- sshfs
+    - Installed with: pacman
+    - Description: Mount remote filesystems locally over ssh.
 
 ## Programming languages and development stuff
 
