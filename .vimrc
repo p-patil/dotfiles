@@ -15,13 +15,13 @@ endfunction
 call plug#begin()
 
 "" Shared between vim and neovim
-Plug 'airblade/vim-gitgutter'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mbbill/undotree'
+Plug 'mhinz/vim-signify'
 Plug 'othree/eregex.vim'
 Plug 'pseewald/vim-anyfold'
 Plug 'scrooloose/nerdcommenter'
@@ -61,10 +61,6 @@ let g:eregex_force_case = 1
 """ fzf settings
 let $FZF_DEFAULT_COMMAND=""
 
-""" gitgutter settings
-set updatetime=500
-let g:gitgutter_max_signs = 700
-
 """ gutentags settings
 """" Directory where tags files are stored (as opposed to in the root project directory)
 let g:gutentags_cache_dir = '~/.tags'
@@ -81,6 +77,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 """ vim-anyfold settings
 let g:anyfold_activate=1
 set foldlevel=99
+
+""" vim-signify settings
+let g:signify_realtime = 1
 
 "" Vim plugins
 if (!has('nvim'))
