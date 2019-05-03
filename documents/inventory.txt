@@ -73,16 +73,20 @@
 - kitty
     - Installed with: pacman
     - Description: Terminal emulator, also offloads some rendering work to GPU for performance gains, but is additionally full of features, such as an intuitive tabbing and window system.
-    - NOTE: Currently, fonts are broken on kitty for some reason (something to do with a system update).
 - termite
      - Installed with: pacman
      - Description: TODO
+
+## Fonts
 - noto-fonts
     - Installed with: pacman
     - Description: Family of "Noto" fonts, which is what is used by the kitty.conf.
 - xorg-fonts-misc
     - Installed with: pacman
     - Some default fonts for xterm.
+- ttf-dejavu
+    - Installed with: pacman
+    - Description: DejaVu fonts. They are a family of fonts that provides greater coverage of unicode. Notably, they fixed the ugly monospaced serif font I was getting on chrome after updating.
 
 - cronie
     - Installed with: pacman

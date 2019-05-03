@@ -81,7 +81,7 @@ fi
 
 ## Function for printing (or grepping, if passed the search pattern) an ASCII table.
 function ascii() {
-    CONTROL_CHAR_OUTPUT=$(column -s "," -t < /home/piyush/scripts/ascii_table_ref/control_chars.csv | sed -E "s/(.*)/\t\1/")
+    CONTROL_CHAR_OUTPUT=$(column -s "," -t < $HOME/scripts/ascii_table_ref/control_chars.csv | sed -E "s/(.*)/\t\1/")
     CONTROL_CHAR_HEADER=$(echo "$CONTROL_CHAR_OUTPUT" | sed -n "1 p")
     CONTROL_CHAR_OUTPUT=$(echo "$CONTROL_CHAR_OUTPUT" | sed -n "2,$ p")
     if [[ $# -gt "0" ]]
@@ -94,7 +94,7 @@ function ascii() {
         fi
     fi
 
-    PRINTABLE_CHAR_OUTPUT=$(column -s "," -t < /home/piyush/scripts/ascii_table_ref/printable_chars.csv | sed -E "s/(.*)/\t\1/")
+    PRINTABLE_CHAR_OUTPUT=$(column -s "," -t < $HOME/scripts/ascii_table_ref/printable_chars.csv | sed -E "s/(.*)/\t\1/")
     PRINTABLE_CHAR_HEADER=$(echo "$PRINTABLE_CHAR_OUTPUT" | sed -n "1 p")
     PRINTABLE_CHAR_OUTPUT=$(echo "$PRINTABLE_CHAR_OUTPUT" | sed -n "2,$ p")
     if [[ $# -gt "0" ]]
@@ -108,7 +108,7 @@ function ascii() {
         fi
     fi
 
-    EXTENDED_CHAR_OUTPUT=$(column -s "," -t < /home/piyush/scripts/ascii_table_ref/extended_chars.csv | sed -E "s/(.*)/\t\1/")
+    EXTENDED_CHAR_OUTPUT=$(column -s "," -t < $HOME/scripts/ascii_table_ref/extended_chars.csv | sed -E "s/(.*)/\t\1/")
     EXTENDED_CHAR_HEADER=$(echo "$EXTENDED_CHAR_OUTPUT" | sed -n "1 p")
     EXTENDED_CHAR_OUTPUT=$(echo "$EXTENDED_CHAR_OUTPUT" | sed -n "2,$ p")
     if [[ $# -gt "0" ]]
@@ -162,7 +162,7 @@ function big() {
 
     if [[ ! -d "$SEARCH_PATH" ]]; then
         echo "Directory does not exist"
-	return
+        return
     fi
 
     du -sh $SEARCH_PATH/* | sort -hr | head -n "$NUM"
@@ -193,12 +193,13 @@ function cdll() {
     cd $1 && ls -alh
 }
 
-alias connect_wifi="/home/piyush/scripts/wifi/wifi_connect"
+alias connect_wifi="$HOME/scripts/wifi/wifi_connect"
 
 # Convenience function to get shell color codes.
 function color() {
     if [[ $# -eq 0 ]]; then
         echo "Usage: color [--foreground | --background] <color name>"
+        echo "Run this script in command substitution when printing something, and anything else printed in the same echo command will have the given color."
         return
     elif [[ $# -eq 1 ]]; then
         NAME=${1:-}
@@ -275,33 +276,32 @@ function color() {
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
 
-function go() {
-    if [[ $# -eq 0 ]]
-    then
-        echo "Usage: go <command>"
-        return
-    fi
-
-    SPACES_REGEX=" |'"
-    COMMAND=""
-    for ARG in "$@"
-    do
-        if [[ "$ARG" =~ "$SPACES_REGEX" ]]
-        then
-            ARG=$(printf %q "$ARG")
-        fi
-
-        COMMAND="$COMMAND $ARG"
-    done
-
-    COMMAND="$COMMAND &> /dev/null &"
-    eval "$COMMAND"
-}
-
 # Git aliases
-alias ga="git commit --amend --no-edit"
-alias gaa="git commit -a --amend --no-edit"
+alias ga="git add"
+alias gap="git add --patch"
+alias gc="git commit"
+alias gca="git commit --amend --no-edit"
+alias gd="git diff"
+alias gl="git ls-files"
+alias glf="git ls-files -m -d"
+alias glg="git log"
+alias glgs="git log --stat"
 alias gp="git pull --all --prune --rebase"
+alias gsh="git stash --include-untracked"
+alias gshp="git stash pop"
+## Aliases for operating on the "next" unstaged file
+alias glfn="git ls-files -m -d | head -n 1" # Show the next file
+alias gra="git rebase --abort"
+alias grc="git rebase --continue"
+alias gri="git rebase --interactive"
+### Add next file
+function gan() {
+  git add $(git ls-files -m -d | sed -n "${1:=1} p")
+}
+### Show diff next file
+function gdn() {
+  git diff $(git ls-files -m -d | sed -n "${1:=1} p")
+}
 
 ## Function for easy symmetric, password-based decryption of a file with GPG.
 function gpg_decrypt() {
@@ -407,14 +407,8 @@ function l() {
     LS_OUTPUT=$(/bin/ls --color -lah "$@")
 
     ## If the first line is a "total" line, delete it.
-    if [[ "$SHELL" == *"/zsh"* ]]; then
-        setopt extended_glob
-        LS_OUTPUT=${LS_OUTPUT#total [0-9]##[A-Z]#
-}
-    else
-        shopt -s extglob
-        LS_OUTPUT=${LS_OUTPUT#total +([0-9])*([A-Z])
-}
+    if [[ "$LS_OUTPUT" =~ "total [0-9]+(\.[0-9]+)?[A-Z]"* ]]; then
+        LS_OUTPUT=$(echo "$LS_OUTPUT" | sed "1d")
     fi
 
     ## Delimit columns with "|"
@@ -442,13 +436,18 @@ function mkcd() {
     cd "$1"
 }
 
-alias mount_sdb1="/home/piyush/scripts/mount/mount_sdb1"
-alias mount_sdc1="/home/piyush/scripts/mount/mount_sdc1"
+alias mount_sdb1="$HOME/scripts/mount/mount_sdb1"
+alias mount_sdc1="$HOME/scripts/mount/mount_sdc1"
 
 function music() {
     OLD_DIR=$PWD
 
-    cd /home/piyush/projects/Music-Player-Basic
+    cd $HOME/projects/Music-Player-Basic
+    lsvirtualenv -b | grep "music-player"
+    if [[ $? -ne 0 ]]; then
+        echo "Virtualenv not found"
+        return
+    fi
     workon music-player
     python main.py
 
@@ -460,8 +459,8 @@ function move_workspace() {
     i3 workspace "$1" && i3 move workspace to output "$2"
 }
 
-alias off_mon="/home/piyush/scripts/monitor/off.py"
-alias on_mon="/home/piyush/scripts/monitor/on.py"
+alias off_mon="$HOME/scripts/monitor/off.py"
+alias on_mon="$HOME/scripts/monitor/on.py"
 alias on_tv="xrandr --output eDP1 --primary --auto --output HDMI2 --right-of eDP1 --mode 1920x1080"
 alias off_tv="xrandr --output eDP1 --primary --auto --output HDMI2 --off"
 
@@ -553,13 +552,13 @@ function program() {
 }
 alias p="nocorrect program"
 
-alias push_dotfiles="/home/piyush/scripts/push_dotfiles.sh"
-alias quick_man="/home/piyush/scripts/quick_man.py"
-alias remap_keys="/home/piyush/scripts/remap_keys.sh"
-alias reset_mouse="/home/piyush/scripts/switch_mouse.sh --right"
-alias restart="/home/piyush/scripts/restart.py"
-alias restore="/home/piyush/projects/Session-Storer/restore"
-alias save="/home/piyush/projects/Session-Storer/save"
+alias push_dotfiles="$HOME/scripts/push_dotfiles.sh"
+alias quick_man="$HOME/scripts/quick_man.py"
+alias remap_keys="$HOME/scripts/remap_keys.sh"
+alias reset_mouse="$HOME/scripts/mouse/switch.sh --right"
+alias restart="$HOME/scripts/restart.py"
+alias restore="$HOME/projects/Session-Storer/restore"
+alias save="$HOME/projects/Session-Storer/save"
 
 function say() {
     if [[ $# -eq 0 ]]
@@ -571,10 +570,34 @@ function say() {
     espeak "\"$@\"" &> /dev/null
 }
 
+alias s="start"
+function start() {
+    if [[ $# -eq 0 ]]
+    then
+        echo "Usage: start <command>"
+        return
+    fi
+
+    SPACES_REGEX=" |'"
+    COMMAND=""
+    for ARG in "$@"
+    do
+        if [[ "$ARG" =~ "$SPACES_REGEX" ]]
+        then
+            ARG=$(printf %q "$ARG")
+        fi
+
+        COMMAND="$COMMAND $ARG"
+    done
+
+    COMMAND="$COMMAND &> /dev/null &"
+    eval "$COMMAND"
+}
+
 function scrambler() {
     OLD_DIR=$PWD
 
-    cd /home/piyush/projects/scripts/scrambler.py
+    cd $HOME/projects/scripts/scrambler.py
     workon scrambler
     ./scrambler "$@"
 
@@ -583,12 +606,12 @@ function scrambler() {
 }
 
 alias screenshot="import /tmp/screenshot.png && xclip -selection \"clipboard\" -target \"image/png\" -i < /tmp/screenshot.png"
-alias switch_mouse="/home/piyush/scripts/switch_mouse.sh --left"
+alias switch_mouse="$HOME/scripts/mouse/switch.sh --left"
 alias sz="source $HOME/.zshrc"
-alias ts_enable="/home/piyush/scripts/touchscreen.sh --enable"
-alias ts_disable="/home/piyush/scripts/touchscreen.sh --disable"
-alias umount_sdb1="/home/piyush/scripts/mount/umount_sdb1"
-alias umount_sdc1="/home/piyush/scripts/mount/umount_sdc1"
+alias ts_enable="$HOME/scripts/touchscreen.sh --enable"
+alias ts_disable="$HOME/scripts/touchscreen.sh --disable"
+alias umount_sdb1="$HOME/scripts/mount/umount_sdb1"
+alias umount_sdc1="$HOME/scripts/mount/umount_sdc1"
 
 function volume() {
     if [[ $# -eq 0 ]] || [[ ! $1 =~ "^[0-9]+$" ]]
@@ -632,5 +655,5 @@ if [[ $(uname -a) == *"Ubuntu"* ]]; then
     alias on_tv="xrandr --output eDP-1 --primary --auto --output HDMI-2 --right-of eDP-1 --mode 1920x1080"
     alias off_tv="xrandr --output eDP-1 --primary --auto --output HDMI-2 --off"
 
-    export ARCH="/mnt/arch/home/piyush"
+    export ARCH="/mnt/arch$HOME"
 fi

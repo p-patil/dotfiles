@@ -19,11 +19,9 @@ Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'othree/eregex.vim'
-Plug 'pseewald/vim-anyfold'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
@@ -36,8 +34,13 @@ Plug 'w0rp/ale'
 
 "" Neovim plugins
 Plug 'Shougo/deoplete.nvim', Cond(has('nvim'), { 'do': ':UpdateRemotePlugins' })
+"Plug 'Shougo/deoplete-clangx', Cond(has('nvim'))
 Plug 'artur-shaik/vim-javacomplete2', Cond(has('nvim'))
-Plug 'zchee/deoplete-jedi', Cond(has('nvim'))
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'deoplete-plugins/deoplete-jedi', Cond(has('nvim'))
 
 call plug#end()
 
@@ -61,22 +64,10 @@ let g:eregex_force_case = 1
 """ fzf settings
 let $FZF_DEFAULT_COMMAND=""
 
-""" gutentags settings
-"""" Directory where tags files are stored (as opposed to in the root project directory)
-let g:gutentags_cache_dir = '~/.tags'
-"""" Map spacebar + d to jump to defining tag of term under cursor.
-nnoremap <Leader>d <C-]>
-"""" Map spacebar + t to jump back from a tag to previous cursor location.
-nnoremap <Leader>t <C-t>
-
 """ nerdtree settings
 map <C-n> :NERDTreeToggle<CR>
 map <Leader>N :NERDTreeFind<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim if the only open window left is nerdtree
-
-""" vim-anyfold settings
-let g:anyfold_activate=1
-set foldlevel=99
 
 """ vim-signify settings
 let g:signify_realtime = 1
@@ -91,9 +82,23 @@ if (has('nvim'))
     """ Deoplete
     let g:deoplete#enable_at_startup = 1
     let g:deoplete#enable_smart_case = 1
-    set completeopt-=preview                " disable preview window
-    inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-    
+    """" Use tab for completion
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
+
+    """ LanguageClient_neovim
+    let g:LanguageClient_serverCommands = {
+      \ 'c': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
+      \ 'cpp': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
+      \ 'cuda': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
+      \ 'objc': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
+      \ }
+    let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
+    let g:LanguageClient_settingsPath = '/home/piyush/.config/nvim/settings.json'
+    " https://github.com/autozimu/LanguageClient-neovim/issues/379 LSP snippet is not supported
+    let g:LanguageClient_hasSnippetSupport = 0
+    let g:LanguageClient_diagnosticsEnable = 0
+
     """ undotree
     if has("persistent_undo")
         set undodir=~/.vim/.undodir/
@@ -103,8 +108,11 @@ if (has('nvim'))
     nnoremap <Leader>u :UndotreeToggle <CR>
 
     """ ale
+    let g:ale_enabled = 0
+    let g:ale_on_text_changed = 'never'
     let g:ale_sign_column_always=1
     let g:ale_fixers = {'python': ['autopep8'], 'c++': ['clang-format']}
+    nnoremap <Leader>A :ALEToggle<CR>
 endif
 
 
