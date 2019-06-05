@@ -73,6 +73,9 @@ fi
 if [[ $PATH != *"/opt/google/chrome"* ]]; then
     export PATH="/opt/google/chrome:$PATH"
 fi
+if [[ $PATH != *"$HOME/.local/bin"* ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
