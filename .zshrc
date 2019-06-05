@@ -174,7 +174,7 @@ function big() {
 # Quick function for easy arithmetic computation.
 function calculator() {
     if [[ $# -eq 0 ]]; then
-        echo "Usage: c <EXPR>"
+        echo "Usage: $funcstack[1] <EXPR>"
         echo "EXPR is any valid elementary arithmetic expression, extended to include any of the builtin functions in Python's math module."
         echo "Make sure to wrap the argument in single quotes to prevent command line expansion."
         return
@@ -201,7 +201,7 @@ alias connect_wifi="$HOME/scripts/wifi/wifi_connect"
 # Convenience function to get shell color codes.
 function color() {
     if [[ $# -eq 0 ]]; then
-        echo "Usage: color [--foreground | --background] <color name>"
+        echo "Usage: $funcstack[1] [--foreground | --background] <color name>"
         echo "Run this script in command substitution when printing something, and anything else printed in the same echo command will have the given color."
         return
     elif [[ $# -eq 1 ]]; then
@@ -218,11 +218,11 @@ function color() {
             TYPE="foreground"
             NAME="$1 $2"
         else
-            echo "Usage: color [--foreground | --background] <color name>"
+            echo "Usage: $funcstack[1] [--foreground | --background] <color name>"
             return
         fi
     else
-        echo "Usage: color [--foreground | --background] <color name>"
+        echo "Usage: $funcstack[1] [--foreground | --background] <color name>"
         return
     fi
 
@@ -299,10 +299,38 @@ alias grc="git rebase --continue"
 alias gri="git rebase --interactive"
 ### Add next file
 function gan() {
+  if [[ $# -ge 2 ]]; then
+    echo "Usage: $funcstack[1] [n]"
+    return
+  elif [[ $# -eq 1 && ! "$1" =~ [0-9]+ ]]; then
+    echo "Argument must be a positive integer"
+    return
+  fi
+
   git add $(git ls-files -m -d | sed -n "${1:=1} p")
+}
+### Edit next file
+function gen() {
+  if [[ $# -ge 2 ]]; then
+    echo "Usage: $funcstack[1] [n]"
+    return
+  elif [[ $# -eq 1 && ! "$1" =~ [0-9]+ ]]; then
+    echo "Argument must be a positive integer"
+    return
+  fi
+
+  nvim $(git ls-files -m -d | sed -n "${1:=1} p")
 }
 ### Show diff next file
 function gdn() {
+  if [[ $# -ge 2 ]]; then
+    echo "Usage: $funcstack[1] [n]"
+    return
+  elif [[ $# -eq 1 && ! "$1" =~ [0-9]+ ]]; then
+    echo "Argument must be a positive integer"
+    return
+  fi
+
   git diff $(git ls-files -m -d | sed -n "${1:=1} p")
 }
 
@@ -310,7 +338,7 @@ function gdn() {
 function gpg_decrypt() {
     if [[ $# -eq 0 ]]
     then
-        echo "Usage: gpg_decrypt <file name>"
+        echo "Usage: $funcstack[1] <file name>"
         return
     fi
 
@@ -336,7 +364,7 @@ function gpg_decrypt() {
 function gpg_encrypt() {
     if [[ $# -eq 2 ]]
     then
-        echo "Usage: gpg_decrypt <file name>"
+        echo "Usage: $funcstack[1] <file name>"
         return
     fi
 
@@ -509,7 +537,7 @@ function plmount() {
         PARTLABEL=$1
         MOUNT_POINT=$2
     else
-        echo "Usage: plmount <PARTLABEL> [<MOUNT POINT>]"
+        echo "Usage: $funcstack[1] <PARTLABEL> [<MOUNT POINT>]"
         return
     fi
 
@@ -566,7 +594,7 @@ alias save="$HOME/projects/Session-Storer/save"
 function say() {
     if [[ $# -eq 0 ]]
     then
-        echo "Usage: say \"<words>\""
+        echo "Usage: $funcstack[1] \"<words>\""
         return
     fi
 
@@ -577,7 +605,7 @@ alias s="start"
 function start() {
     if [[ $# -eq 0 ]]
     then
-        echo "Usage: start <command>"
+        echo "Usage: $funcstack[1] <command>"
         return
     fi
 
@@ -619,7 +647,7 @@ alias umount_sdc1="$HOME/scripts/mount/umount_sdc1"
 function volume() {
     if [[ $# -eq 0 ]] || [[ ! $1 =~ "^[0-9]+$" ]]
     then
-        echo "Usage: volume <PERCENTAGE>"
+        echo "Usage: $funcstack[1] <PERCENTAGE>"
         return
     elif [[ $1 -gt 100 ]]
     then

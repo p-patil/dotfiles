@@ -184,7 +184,7 @@ nnoremap <Leader>s :mksession! session.vim<CR>
 nnoremap <Leader>S :mksession!
 
 " Close buffer without closing its window, instead switching to previous buffer.
-nnoremap <C-b> :bp \|bd # <CR>
+nnoremap :bdp :bp\|bd #<CR>
 
 " Close all hidden buffers.
 function! DeleteHiddenBuffers()
