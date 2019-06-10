@@ -290,6 +290,7 @@ alias glf="git ls-files -m -d"
 alias glg="git log"
 alias glgs="git log --stat"
 alias gp="git pull --all --prune --rebase"
+alias gS="nocorrect git status" # Stop zsh from trying to correct git status to stats
 alias gsh="git stash --include-untracked"
 alias gshp="git stash pop"
 ## Aliases for operating on the "next" unstaged file
@@ -299,15 +300,34 @@ alias grc="git rebase --continue"
 alias gri="git rebase --interactive"
 ### Add next file
 function gan() {
-  if [[ $# -ge 2 ]]; then
-    echo "Usage: $funcstack[1] [n]"
+  NUM=1
+  PATCH=""
+
+  # Parse arguments.
+  if [[ $# -gt 2 ]]; then
+      echo "Usage: $funcstack[1] [-p] [n]"
     return
-  elif [[ $# -eq 1 && ! "$1" =~ [0-9]+ ]]; then
+  elif [[ $# -eq 1 ]]; then
+    NUM="$1"
+  elif [[ $# -eq 2 ]]; then
+    PATCH="$1"
+    NUM="$2"
+  fi
+
+  # Validate arguments.
+  if [[ ! "$NUM" =~ [0-9]+ ]]; then
     echo "Argument must be a positive integer"
+    return
+  elif [[ -n "$PATCH" && "$PATCH" != "-p" && "$PATCH" != "--patch" ]]; then
+    echo "Usage: $funcstack[1] [-p] [n]"
     return
   fi
 
-  git add $(git ls-files -m -d | sed -n "${1:=1} p")
+  if [[ -n "$PATCH" ]]; then
+    git add -p $(git ls-files -m -d | sed -n "$NUM p")
+  else
+    git add $(git ls-files -m -d | sed -n "$NUM p")
+  fi
 }
 ### Edit next file
 function gen() {
