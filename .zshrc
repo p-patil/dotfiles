@@ -308,7 +308,11 @@ function gan() {
       echo "Usage: $funcstack[1] [-p] [n]"
     return
   elif [[ $# -eq 1 ]]; then
-    NUM="$1"
+    if [[ "$1" == "-p" || "$1" == "--patch" ]]; then
+      PATCH="$1"
+    else
+      NUM="$1"
+    fi
   elif [[ $# -eq 2 ]]; then
     PATCH="$1"
     NUM="$2"
