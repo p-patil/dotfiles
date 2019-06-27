@@ -330,10 +330,17 @@ function gan() {
     return
   fi
 
+  INDEX_FILES=$(git ls-files -m -d)
+  NUM_FILES=$(echo "$INDEX_FILES" | wc -l)
+  if [[ $NUM -gt $NUM_FILES ]]; then
+    echo "Out of bounds argument, only $NUM_FILES files in index"
+    return
+  fi
+
   if [[ -n "$PATCH" ]]; then
-    git add -p $(git ls-files -m -d | sed -n "$NUM p")
+    git add -p $(echo "$INDEX_FILES" | sed -n "$NUM p")
   else
-    git add $(git ls-files -m -d | sed -n "$NUM p")
+    git add $(echo "$INDEX_FILES" | sed -n "$NUM p")
   fi
 }
 ### Edit next file
@@ -346,7 +353,14 @@ function gen() {
     return
   fi
 
-  nvim $(git ls-files -m -d | sed -n "${1:=1} p")
+  INDEX_FILES=$(git ls-files -m -d)
+  NUM_FILES=$(echo "$INDEX_FILES" | wc -l)
+  if [[ $1 -gt $NUM_FILES ]]; then
+    echo "Out of bounds argument, only $NUM_FILES files in index"
+    return
+  fi
+
+  nvim $(echo "$INDEX_FILES" | sed -n "${1:=1} p")
 }
 ### Show diff next file
 function gdn() {
@@ -358,7 +372,14 @@ function gdn() {
     return
   fi
 
-  git diff $(git ls-files -m -d | sed -n "${1:=1} p")
+  INDEX_FILES=$(git ls-files -m -d)
+  NUM_FILES=$(echo "$INDEX_FILES" | wc -l)
+  if [[ $1 -gt $NUM_FILES ]]; then
+    echo "Out of bounds argument, only $NUM_FILES files in index"
+    return
+  fi
+
+  git diff $(echo "$INDEX_FILES" | sed -n "${1:=1} p")
 }
 
 ## Function for easy symmetric, password-based decryption of a file with GPG.
