@@ -326,3 +326,18 @@ funct! Redir(command, to)
   redir END
 endfunct
 command! -nargs=+ R call call(function('Redir'), split(<q-args>, '\s\(\S\+\s*$\)\@='))
+
+
+
+" Nuro-specific stuff
+let hostname = substitute(system('hostname'), '\n', '', '')
+if hostname == "piyush-nuro-workstation" || $NURO_VIM != ""
+  " Set tabs to 2
+  set expandtab
+  set tabstop=2
+  set softtabstop=2
+  set shiftwidth=2
+
+  " Disable PYTHONPATH so deoplete works
+  let $PYTHONPATH = ''
+endif
