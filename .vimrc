@@ -25,6 +25,7 @@ Plug 'othree/eregex.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-surround'
 Plug 'w0rp/ale'
@@ -34,13 +35,13 @@ Plug 'w0rp/ale'
 
 "" Neovim plugins
 Plug 'Shougo/deoplete.nvim', Cond(has('nvim'), { 'do': ':UpdateRemotePlugins' })
-"Plug 'Shougo/deoplete-clangx', Cond(has('nvim'))
-Plug 'artur-shaik/vim-javacomplete2', Cond(has('nvim'))
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-Plug 'deoplete-plugins/deoplete-jedi', Cond(has('nvim'))
+"TODO(piyush) remove if tabnine works well
+"Plug 'artur-shaik/vim-javacomplete2', Cond(has('nvim'))
+"Plug 'autozimu/LanguageClient-neovim', {
+    "\ 'branch': 'next',
+    "\ 'do': 'bash install.sh',
+    "\ }
+"Plug 'deoplete-plugins/deoplete-jedi', Cond(has('nvim'))
 
 call plug#end()
 
@@ -86,18 +87,18 @@ if (has('nvim'))
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 
-    """ LanguageClient_neovim
-    let g:LanguageClient_serverCommands = {
-      \ 'c': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
-      \ 'cpp': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
-      \ 'cuda': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
-      \ 'objc': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
-      \ }
-    let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
-    let g:LanguageClient_settingsPath = '/home/piyush/.config/nvim/settings.json'
-    " https://github.com/autozimu/LanguageClient-neovim/issues/379 LSP snippet is not supported
-    let g:LanguageClient_hasSnippetSupport = 0
-    let g:LanguageClient_diagnosticsEnable = 0
+    """ LanguageClient_neovim "TODO(piyush) remove if tabnine works well
+    "let g:LanguageClient_serverCommands = {
+      "\ 'c': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
+      "\ 'cpp': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
+      "\ 'cuda': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
+      "\ 'objc': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
+      "\ }
+    "let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
+    "let g:LanguageClient_settingsPath = '/home/piyush/.config/nvim/settings.json'
+    "" https://github.com/autozimu/LanguageClient-neovim/issues/379 LSP snippet is not supported
+    "let g:LanguageClient_hasSnippetSupport = 0
+    "let g:LanguageClient_diagnosticsEnable = 0
 
     """ undotree
     if has("persistent_undo")
@@ -108,7 +109,6 @@ if (has('nvim'))
     nnoremap <Leader>u :UndotreeToggle <CR>
 
     """ ale
-    let g:ale_enabled = 0
     let g:ale_on_text_changed = 'never'
     let g:ale_sign_column_always=1
     let g:ale_fixers = {'python': ['autopep8'], 'c++': ['clang-format']}
@@ -143,13 +143,15 @@ noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 2)<CR>
 nnoremap <Leader>/ :M/
 
 "" Only highlight word under cursor, don't jump to next match or scroll.
-"" Explanation - First set a mark at the current cursor position. Then visually
-"" select the word under the cursor and yank into register z. Then move back
-"" to the mark to restore cursor position. NOTE: For an unknown reason, `x
-"" causes us to move 2 characters ahead of the mark instead of the mark
-"" itself, hence the hh to cancel that out. Then, paste from register z into
-"" the search register, and highlight the matches.
-nnoremap * mxviw"zy`xhh :let @/='\<<C-r>z\>'<CR> :set hlsearch<CR>
+"" Explanation:
+"" 1. To prevent the defualt register from being overwritten, save it into
+""    register a.
+"" 2. Set a mark at the current cursor position so we can restore it later.
+"" 3. Visually select the word under the cursor and yank into register z.
+"" 4. Then move back to the mark to restore cursor position.
+"" 5. Paste from register z into the search register.
+"" 6. Highlight the matches.
+nnoremap * :let @a=@"<CR>mxviw"zy:let @"=@a<CR>:let @/='\<<C-r>z\>'<CR>:set hlsearch<CR>`x
 
 "" Ctrl+x to unhighlight searched text
 nnoremap <silent> <C-x> :nohl<CR><C-l>
@@ -252,21 +254,22 @@ set directory^=$HOME/.vim/tmp//
 set backupdir=$HOME/.vim/tmp//
 
 "" Misc. options
-set cinkeys-=0#     " Don't unindent when typing # in insert mode
-set cursorline      " Highlight the line where the cursor is
-set hidden          " Hides unloaded buffers instead of closing - this allows for switching between buffers without saving
-set hlsearch        " Highlight search matches
-set incsearch       " Start searching as the search query is typed
-set linebreak       " Don't let vim split words when it text wraps over window size
-set noconfirm       " Don't display 'Enter to continue' prompts
-set nu              " But display the current line number next to the line, instead of 0
-set relativenumber  " Make line numbering relative
-set scrolloff=4     " always show 5 lines above and below cursor
-set showcmd		      " Display typed characters in Normal mode
-set showmatch	      " Show matching brackets
-set sidescrolloff=5 " always show 10 characters to left and right of line
-set smartcase       " All-lowercase patterns are case-insensitive, but otherwise case-sensitive
-set wildmenu        " Command-line completion
+set cinkeys-=0#           " Don't unindent when typing # in insert mode
+set completeopt-=preview  " Disable previewing.
+set cursorline            " Highlight the line where the cursor is
+set hidden                " Hides unloaded buffers instead of closing - this allows for switching between buffers without saving
+set hlsearch              " Highlight search matches
+set incsearch             " Start searching as the search query is typed
+set linebreak             " Don't let vim split words when it text wraps over window size
+set noconfirm             " Don't display 'Enter to continue' prompts
+set nu                    " But display the current line number next to the line, instead of 0
+set relativenumber        " Make line numbering relative
+set scrolloff=4           " always show 5 lines above and below cursor
+set showcmd		          " Display typed characters in Normal mode
+set showmatch	          " Show matching brackets
+set sidescrolloff=5       " always show 10 characters to left and right of line
+set smartcase             " All-lowercase patterns are case-insensitive, but otherwise case-sensitive
+set wildmenu              " Command-line completion
 
 "" Wrap git commit messages to 72 characters
 au FileType gitcommit set tw=72

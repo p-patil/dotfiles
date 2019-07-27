@@ -292,6 +292,9 @@ alias glgs="git log --stat"
 alias gp="git pull --all --prune --rebase"
 alias gS="nocorrect git status" # Stop zsh from trying to correct git status to stats
 alias gsh="git stash --include-untracked"
+alias gshl="git stash list"
+alias gshlp="git stash list --patch"
+alias gshls="git stash list --stat"
 alias gshp="git stash pop"
 ## Aliases for operating on the "next" unstaged file
 alias glfn="git ls-files -m -d | head -n 1" # Show the next file
@@ -300,15 +303,45 @@ alias grc="git rebase --continue"
 alias gri="git rebase --interactive"
 ### Add next file
 function gan() {
-  if [[ $# -ge 2 ]]; then
-    echo "Usage: $funcstack[1] [n]"
+  NUM=1
+  PATCH=""
+
+  # Parse arguments.
+  if [[ $# -gt 2 ]]; then
+      echo "Usage: $funcstack[1] [-p] [n]"
     return
-  elif [[ $# -eq 1 && ! "$1" =~ [0-9]+ ]]; then
+  elif [[ $# -eq 1 ]]; then
+    if [[ "$1" == "-p" || "$1" == "--patch" ]]; then
+      PATCH="$1"
+    else
+      NUM="$1"
+    fi
+  elif [[ $# -eq 2 ]]; then
+    PATCH="$1"
+    NUM="$2"
+  fi
+
+  # Validate arguments.
+  if [[ ! "$NUM" =~ [0-9]+ ]]; then
     echo "Argument must be a positive integer"
+    return
+  elif [[ -n "$PATCH" && "$PATCH" != "-p" && "$PATCH" != "--patch" ]]; then
+    echo "Usage: $funcstack[1] [-p] [n]"
     return
   fi
 
-  git add $(git ls-files -m -d | sed -n "${1:=1} p")
+  INDEX_FILES=$(git ls-files -m -d)
+  NUM_FILES=$(echo "$INDEX_FILES" | wc -l)
+  if [[ $NUM -gt $NUM_FILES ]]; then
+    echo "Out of bounds argument, only $NUM_FILES files in index"
+    return
+  fi
+
+  if [[ -n "$PATCH" ]]; then
+    git add -p $(echo "$INDEX_FILES" | sed -n "$NUM p")
+  else
+    git add $(echo "$INDEX_FILES" | sed -n "$NUM p")
+  fi
 }
 ### Edit next file
 function gen() {
@@ -320,7 +353,14 @@ function gen() {
     return
   fi
 
-  nvim $(git ls-files -m -d | sed -n "${1:=1} p")
+  INDEX_FILES=$(git ls-files -m -d)
+  NUM_FILES=$(echo "$INDEX_FILES" | wc -l)
+  if [[ $1 -gt $NUM_FILES ]]; then
+    echo "Out of bounds argument, only $NUM_FILES files in index"
+    return
+  fi
+
+  nvim $(echo "$INDEX_FILES" | sed -n "${1:=1} p")
 }
 ### Show diff next file
 function gdn() {
@@ -332,7 +372,14 @@ function gdn() {
     return
   fi
 
-  git diff $(git ls-files -m -d | sed -n "${1:=1} p")
+  INDEX_FILES=$(git ls-files -m -d)
+  NUM_FILES=$(echo "$INDEX_FILES" | wc -l)
+  if [[ $1 -gt $NUM_FILES ]]; then
+    echo "Out of bounds argument, only $NUM_FILES files in index"
+    return
+  fi
+
+  git diff $(echo "$INDEX_FILES" | sed -n "${1:=1} p")
 }
 
 ## Function for easy symmetric, password-based decryption of a file with GPG.
