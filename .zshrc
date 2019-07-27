@@ -290,6 +290,7 @@ alias glf="git ls-files -m -d"
 alias glg="git log"
 alias glgs="git log --stat"
 alias gp="git pull --all --prune --rebase"
+alias gS="nocorrect git status" # Stop zsh from trying to correct git status to stats
 alias gsh="git stash --include-untracked"
 alias gshp="git stash pop"
 ## Aliases for operating on the "next" unstaged file
