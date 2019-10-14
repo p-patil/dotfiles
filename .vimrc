@@ -35,13 +35,6 @@ Plug 'w0rp/ale'
 
 "" Neovim plugins
 Plug 'Shougo/deoplete.nvim', Cond(has('nvim'), { 'do': ':UpdateRemotePlugins' })
-"TODO(piyush) remove if tabnine works well
-"Plug 'artur-shaik/vim-javacomplete2', Cond(has('nvim'))
-"Plug 'autozimu/LanguageClient-neovim', {
-    "\ 'branch': 'next',
-    "\ 'do': 'bash install.sh',
-    "\ }
-"Plug 'deoplete-plugins/deoplete-jedi', Cond(has('nvim'))
 
 call plug#end()
 
@@ -87,18 +80,11 @@ if (has('nvim'))
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
 
-    """ LanguageClient_neovim "TODO(piyush) remove if tabnine works well
-    "let g:LanguageClient_serverCommands = {
-      "\ 'c': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
-      "\ 'cpp': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
-      "\ 'cuda': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
-      "\ 'objc': ['/home/piyush/bin/ccls/Release/ccls', '--log-file=/tmp/cc.log'],
-      "\ }
-    "let g:LanguageClient_loadSettings = 1 " Use an absolute configuration path if you want system-wide settings
-    "let g:LanguageClient_settingsPath = '/home/piyush/.config/nvim/settings.json'
-    "" https://github.com/autozimu/LanguageClient-neovim/issues/379 LSP snippet is not supported
-    "let g:LanguageClient_hasSnippetSupport = 0
-    "let g:LanguageClient_diagnosticsEnable = 0
+    """ tabnine
+    call deoplete#custom#var('tabnine', {
+    \ 'line_limit': 500,
+    \ 'max_num_results': 20,
+    \ })
 
     """ undotree
     if has("persistent_undo")
@@ -221,12 +207,12 @@ nnoremap <Leader>n Ypk:call NERDComment('n', 'Comment')<CR>j
 
 "" Syntax
 syntax on
-filetype on                         " detect the type of file
-filetype plugin on                  " enable filetype-specific plugins
+filetype on                                     " detect the type of file
+filetype plugin on                              " enable filetype-specific plugins
 let file_name = fnamemodify(bufname("%"), ":t")
 let file_ext = matchstr(file_name, '.*\.tex')
 if empty(file_ext)
-    filetype indent on              " enable filetype-specific indenting, but not for tex files
+    filetype indent on                          " enable filetype-specific indenting, but not for tex files
     set cindent
     set indentkeys-=0#
 endif
@@ -265,8 +251,8 @@ set noconfirm             " Don't display 'Enter to continue' prompts
 set nu                    " But display the current line number next to the line, instead of 0
 set relativenumber        " Make line numbering relative
 set scrolloff=4           " always show 5 lines above and below cursor
-set showcmd		          " Display typed characters in Normal mode
-set showmatch	          " Show matching brackets
+set showcmd		            " Display typed characters in Normal mode
+set showmatch	            " Show matching brackets
 set sidescrolloff=5       " always show 10 characters to left and right of line
 set smartcase             " All-lowercase patterns are case-insensitive, but otherwise case-sensitive
 set wildmenu              " Command-line completion
@@ -275,11 +261,11 @@ set wildmenu              " Command-line completion
 au FileType gitcommit set tw=72
 
 "" Tab (character, not window) stuff
-set expandtab     " Use spaces when tab key is pressed
-set shiftwidth=4  " The amount to indent or de-indent with >> or << operators
-set smarttab      " Intelligent auto-indenting
-set softtabstop=0 " Turn soft tab stop (which allows indenting between tabs) off
-set tabstop=4    " Number of spaces equal to a tab
+set expandtab      " Use spaces when tab key is pressed
+set shiftwidth=4   " The amount to indent or de-indent with >> or << operators
+set smarttab       " Intelligent auto-indenting
+set softtabstop=0  " Turn soft tab stop (which allows indenting between tabs) off
+set tabstop=4      " Number of spaces equal to a tab
 
 
 
@@ -326,3 +312,28 @@ funct! Redir(command, to)
   redir END
 endfunct
 command! -nargs=+ R call call(function('Redir'), split(<q-args>, '\s\(\S\+\s*$\)\@='))
+
+"" Tab and window switching and management in in TERMINAL mode.
+tnoremap <C-o> <C-\><C-N>gT
+tnoremap <C-p> <C-\><C-N>gt
+tnoremap <C-h> <C-\><C-N><C-w>h
+tnoremap <C-j> <C-\><C-N><C-w>j
+tnoremap <C-k> <C-\><C-N><C-w>k
+tnoremap <C-l> <C-\><C-N><C-w>l
+tnoremap <C-q> <C-\><C-N> :tabc <CR>
+nnoremap tT :tab split<CR>:te<CR>i
+
+
+
+" Nuro-specific stuff
+let hostname = substitute(system('hostname'), '\n', '', '')
+if hostname == "ppatil-desktop.corp.nuro.team" || $NURO_VIM != ""
+  " Set tabs to 2
+  set expandtab
+  set tabstop=2
+  set softtabstop=2
+  set shiftwidth=2
+
+  " Disable PYTHONPATH so deoplete works
+  let $PYTHONPATH = ''
+endif
