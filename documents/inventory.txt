@@ -183,6 +183,9 @@
 - youtube-dl
     - Installed with: sudo pacman -S youtube-dl ffmpeg
 
+- anki
+    - Installed with: sudo pacman -S anki
+
 ## Command line stuff
 
 - neovim

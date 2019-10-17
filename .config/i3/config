@@ -40,6 +40,9 @@ focus_follows_mouse no
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Screenshot
+bindsym --release $movemod+Ctrl+s exec /home/piyush/scripts/screenshot.sh
+
 # start a terminal
 bindsym $mod+Return exec alacritty
 

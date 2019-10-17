@@ -686,7 +686,7 @@ function scrambler() {
     cd "$OLD_DIR"
 }
 
-alias screenshot="import /tmp/screenshot.png && xclip -selection \"clipboard\" -target \"image/png\" -i < /tmp/screenshot.png"
+alias screenshot="$HOME/scripts/screenshot.sh"
 alias switch_mouse="$HOME/scripts/mouse/switch.sh --left"
 alias sz="source $HOME/.zshrc"
 alias ts_enable="$HOME/scripts/touchscreen.sh --enable"
