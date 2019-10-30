@@ -133,6 +133,10 @@
     - Installed with: pacman
     - Description: Generates a tag file for a project root directory that tracks where the definitions of all expressions in source code are.
 
+### Go
+- go
+    - Installed with: pacman
+
 # Extra
 
 ## Google Chrome
@@ -148,6 +152,9 @@
 - google-chrome
     - Installed with: AUR package (https://aur.archlinux.org/packages/google-chrome/)
     - Description: TODO remove. Closed source Chrome build for linux.
+
+- jupyter-notebook
+    - Installed with: sudo pacman -S jupyter-notebook
 
 ## Desktop applications
 
