@@ -15,6 +15,7 @@ endfunction
 call plug#begin()
 
 "" Shared between vim and neovim
+Plug 'Shougo/deoplete.nvim'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -76,6 +77,7 @@ if (has('nvim'))
     """ Deoplete
     let g:deoplete#enable_at_startup = 1
     let g:deoplete#enable_smart_case = 1
+    nmap <Leader>d :call deoplete#disable()<CR>
     """" Use tab for completion
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"

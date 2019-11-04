@@ -1,0 +1,1 @@
+ACTION=="add", KERNEL=="hidraw[0-9]*", SUBSYSTEM=="hidraw", SUBSYSTEMS=="usb", ATTRS{idVendor}=="093a", ATTRS{idProduct}=="2521", ENV{DISPLAY}=":0.0", ENV{XAUTHORITY}="/home/piyush/.Xauthority", ENV{ID_CLASS}="mouse", RUN+="/home/piyush/scripts/switch_mouse.sh"

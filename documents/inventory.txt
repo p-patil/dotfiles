@@ -43,7 +43,8 @@
     - Installed with: pacman
     - Description: Window manager.
 - py3status
-    - Installed with: AUR package
+    - Installed with: AUR package (https://aur.archlinux.org/packages/py3status-git/)
+    - Installation path: /opt/aur_builds/py3status
     - Description: i3 status bar.
 - pulseaudio, pulseaudio-alsa, alsa-utils
     - Installed with: pacman
@@ -69,6 +70,7 @@
 ## Terminal
 - alacritty
     - Installed with: AUR package (https://aur.archlinux.org/alacritty-scrollback-git)
+    - Installation path: /opt/aur_builds/alacritty-scrollback-git
     - Description: Terminal emulator, optimized for speed (uses OpenGL for GPU access when rendering, and fast parser written in Rust) and with a minimalist philosophy. This AUR package is a fork which adds scrollback as a feature, as this is not supported by default.
 - kitty
     - Installed with: pacman
@@ -121,6 +123,7 @@
 ### Java
 - jdk
     - Installed with: AUR package (https://aur.archlinux.org/jdk.git)
+    - Installation path: /opt/aur_builds/jdk
     - Description: The Oracle Java development kit for the Java programming language.
 
 ### Haskell
@@ -142,15 +145,18 @@
 ## Google Chrome
 - chromium
     - Installed with: AUR package (https://aur.archlinux.org/packages/chromium-vaapi/)
+    - Installation path: TODO (unknown for now)
     - Description: Chromium, built from source, to include VA-API and other hardware acceleration components.
 - pepper-flash
     - Installed with: pacman
     - Description: Chrome flash plugin.
 - chromium-widevine
     - Installed with: AUR package (https://aur.archlinux.org/packages/chromium-widevine/)
+    - Installation path: TODO (unknown for now)
     - Description: Plugin to allow viewing of certain content (e.g. Netflix).
 - google-chrome
     - Installed with: AUR package (https://aur.archlinux.org/packages/google-chrome/)
+    - Installation path: /opt/aur_builds/google-chrome
     - Description: TODO remove. Closed source Chrome build for linux.
 
 - jupyter-notebook
@@ -160,13 +166,18 @@
 
 - trello
     - Installed with: AUR package (https://aur.archlinux.org/packages/trello/)
+    - Installation path: /opt/aur_builds/trello
+    - Description: Trello (task tracking app)
 
 - slack-desktop
     - Installed with: AUR package (https://aur.archlinux.org/packages/slack-desktop/)
+    - Installation path: /opt/aur_builds/slack
     - Description: Desktop application for Slack.
 
 - evince
     - Installed with: AUR package (https://aur.archlinux.org/packages/evince-no-gnome/)
+    - Installation path: /opt/aur_builds/evince-no-gnome
+    - Description: Lightweight PDF viewer
 
 - rtorrent
     - Installed with: pacman
@@ -174,15 +185,18 @@
 
 - spotify-stable
     - Installed with: AUR package (https://aur.archlinux.org/spotify-stable.git)
+    - Installation path: /opt/aur_builds/spotify-stable
     - Dependencies (manually installed)
         - zenity
             - Installed with: pacman
             - Description: Required to play local files.
         - ffmpeg-compat-54
             - Installed with: AUR package (https://aur.archlinux.org/ffmpeg-compat-54.git)
+            - Installation path: /opt/aur_builds/ffmpeg-compat-54
             - Description: Required to play local files.
         - libavutil-52
             - Installed with: AUR package (https://aur.archlinux.org/libavutil-52.git)
+            - Installation path: TODO (unknown for now)
             - Description: Dependency of ffmpeg-compat-54.
     - Description: Semi-official desktop application for spotify, developed by Spotify engineers in their spare time (not officially backed by Spotify).
     - Note: A couple of invocations of `makepkg` error out due to being unable to verify certain PGP signatures. The keys can be manually added with `gpg --recv-keys <KEY>`.
@@ -192,6 +206,11 @@
 
 - anki
     - Installed with: sudo pacman -S anki
+
+- zoom
+    - Installed with: AUR package (https://aur.archlinux.org/packages/zoom/)
+    - Installation path: /opt/aur_builds/zoom
+    - Description: Video chatting software
 
 ## Command line stuff
 
@@ -257,6 +276,7 @@
 
 - Google play music manager
     - Installed with: AUR package (https://aur.archlinux.org/google-musicmanager.git)
+    - Installation path: /opt/aur_builds/google-musicmanager
     - Dependency: libidn11
         - Manually installed with: sudo pacman -U /opt/aur_builds/google-musicmanager/libidn11-1.33-1-x86_64.pkg.tar.xz
 
@@ -264,14 +284,6 @@
 - texlive-most
     - Installed with: pacman
     - Description: Provides latex libraries and the pdflatex tool for building PDFs from tex files.
-
-## Printer stuff
-- cups, cups-pdf
-    - Installed with: pacman
-    - Description: A standards-based, open source printing system for Unix operating systems.
-- brother-hl2280dw
-    - Installed with: AUR package (https://aur.archlinux.org/packages/brother-hl2280dw/)
-    - Description: Driver for Brother HL2280DW printer.
 
 ## Kernel development
 - qemu qemu-arch-extra
@@ -312,6 +324,7 @@
 
 - dtrx
      - Installed with: AUR package (https://aur.archlinux.org/dtrx.git)
+     - Installation path: /opt/aur_builds/dtrx
      - Description: Intelligent archive extracter.
 
 - gparted
