@@ -1,0 +1,1 @@
+ACTION=="add", KERNEL=="hidraw[0-9]*", SUBSYSTEM=="hidraw", SUBSYSTEMS=="usb", ATTRS{idVendor}=="093a", ATTRS{idProduct}=="2521", RUN+="/home/piyush/scripts/switch_mouse_udev.sh"

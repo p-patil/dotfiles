@@ -1,0 +1,4 @@
+# NOTE: This udev rule isn't currently used since udev doesn't pick up HDMI2 connecting. Instead, autorandr is used.
+#ACTION=="change", KERNEL=="card[0-9]*", SUBSYSTEM=="drm", RUN+="/home/piyush/scripts/monitor.sh DP1 toggle"
+ACTION=="add", KERNEL=="0000:05:00.0", SUBSYSTEM=="pci", RUN+="/home/piyush/scripts/monitor.sh DP1 on"
+ACTION=="remove", KERNEL=="0000:3d:00.0", SUBSYSTEM=="pci", RUN+="/home/piyush/scripts/monitor.sh DP1 off"
