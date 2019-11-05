@@ -38,6 +38,11 @@
     - Description: The package "mesa" provides the DRI driver (for 3-D acceleration) for Intel video cards. The package "libva-intel-driver" is the VA-API implementation for hardware acceleration.
     - Note: This laptop (Thinkpad T470) has an Intel GPU named "HD Graphics 520" (codename Skylake), which is among the 9th generation of Intel GPUs.
 
+- autorandr
+    - Installed with: pacman
+    - Description: Automatically handle monitors being plugged in and out.
+    - Note: Runs the systemd unit autorandr.service.
+
 ## Window manager stuff
 - i3
     - Installed with: pacman
@@ -298,6 +303,10 @@
     - Installed with: pacman
     - Description: TODO
     - Note: Also enabled the systemd units tlp.service and tlp-sleep.service.
+
+- acpid
+    - Installed with: pacman
+    - Description Daemone (systemd unit acpid.service) for delivering and handling ACPI events, even with custom scripts.
 
 - aws-cli
     - Installed with: pacman
