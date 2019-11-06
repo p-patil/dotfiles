@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ ! $AUTORANDR_MONITORS ]]; then
+    LOGFILE=$HOME/logs/autorandr/$(basename $0).log
+    mkdir -p $(dirname $LOGFILE)
+
+    date > $LOGFILE
+    echo $0 >> $LOGFILE
+    echo "ERROR: \$AUTORANDR_MONITORS variable not found in environment" >> $LOGFILE
+    exit 1
+fi
+
+# Only set up layout if we have all 3 displays
+MONITORS=${AUTORANDR_MONITORS//:/ }
+NUM_MONITORS=$(echo $MONITORS | wc -w)
+if [[ $NUM_MONITORS -ge 3 ]]; then
+    $HOME/scripts/i3_layout.sh
+fi
