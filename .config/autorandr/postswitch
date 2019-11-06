@@ -14,5 +14,6 @@ fi
 MONITORS=${AUTORANDR_MONITORS//:/ }
 NUM_MONITORS=$(echo $MONITORS | wc -w)
 if [[ $NUM_MONITORS -ge 3 ]]; then
+    echo "Found $NUM_MONITORS monitors, setting up layout"
     $HOME/scripts/i3_layout.sh
 fi
