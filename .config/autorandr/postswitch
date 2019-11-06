@@ -13,6 +13,6 @@ fi
 # Only set up layout if we have all 3 displays
 MONITORS=${AUTORANDR_MONITORS//:/ }
 NUM_MONITORS=$(echo $MONITORS | wc -w)
-if [[ $NUM_MONITORS -ge 3 ]]; then
-    $HOME/scripts/i3_layout.sh
+if [[ $NUM_MONITORS -ge 2 ]]; then
+    $HOME/scripts/i3_monitor_layout.sh
 fi
