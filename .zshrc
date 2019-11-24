@@ -290,21 +290,28 @@ alias gl="git ls-files"
 alias glf="git ls-files -m -d"
 alias glg="git log"
 alias glgme="git log --author=\"$(git config user.name)\""
+alias glgp="git log --patch"
 alias glgs="git log --stat"
 alias gp="git pull --all --prune --rebase"
 alias gS="nocorrect git status" # Stop zsh from trying to correct git status to stats
-alias gsh="git stash --include-untracked"
+function gsh() { # Stash with name.
+    if [[ $# -eq 0 ]]; then
+        git stash --include-untracked
+    elif [[ $# -eq 1 ]]; then
+        git stash save --include-untracked "$1"
+    else
+        echo "Usage: $funcstack[1] [stash name]"
+    fi
+}
 alias gshl="git stash list"
 alias gshlp="git stash list --patch"
 alias gshls="git stash list --stat"
 alias gshp="git stash pop"
-## Aliases for operating on the "next" unstaged file
 alias glfn="git ls-files -m -d | head -n 1" # Show the next file
 alias gra="git rebase --abort"
 alias grc="git rebase --continue"
 alias gri="git rebase --interactive"
-### Add next file
-function gan() {
+function gan() { # Add next file
   NUM=1
   PATCH=""
 
@@ -345,8 +352,7 @@ function gan() {
     git add $(echo "$INDEX_FILES" | sed -n "$NUM p")
   fi
 }
-### Edit next file
-function gen() {
+function gen() { # Edit next file
   if [[ $# -ge 2 ]]; then
     echo "Usage: $funcstack[1] [n]"
     return
@@ -364,8 +370,7 @@ function gen() {
 
   nvim $(echo "$INDEX_FILES" | sed -n "${1:=1} p")
 }
-### Show diff next file
-function gdn() {
+function gdn() { # Show diff next file
   if [[ $# -ge 2 ]]; then
     echo "Usage: $funcstack[1] [n]"
     return

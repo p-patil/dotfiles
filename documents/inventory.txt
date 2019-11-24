@@ -285,6 +285,10 @@
     - Dependency: libidn11
         - Manually installed with: sudo pacman -U /opt/aur_builds/google-musicmanager/libidn11-1.33-1-x86_64.pkg.tar.xz
 
+- wget
+    - Description: Tool for downloading files from servers.
+    - Installed with: pacman
+
 ## Building Latex files
 - texlive-most
     - Installed with: pacman
