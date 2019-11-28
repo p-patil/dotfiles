@@ -11,9 +11,6 @@
 - iw, wpa_supplicant, dialog, wpa_actiond
     - Installed with: pacman
     - Description: For network configuration. The "dialog" package is necessary for wifi-menu. Netctl comes with "base" package. The "wpa_actiond" package is needed for the netctl-auto@wlp4s0.service systemd unit.
-- openconnect
-    - Installed with: pacman
-    - Description: Client program for Cisco's AnyConnect VPN, needed to access UC Berkeley campus VPN.
 - openbsd-netcat
     - Installed with: pacman
     - Description: Network utility for writing to and reading from network connections, using the TCP and UDP protocols.
@@ -80,9 +77,6 @@
 - kitty
     - Installed with: pacman
     - Description: Terminal emulator, also offloads some rendering work to GPU for performance gains, but is additionally full of features, such as an intuitive tabbing and window system.
-- termite
-     - Installed with: pacman
-     - Description: TODO
 
 ## Fonts
 - noto-fonts

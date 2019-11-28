@@ -29,7 +29,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tpope/vim-surround'
-Plug 'w0rp/ale'
 
 "" Vim plugins
 """ None so far. Example usage: Plug 'example', Cond(!has('nvim'))
@@ -95,12 +94,6 @@ if (has('nvim'))
     endif
     """" Key to toggle undo tree (depends on Undotree)
     nnoremap <Leader>u :UndotreeToggle <CR>
-
-    """ ale
-    let g:ale_on_text_changed = 'never'
-    let g:ale_sign_column_always=1
-    let g:ale_fixers = {'python': ['autopep8'], 'c++': ['clang-format']}
-    nnoremap <Leader>A :ALEToggle<CR>
 endif
 
 
