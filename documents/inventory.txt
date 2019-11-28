@@ -107,9 +107,6 @@
     - Installed with: pacman
     - Description: Pip package manager for python.
     - To see packages installed with pip, run `pip freeze`
-- python-pylint
-    - Installed with: pacman
-    - Description: Python linter. Necessary for Neovim plugin Ale.
 
 - git
     - Installed with: pacman
@@ -163,11 +160,6 @@
 
 ## Desktop applications
 
-- trello
-    - Installed with: AUR package (https://aur.archlinux.org/packages/trello/)
-    - Installation path: /opt/aur_builds/trello
-    - Description: Trello (task tracking app)
-
 - slack-desktop
     - Installed with: AUR package (https://aur.archlinux.org/packages/slack-desktop/)
     - Installation path: /opt/aur_builds/slack
@@ -200,9 +192,6 @@
     - Description: Semi-official desktop application for spotify, developed by Spotify engineers in their spare time (not officially backed by Spotify).
     - Note: A couple of invocations of `makepkg` error out due to being unable to verify certain PGP signatures. The keys can be manually added with `gpg --recv-keys <KEY>`.
 
-- youtube-dl
-    - Installed with: sudo pacman -S youtube-dl ffmpeg
-
 - anki
     - Installed with: sudo pacman -S anki
 
@@ -225,10 +214,6 @@
     - Installed with: pacman
     - Description: Provides the "ag" tool, for quickly searching text.
 
-- vlc
-    - Installed with: pacman
-    - Description: Media player.
-
 - imagemagick
     - Installed with: pacman
     - Description: Diverse and powerful image processing utility.
@@ -249,10 +234,6 @@
     - Installed with: pacman
     - Description: Compression and uncompression utilities for .zip file format.
 
-- espeak
-    - Installed with: pacman
-    - Description: Command-line text-to-speech.
-
 - android-tools
     - Installed with: pacman
     - Description: Provides the android debug bridge (adb) tool, which can be used to manipulate connected (via USB) android devices.
@@ -265,20 +246,6 @@
     - Installed with: pacman
     - Description: GUI front-end for mplayer, which is a movie player with support for most audio and video formats.
 
-- python-eyed3
-    - Installed with: pacman
-    - Description: Utility for adding ID3 tags (such as artist) to MP3 files. Also a python module.
-    - Note: The command line utility is invoked with `eyeD3`.
-- grako
-    - Installed with: pip
-    - Description: Python module that provides a parser generator for EBNF (extended Backus-Naur form) grammars. eyeD3 uses it as a plugin.
-
-- Google play music manager
-    - Installed with: AUR package (https://aur.archlinux.org/google-musicmanager.git)
-    - Installation path: /opt/aur_builds/google-musicmanager
-    - Dependency: libidn11
-        - Manually installed with: sudo pacman -U /opt/aur_builds/google-musicmanager/libidn11-1.33-1-x86_64.pkg.tar.xz
-
 - wget
     - Description: Tool for downloading files from servers.
     - Installed with: pacman
@@ -288,27 +255,15 @@
     - Installed with: pacman
     - Description: Provides latex libraries and the pdflatex tool for building PDFs from tex files.
 
-## Kernel development
-- qemu qemu-arch-extra
-    - Installed with: pacman
-    - Description: Hypervisor for running virtual machines, designed for performance. Can be paired with KVM to attain near native performance.
-- vido
-    - Installed with: pip
-    - Description: Wrapper around qemu, provides easy command to use as a kernel launcher. So, vido can be used similar to sudo, i.e. to wrap around commands, which are then run inside a new (optionally custom) kernel.
-
 ## Battery and hardware stuff
 - tlp, acpi_call
     - Installed with: pacman
-    - Description: TODO
+    - Description: TLP provides automatic advanced power management.
     - Note: Also enabled the systemd units tlp.service and tlp-sleep.service.
 
 - acpid
     - Installed with: pacman
     - Description Daemone (systemd unit acpid.service) for delivering and handling ACPI events, even with custom scripts.
-
-- aws-cli
-    - Installed with: pacman
-    - Description: Command-line tool for managing AWS ec2 instances.
 
 - tmux
     - Installed with: pacman
@@ -328,11 +283,6 @@
 - traceroute
     - Installed with: pacman
     - Description: Sends and receives IP packets. Similar to tracepath, but manipulates raw packets instead of going through the sockets API, which means it requires root priviledges, but also that it is more powerful, allowing for the option of which protocol to use (IP vs TCP vs UDP, etc.), setting limits for minimum and maximum TTL, and other fine-grained control.
-
-- dtrx
-     - Installed with: AUR package (https://aur.archlinux.org/dtrx.git)
-     - Installation path: /opt/aur_builds/dtrx
-     - Description: Intelligent archive extracter.
 
 - gparted
     - Installed with: pacman
