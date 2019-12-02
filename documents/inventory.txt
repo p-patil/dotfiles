@@ -45,8 +45,7 @@
     - Installed with: pacman
     - Description: Window manager.
 - py3status
-    - Installed with: AUR package (https://aur.archlinux.org/packages/py3status-git/)
-    - Installation path: /opt/aur_builds/py3status
+    - Installed with: yay (AUR package)
     - Description: i3 status bar.
 - pulseaudio, pulseaudio-alsa, alsa-utils
     - Installed with: pacman
@@ -71,9 +70,8 @@
 
 ## Terminal
 - alacritty
-    - Installed with: AUR package (https://aur.archlinux.org/alacritty-scrollback-git)
-    - Installation path: /opt/aur_builds/alacritty-scrollback-git
-    - Description: Terminal emulator, optimized for speed (uses OpenGL for GPU access when rendering, and fast parser written in Rust) and with a minimalist philosophy. This AUR package is a fork which adds scrollback as a feature, as this is not supported by default.
+    - Installed with: yay (AUR package)
+    - Description: Terminal emulator, optimized for speed (uses OpenGL for GPU access when rendering, and fast parser written in Rust) and with a minimalist philosophy.
 - kitty
     - Installed with: pacman
     - Description: Terminal emulator, also offloads some rendering work to GPU for performance gains, but is additionally full of features, such as an intuitive tabbing and window system.
@@ -118,8 +116,7 @@
 
 ### Java
 - jdk
-    - Installed with: AUR package (https://aur.archlinux.org/jdk.git)
-    - Installation path: /opt/aur_builds/jdk
+    - Installed with: yay (AUR package) 
     - Description: The Oracle Java development kit for the Java programming language.
 
 ### Haskell
@@ -138,67 +135,41 @@
 
 # Extra
 
-## Google Chrome
-- chromium
-    - Installed with: AUR package (https://aur.archlinux.org/packages/chromium-vaapi/)
-    - Installation path: TODO (unknown for now)
-    - Description: Chromium, built from source, to include VA-API and other hardware acceleration components.
-- pepper-flash
-    - Installed with: pacman
-    - Description: Chrome flash plugin.
-- chromium-widevine
-    - Installed with: AUR package (https://aur.archlinux.org/packages/chromium-widevine/)
-    - Installation path: TODO (unknown for now)
-    - Description: Plugin to allow viewing of certain content (e.g. Netflix).
-- google-chrome
-    - Installed with: AUR package (https://aur.archlinux.org/packages/google-chrome/)
-    - Installation path: /opt/aur_builds/google-chrome
-    - Description: TODO remove. Closed source Chrome build for linux.
-
 - jupyter-notebook
     - Installed with: sudo pacman -S jupyter-notebook
 
 ## Desktop applications
 
-- slack-desktop
-    - Installed with: AUR package (https://aur.archlinux.org/packages/slack-desktop/)
-    - Installation path: /opt/aur_builds/slack
+- google-chrome
+    - Installed with: yay (AUR package)
+    - Description: TODO remove. Closed source Chrome build for linux.
+
+### tor
+- tor
+    - Installed with: pacman
+    - Description: Implements the onion routing networking protocol, providing free access to an anonymous proxy network.
+- torsocks
+    - Installed with: pacman
+    - Description: Allows for routing traffic of any command over tor; simply start tor and than run `torsocks <command>`.
+
+- slack
+    - Installed with: yay (AUR package)
     - Description: Desktop application for Slack.
 
-- evince
-    - Installed with: AUR package (https://aur.archlinux.org/packages/evince-no-gnome/)
-    - Installation path: /opt/aur_builds/evince-no-gnome
+- evince-no-gnome
+    - Installed with: yay (AUR package)
     - Description: Lightweight PDF viewer
 
 - rtorrent
     - Installed with: pacman
     - Description: Command-line torrent client.
 
-- spotify-stable
-    - Installed with: AUR package (https://aur.archlinux.org/spotify-stable.git)
-    - Installation path: /opt/aur_builds/spotify-stable
-    - Dependencies (manually installed)
-        - zenity
-            - Installed with: pacman
-            - Description: Required to play local files.
-        - ffmpeg-compat-54
-            - Installed with: AUR package (https://aur.archlinux.org/ffmpeg-compat-54.git)
-            - Installation path: /opt/aur_builds/ffmpeg-compat-54
-            - Description: Required to play local files.
-        - libavutil-52
-            - Installed with: AUR package (https://aur.archlinux.org/libavutil-52.git)
-            - Installation path: TODO (unknown for now)
-            - Description: Dependency of ffmpeg-compat-54.
+- spotify
+    - Installed with: yay (AUR package)
     - Description: Semi-official desktop application for spotify, developed by Spotify engineers in their spare time (not officially backed by Spotify).
-    - Note: A couple of invocations of `makepkg` error out due to being unable to verify certain PGP signatures. The keys can be manually added with `gpg --recv-keys <KEY>`.
 
 - anki
     - Installed with: sudo pacman -S anki
-
-- zoom
-    - Installed with: AUR package (https://aur.archlinux.org/packages/zoom/)
-    - Installation path: /opt/aur_builds/zoom
-    - Description: Video chatting software
 
 ## Command line stuff
 
