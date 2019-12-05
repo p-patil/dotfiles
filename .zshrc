@@ -522,9 +522,6 @@ function mkcd() {
     cd "$1"
 }
 
-alias mount_sdb1="$HOME/scripts/mount/mount_sdb1"
-alias mount_sdc1="$HOME/scripts/mount/mount_sdc1"
-
 function music() {
     OLD_DIR=$PWD
 

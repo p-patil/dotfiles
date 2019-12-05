@@ -77,6 +77,7 @@ if (has('nvim'))
     let g:deoplete#enable_at_startup = 1
     let g:deoplete#enable_smart_case = 1
     nmap <Leader>d :call deoplete#disable()<CR>
+    nmap <Leader>D :call deoplete#enable()<CR>
     """" Use tab for completion
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
     inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<TAB>"
@@ -136,6 +137,9 @@ nnoremap * :let @a=@"<CR>mxviw"zy:let @"=@a<CR>:let @/='\<<C-r>z\>'<CR>:set hlse
 
 "" Ctrl+x to unhighlight searched text
 nnoremap <silent> <C-x> :nohl<CR><C-l>
+
+"" Press ctrl+r to interactively search and replace visually selected text.
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 "" Fuzzy search (depends on fzf.vim) stuff below
 
@@ -296,7 +300,7 @@ if has('nvim')
     endfunction
 endif
 
-"" Command to see changes to file since last save
+"" Command to see changes to file since last save.
 command! Df :w ! diff -C 1 % -
 
 "" Shortcut to redirect output of a vim command, e.g. to file. NOTE: There
@@ -317,18 +321,3 @@ tnoremap <C-k> <C-\><C-N><C-w>k
 tnoremap <C-l> <C-\><C-N><C-w>l
 tnoremap <C-q> <C-\><C-N> :tabc <CR>
 nnoremap tT :tab split<CR>:te<CR>i
-
-
-
-" Nuro-specific stuff
-let hostname = substitute(system('hostname'), '\n', '', '')
-if hostname == "ppatil-desktop.corp.nuro.team" || $NURO_VIM != ""
-  " Set tabs to 2
-  set expandtab
-  set tabstop=2
-  set softtabstop=2
-  set shiftwidth=2
-
-  " Disable PYTHONPATH so deoplete works
-  let $PYTHONPATH = ''
-endif
