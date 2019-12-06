@@ -139,7 +139,7 @@ nnoremap * :let @a=@"<CR>mxviw"zy:let @"=@a<CR>:let @/='\<<C-r>z\>'<CR>:set hlse
 nnoremap <silent> <C-x> :nohl<CR><C-l>
 
 "" Press ctrl+r to interactively search and replace visually selected text.
-vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+vnoremap <C-r> "hy:%s/\<<C-r>h\>//gc<left><left><left>
 
 "" Fuzzy search (depends on fzf.vim) stuff below
 
