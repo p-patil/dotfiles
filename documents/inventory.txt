@@ -133,6 +133,10 @@
 - go
     - Installed with: pacman
 
+### Javascript
+- nodejs, npm
+    - Installed with: pacman
+
 # Extra
 
 - jupyter-notebook
