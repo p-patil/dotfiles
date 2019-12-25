@@ -225,10 +225,6 @@
     - Description: Tool for downloading files from servers.
     - Installed with: pacman
 
-- hey
-    - Description: Simple, lightweight program that sends dummy HTTP requests to an address. Useful for testing HTTP load on a server.
-    - Installed with: yay (AUR package)
-
 ## Building Latex files
 - texlive-most
     - Installed with: pacman
