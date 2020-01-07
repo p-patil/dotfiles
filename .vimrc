@@ -56,7 +56,7 @@ let g:eregex_default_enable = 0 " Enable
 let g:eregex_force_case = 1
 
 """ fzf settings
-let $FZF_DEFAULT_COMMAND=""
+let $FZF_DEFAULT_COMMAND="ag -g ''"
 
 """ nerdtree settings
 map <C-n> :NERDTreeToggle<CR>
@@ -256,7 +256,10 @@ set sidescrolloff=5       " always show 10 characters to left and right of line
 set smartcase             " All-lowercase patterns are case-insensitive, but otherwise case-sensitive
 set wildmenu              " Command-line completion
 
-"" Wrap git commit messages to 72 characters
+"" Wrap text to 79 characters.
+set textwidth=79
+
+" Wrap git commit messages to 72 characters.
 au FileType gitcommit set tw=72
 
 "" Tab (character, not window) stuff

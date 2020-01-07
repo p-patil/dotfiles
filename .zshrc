@@ -284,6 +284,7 @@ alias ga="git add"
 alias gap="git add --patch"
 alias gc="git commit"
 alias gca="git commit --amend --no-edit"
+alias gck="git checkout"
 alias gd="git diff"
 alias gds="git diff --staged"
 alias gl="git ls-files"
@@ -721,7 +722,8 @@ then
 fi
 
 # fzf stuff
-export FZF_DEFAULT_COMMAND="ag --hidden --ignore .git -f -g"
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # bd
 . $HOME/.zsh/plugins/bd/bd.zsh
