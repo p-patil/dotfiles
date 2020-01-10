@@ -36,7 +36,7 @@ floating_modifier $mod
 bindsym --release $movemod+Ctrl+s exec /home/piyush/scripts/screenshot.sh
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec env WINIT_HIDPI_FACTOR=1 alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
