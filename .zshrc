@@ -54,16 +54,13 @@ fi
 ## Reduce lag on pressing <ESC>
 export KEYTIMEOUT=0.1
 
-## Set default editor
-export EDITOR="/usr/bin/nvim"
-
 ## For SSH agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval `ssh-agent -s` &> /dev/null
 fi
 ssh-add ~/.ssh/id_rsa &> /dev/null
 
-## Set PATH
+## Add packages built from source to PATH
 if [[ $PATH != *"/opt/aur_builds/trello"* ]]; then
     export PATH="/opt/aur_builds/trello:$PATH"
 fi
@@ -73,9 +70,15 @@ fi
 if [[ $PATH != *"/opt/google/chrome"* ]]; then
     export PATH="/opt/google/chrome:$PATH"
 fi
+if [[ $PATH != *"/opt/google-cloud-sdk/bin"* ]]; then
+    export PATH="/opt/google-cloud-sdk/bin:$PATH"
+fi
 if [[ $PATH != *"$HOME/.local/bin"* ]]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
+
+# For alacritty - set default zoom level.
+export WINIT_HIDPI_FACTOR=1
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
