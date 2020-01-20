@@ -712,7 +712,11 @@ function volume() {
 
 alias vlc="vlc --play-and-exit"
 alias wat="/opt/wat"
-alias wr="sudo systemctl restart netctl-auto@wlp4s0.service"
+function wr() {
+    # TODO(piyush) Remove sudo for rfkill
+    sudo rfkill unblock all
+    sudo systemctl restart netctl-auto@wlp4s0.service
+}
 alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard by default
 
 # Add vim bindings

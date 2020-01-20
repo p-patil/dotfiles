@@ -225,6 +225,14 @@
     - Description: Tool for downloading files from servers.
     - Installed with: pacman
 
+- git-secret
+    - Description: A bash-tool to store your private data inside a git repository.
+    - Installation: yay (AUR package)
+
+- lm_sensors
+    - Description: Bash script for controlling speeds of CPU/case fans.
+    - Installed with: pacman
+
 ## Building Latex files
 - texlive-most
     - Installed with: pacman
