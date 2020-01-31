@@ -296,13 +296,11 @@ alias glgs="git log --stat"
 alias gp="git pull --all --prune --rebase"
 alias gS="nocorrect git status" # Stop zsh from trying to correct git status to stats
 function gsh() { # Stash with name.
-    if [[ $# -eq 0 ]]; then
-        git stash --include-untracked
-    elif [[ $# -eq 1 ]]; then
-        git stash save --include-untracked "$1"
-    else
+    if [[ $# -ne 1 ]]; then
         echo "Usage: $funcstack[1] [stash name]"
+        return 1
     fi
+    git stash save --include-untracked "$1"
 }
 alias gshl="git stash list"
 alias gshlp="git stash list --patch"
@@ -638,6 +636,20 @@ alias p="nocorrect program"
 
 alias push_dotfiles="$HOME/scripts/push_dotfiles.sh"
 alias quick_man="$HOME/scripts/quick_man.py"
+
+function random() {
+    if [[ $# -ne 0 ]] && [[ $# -ne 1 ]]; then
+        echo "Usage: $funcstack[1] <length>"
+        return 2
+    elif [[ ! $1 =~ '[0-9]+' ]]; then
+        echo "Usage: $funcstack[1] <length>"
+        echo "<length> must be an integer"
+        return 1
+    fi
+
+    cat /dev/urandom | tr -d -c '[:alnum:]' | head -c $1; echo
+}
+
 alias remap_keys="$HOME/scripts/remap_keys.sh"
 alias reset_mouse="$HOME/scripts/mouse/switch.sh --right"
 alias restart="$HOME/scripts/restart.py"
