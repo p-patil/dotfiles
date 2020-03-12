@@ -16,6 +16,11 @@ bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 3%+
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 3%-
 bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
 
+# Bind Spotify controls.
+bindsym Control+XF86AudioMute exec /home/piyush/scripts/spotify_dbus_control.sh --toggle-play
+bindsym Control+XF86AudioLowerVolume exec /home/piyush/scripts/spotify_dbus_control.sh --prev
+bindsym Control+XF86AudioRaiseVolume exec /home/piyush/scripts/spotify_dbus_control.sh --next
+
 # Bind microphone key
 bindsym XF86AudioMicMute exec amixer set Capture toggle
 

@@ -217,9 +217,9 @@
     - Installed with: pacman
     - Description: Containerization tool.
 
-- smplayer
+- mpv
     - Installed with: pacman
-    - Description: GUI front-end for mplayer, which is a movie player with support for most audio and video formats.
+    - Description: A project extending the now unmaintained mplayer, supporting wide variety of video file formats, audio and video codecs, and subtitle types.
 
 - wget
     - Description: Tool for downloading files from servers.
