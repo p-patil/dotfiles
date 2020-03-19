@@ -148,6 +148,10 @@
     - Installed with: yay (AUR package)
     - Description: TODO remove. Closed source Chrome build for linux.
 
+- zoom
+    - Installed with: yay (AUR package)
+    - Description: Popular video chatting software.
+
 ### tor
 - tor
     - Installed with: pacman
