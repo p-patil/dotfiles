@@ -105,6 +105,9 @@
     - Installed with: pacman
     - Description: Pip package manager for python.
     - To see packages installed with pip, run `pip freeze`
+- python37
+    - Installed with: yay
+    - Description: Version 3.7 of the Python programming language.
 
 - git
     - Installed with: pacman
