@@ -240,6 +240,10 @@
     - Description: Bash script for controlling speeds of CPU/case fans.
     - Installed with: pacman
 
+- strace, ltrace
+    - Description: Utilities for tracking the syscall and library calls a program makes.
+    - Installed with: pacman
+
 ## Building Latex files
 - texlive-most
     - Installed with: pacman
