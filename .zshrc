@@ -307,6 +307,7 @@ alias gshlp="git stash list --patch"
 alias gshls="git stash list --stat"
 alias gshp="git stash pop"
 alias glfn="git ls-files -m -d | head -n 1" # Show the next file
+alias gr="git rebase"
 alias gra="git rebase --abort"
 alias grc="git rebase --continue"
 alias gri="git rebase --interactive"
@@ -387,6 +388,8 @@ function gdn() { # Show diff next file
 
   git diff $(echo "$INDEX_FILES" | sed -n "${1:=1} p")
 }
+
+alias gci='google-chrome --incognito'
 
 ## Function for easy symmetric, password-based decryption of a file with GPG.
 function gpg_decrypt() {
