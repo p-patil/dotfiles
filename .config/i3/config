@@ -11,6 +11,12 @@
 set $mod Mod4
 set $movemod Mod1
 
+# start a terminal
+bindsym $mod+Return exec env WINIT_HIDPI_FACTOR=1 alacritty
+
+# Launch dmenu
+bindsym $mod+d exec dmenu_run -b -i
+
 # Bind volume keys
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 3%+
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 3%-
@@ -39,9 +45,6 @@ floating_modifier $mod
 
 # Screenshot
 bindsym --release $movemod+Ctrl+s exec /home/piyush/scripts/screenshot.sh
-
-# start a terminal
-bindsym $mod+Return exec env WINIT_HIDPI_FACTOR=1 alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill

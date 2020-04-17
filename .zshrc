@@ -278,6 +278,7 @@ function color() {
 
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
+alias feh="feh --conversion-timeout 1"
 
 # Git aliases
 alias ga="git add"
@@ -312,21 +313,23 @@ alias gra="git rebase --abort"
 alias grc="git rebase --continue"
 alias gri="git rebase --interactive"
 function gan() { # Add next file
+  USAGE="Usage: $funcstack[1] [-p | -e] [n]"
+
   NUM=1
-  PATCH=""
+  ARG=""
 
   # Parse arguments.
   if [[ $# -gt 2 ]]; then
-      echo "Usage: $funcstack[1] [-p] [n]"
+    echo $USAGE
     return
   elif [[ $# -eq 1 ]]; then
-    if [[ "$1" == "-p" || "$1" == "--patch" ]]; then
-      PATCH="$1"
+    if [[ "$1" == -* ]]; then
+      ARG="$1"
     else
       NUM="$1"
     fi
   elif [[ $# -eq 2 ]]; then
-    PATCH="$1"
+    ARG="$1"
     NUM="$2"
   fi
 
@@ -334,8 +337,8 @@ function gan() { # Add next file
   if [[ ! "$NUM" =~ [0-9]+ ]]; then
     echo "Argument must be a positive integer"
     return
-  elif [[ -n "$PATCH" && "$PATCH" != "-p" && "$PATCH" != "--patch" ]]; then
-    echo "Usage: $funcstack[1] [-p] [n]"
+  elif [[ -n "$ARG" && "$ARG" != "-p" && "$ARG" != "-e" ]]; then
+    echo $USAGE
     return
   fi
 
@@ -346,11 +349,8 @@ function gan() { # Add next file
     return
   fi
 
-  if [[ -n "$PATCH" ]]; then
-    git add -p $(echo "$INDEX_FILES" | sed -n "$NUM p")
-  else
-    git add $(echo "$INDEX_FILES" | sed -n "$NUM p")
-  fi
+  FILE=$(echo "$INDEX_FILES" | sed -n "$NUM p")
+  git add $ARG $FILE
 }
 function gen() { # Edit next file
   if [[ $# -ge 2 ]]; then

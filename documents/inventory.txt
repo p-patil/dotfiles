@@ -53,6 +53,9 @@
 - i3ipc
     - Installed with: pip
     - Description: Python package for communicating with i3 using its IPC interface. Required by scratchpad_async on i3status bar.
+- dmenu
+    - Installed with: pacman
+    - Description: A dynamic menu for the X server that's used to create an interactive searchable menu of all programs executable from $PATH.
 
 # Functionality packages
 
@@ -150,6 +153,9 @@
 - google-chrome
     - Installed with: yay (AUR package)
     - Description: TODO remove. Closed source Chrome build for linux.
+- chromium-vaapi
+    - Installed with yay (AUR package)
+    - Description: A patched version of the open-source Chromium browser (on which Google Chrome is based) which includes video decoding via hardware acceleration by means of the VaAPI library. Decoding video on the GPU should allow for significantly lower CPU usage than chromium or google-chrome.
 
 - zoom
     - Installed with: yay (AUR package)
