@@ -250,6 +250,10 @@
     - Description: Utilities for tracking the syscall and library calls a program makes.
     - Installed with: pacman
 
+- kubectl
+    - Description: Command line tool for interacting with Google's kubernetes engine.
+    - Installed with: gcloud (`gcloud components install kubectl`)
+
 ## Building Latex files
 - texlive-most
     - Installed with: pacman

@@ -20,6 +20,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'othree/eregex.vim'
@@ -57,6 +58,15 @@ let g:eregex_force_case = 1
 
 """ fzf settings
 let $FZF_DEFAULT_COMMAND="ag -g ''"
+
+""" goyo settings
+nmap <Leader>g :Goyo 120x100%<CR>
+nmap <Leader>G :Goyo!<CR>
+function! s:goyo_enter()
+    set relativenumber
+    set nu
+endfunction
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
 
 """ nerdtree settings
 map <C-n> :NERDTreeToggle<CR>

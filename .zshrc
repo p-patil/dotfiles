@@ -280,6 +280,24 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
 alias feh="feh --conversion-timeout 1"
 
+function genres() {
+    [[ $# -ne 1 ]] && { echo "Usage: $funcstack[1] <song name or url>"; exit }
+
+    if [[ $1 =~ https?://open.spotify.com* ]]; then
+        # URL
+        OPT="--url"
+    else
+        # Song name
+        OPT="--song"
+    fi
+
+    (
+        cd $HOME/projects/spotify &&
+        workon spotify &&
+        python get_genres.py --refresh $OPT "$1"
+    )
+}
+
 # Git aliases
 alias ga="git add"
 alias gap="git add --patch"
@@ -516,6 +534,16 @@ function l() {
 $LS_OUTPUT"
         column -t -s "|" <<< "$LS_OUTPUT"
     fi
+}
+
+function len() {
+    if [[ $# -ne 1 ]]; then
+        echo "Usage: $(basename $0) <str>"
+        return 1
+    fi
+
+    STR="$1"
+    echo ${#STR}
 }
 
 ## Function to create and then automatically change into a directory.
