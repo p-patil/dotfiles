@@ -276,12 +276,17 @@ function color() {
     echo -e '\e[0;'$CODE"m"
 }
 
+function copy_pgn() {
+    [[ $# -ne 1 ]] && { echo "$funcstack[1]: <path to chess.com PGN file>"; return 1 }
+    sed '/^\[.*\]$/d' "$1" | tr '\n' ' ' | xclip -in
+}
+
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
 alias feh="feh --conversion-timeout 1"
 
 function genres() {
-    [[ $# -ne 1 ]] && { echo "Usage: $funcstack[1] <song name or url>"; exit }
+    [[ $# -ne 1 ]] && { echo "Usage: $funcstack[1] <song name or url>"; return }
 
     if [[ $1 =~ https?://open.spotify.com* ]]; then
         # URL
