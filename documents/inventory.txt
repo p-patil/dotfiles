@@ -142,6 +142,8 @@
 ### Javascript
 - nodejs, npm
     - Installed with: pacman
+- yarn
+    - Installed with: pacman
 
 # Extra
 

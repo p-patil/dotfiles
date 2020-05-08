@@ -118,14 +118,20 @@ noremap gj j
 noremap gk k
 
 "" Map to scrolling
-noremap J <C-e>
-noremap K <C-y>
+noremap H <C-e>
+noremap L <C-y>
 
 "" Map to smooth scrolling
 noremap <silent> U :call smooth_scroll#up(&scroll, 0, 1)<CR>
 noremap <silent> D :call smooth_scroll#down(&scroll, 0, 1)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 2)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 2)<CR>
+
+"" Jump between files quickly
+noremap J 20j
+noremap K 20k
+noremap f 50j
+noremap F 50k
 
 
 
