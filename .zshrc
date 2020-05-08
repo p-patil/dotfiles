@@ -319,12 +319,18 @@ alias glgp="git log --patch"
 alias glgs="git log --stat"
 alias gp="git pull --all --prune --rebase"
 function gph() {
-    if git push; then
-        return
+    OUTPUT=$(git push 2>&1)
+    if echo $OUTPUT | grep -qF "has no upstream branch"; then
+        echo "Push failed. Attempting to create new remote branch."
+        git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)
+    elif echo $OUTPUT | grep -qF "! [rejected]"; then
+        read "ANSWER?Push failed due to divergent local branch. Force push? (y/n) "
+        if [[ "$ANSWER" =~ [Yy] ]]; then
+            git push --force
+        fi
+    else
+        echo "Push failed due to unknown error:\n$OUTPUT"
     fi
-
-    echo "Push failed. Attempting to create new remote branch."
-    git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)
 }
 alias gS="nocorrect git status" # Stop zsh from trying to correct git status to stats
 function gsh() { # Stash with name.
