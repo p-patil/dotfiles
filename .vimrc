@@ -266,8 +266,8 @@ set sidescrolloff=5       " always show 10 characters to left and right of line
 set smartcase             " All-lowercase patterns are case-insensitive, but otherwise case-sensitive
 set wildmenu              " Command-line completion
 
-"" Wrap text to 79 characters.
-set textwidth=79
+"" Wrap text to 100 characters.
+set textwidth=100
 
 " Wrap git commit messages to 72 characters.
 au FileType gitcommit set tw=72

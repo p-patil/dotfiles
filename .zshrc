@@ -318,6 +318,14 @@ alias glgme="git log --author=\"$(git config user.name)\""
 alias glgp="git log --patch"
 alias glgs="git log --stat"
 alias gp="git pull --all --prune --rebase"
+function gph() {
+    if git push; then
+        return
+    fi
+
+    echo "Push failed. Attempting to create new remote branch."
+    git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)
+}
 alias gS="nocorrect git status" # Stop zsh from trying to correct git status to stats
 function gsh() { # Stash with name.
     if [[ $# -ne 1 ]]; then
