@@ -320,6 +320,8 @@ alias glgs="git log --stat"
 alias gp="git pull --all --prune --rebase"
 function gph() {
     OUTPUT=$(git push 2>&1)
+    [[ $? -eq 0 ]] && return;
+
     if echo $OUTPUT | grep -qF "has no upstream branch"; then
         echo "Push failed. Attempting to create new remote branch."
         git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)
