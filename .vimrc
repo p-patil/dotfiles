@@ -15,6 +15,7 @@ endfunction
 call plug#begin()
 
 "" Shared between vim and neovim
+Plug 'jreybert/vimagit'
 Plug 'Shougo/deoplete.nvim'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
@@ -128,8 +129,8 @@ noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 2)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 2)<CR>
 
 "" Jump between files quickly
-noremap H 20j
-noremap L 20k
+noremap L 20j
+noremap H 20k
 
 
 

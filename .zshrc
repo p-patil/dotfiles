@@ -808,3 +808,6 @@ if [[ $(uname -a) == *"Ubuntu"* ]]; then
     alias on_tv="xrandr --output eDP-1 --primary --auto --output HDMI-2 --right-of eDP-1 --mode 1920x1080"
     alias off_tv="xrandr --output eDP-1 --primary --auto --output HDMI-2 --off"
 fi
+
+# Xoba specific stuff
+alias prunelocal="git branch --merged development | grep -vE '^[+*]|master' | xargs git branch -d"
