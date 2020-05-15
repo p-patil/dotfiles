@@ -15,7 +15,6 @@ endfunction
 call plug#begin()
 
 "" Shared between vim and neovim
-Plug 'jreybert/vimagit'
 Plug 'Shougo/deoplete.nvim'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
