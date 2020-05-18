@@ -188,7 +188,8 @@
     - Description: Semi-official desktop application for spotify, developed by Spotify engineers in their spare time (not officially backed by Spotify).
 
 - anki
-    - Installed with: sudo pacman -S anki
+    - Installed with: yay -S anki
+    - Description: Anki spaced repetition program.
 
 ## Command line stuff
 

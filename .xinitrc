@@ -8,4 +8,5 @@ fi
 # Settings to configure
 /home/piyush/scripts/startup.sh
 
-exec i3
+# Start i3 with dbus (for spotify).
+exec dbus-launch i3
