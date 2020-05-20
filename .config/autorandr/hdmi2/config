@@ -7,11 +7,13 @@ off
 output VIRTUAL1
 off
 output HDMI2
-mode 1920x1080
+crtc 1
+mode 3440x1440
 pos 0x0
-rate 60.00
+rate 49.99
 output eDP1
+crtc 0
 mode 1920x1080
-pos 1920x0
+pos 3440x0
 primary
 rate 60.01
