@@ -783,6 +783,13 @@ function wr() {
 }
 alias xclip="/usr/bin/xclip -selection \"clipboard\"" # Copy to system clipboard by default
 
+# Parse the output of xev (which tracks X events and displays information about them in the console
+# in real-time) to show the names of pressed keys. Ripped from
+# https://wiki.archlinux.org/index.php/Keyboard_input#Identifying_keycodes_in_Xorg.
+function xev_better() {
+    xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'
+}
+
 # Add vim bindings
 if [[ $TERM != "xterm-termite" ]]
 then
@@ -810,4 +817,4 @@ if [[ $(uname -a) == *"Ubuntu"* ]]; then
 fi
 
 # Xoba specific stuff
-alias prunelocal="git branch --merged development | grep -vE '^[+*]|master' | xargs git branch -d"
+alias prunelocal="git branch --merged development | grep -vE '^[+*]|master|development' | xargs git branch -d"

@@ -111,6 +111,9 @@
 - python37
     - Installed with: yay
     - Description: Version 3.7 of the Python programming language.
+- bpython
+    - Installed with: pacman
+    - Description: Better python interpreter (has more features such as syntax highlighting and autocomplete).
 
 - git
     - Installed with: pacman
@@ -294,3 +297,8 @@
 - gparted
     - Installed with: pacman
     - Description: GUI for managing disk partitions.
+
+# Xoba
+- terraform
+    - Installed with: pacman
+    - Description: "Infrastructure as code" tool

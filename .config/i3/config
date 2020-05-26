@@ -8,8 +8,8 @@
 # To get a config file with the same key positions, but for your current
 # layout, use the i3-config-wizard
 
-set $mod Mod4
-set $movemod Mod1
+set $mod Mod4      # Super key
+set $movemod Mod1  # Alt key
 
 # start a terminal
 bindsym $mod+Return exec env WINIT_HIDPI_FACTOR=1 alacritty
@@ -23,9 +23,14 @@ bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 3%-
 bindsym XF86AudioMute exec amixer -D pulse set Master 1+ toggle
 
 # Bind Spotify controls.
+## ThinkPad built-in keyboard.
 bindsym Control+XF86AudioMute exec /home/piyush/scripts/spotify_dbus_control.sh --toggle-play
 bindsym Control+XF86AudioLowerVolume exec /home/piyush/scripts/spotify_dbus_control.sh --prev
 bindsym Control+XF86AudioRaiseVolume exec /home/piyush/scripts/spotify_dbus_control.sh --next
+## Used for Apply Inc. Magic Keyboard with Numeric Keypad
+bindsym XF86AudioPlay exec /home/piyush/scripts/spotify_dbus_control.sh --toggle-play
+bindsym XF86AudioPrev exec /home/piyush/scripts/spotify_dbus_control.sh --prev
+bindsym XF86AudioNext exec /home/piyush/scripts/spotify_dbus_control.sh --next
 
 # Bind microphone key
 bindsym XF86AudioMicMute exec amixer set Capture toggle
