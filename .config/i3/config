@@ -8,8 +8,11 @@
 # To get a config file with the same key positions, but for your current
 # layout, use the i3-config-wizard
 
-set $mod Mod4      # Super key
-set $movemod Mod1  # Alt key
+# Super key
+set $mod Mod4
+
+# Alt key
+set $movemod Mod1
 
 # start a terminal
 bindsym $mod+Return exec env WINIT_HIDPI_FACTOR=1 alacritty
