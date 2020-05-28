@@ -281,6 +281,19 @@ function copy_pgn() {
     sed '/^\[.*\]$/d' "$1" | tr '\n' ' ' | xclip -in
 }
 
+function dockerclean() {
+    if [[ $# -gt 0 ]] && [[ $1 == "--all" ]]; then
+        CONTAINERS=$(docker ps -aq)
+        [[ -n $CONTAINERS ]] && docker stop $CONTAINERS
+
+        CONTAINERS=$(docker ps -aq)
+        [[ -n $CONTAINERS ]] && docker rm $CONTAINERS
+    fi
+
+    IMAGES=$(docker images | grep -v latest | awk 'NR > 1 { print $3 }')
+    [[ -n "$IMAGES" ]] && docker rmi $IMAGES
+}
+
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 alias e="/usr/bin/nvim"
 alias feh="feh --conversion-timeout 1"
