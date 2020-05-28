@@ -27,8 +27,8 @@ Plug 'othree/eregex.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
-Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'terryma/vim-smooth-scroll'
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'tpope/vim-surround'
 
 "" Vim plugins
