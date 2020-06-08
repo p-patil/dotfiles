@@ -25,7 +25,6 @@ Plug 'mbbill/undotree'
 Plug 'mhinz/vim-signify'
 Plug 'othree/eregex.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
 Plug 'sheerun/vim-polyglot'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }

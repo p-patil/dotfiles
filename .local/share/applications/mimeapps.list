@@ -165,3 +165,4 @@ audio/vnd.dts.hd=/usr/share/applications/mpv.desktop
 audio/x-adpcm=/usr/share/applications/mpv.desktop
 application/x-cue=/usr/share/applications/mpv.desktop
 audio/m3u=/usr/share/applications/mpv.desktop
+x-scheme-handler/tg=telegramdesktop.desktop

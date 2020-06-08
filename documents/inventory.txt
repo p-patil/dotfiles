@@ -108,12 +108,12 @@
     - Installed with: pacman
     - Description: Pip package manager for python.
     - To see packages installed with pip, run `pip freeze`
-- python37
-    - Installed with: yay
-    - Description: Version 3.7 of the Python programming language.
 - bpython
     - Installed with: pacman
     - Description: Better python interpreter (has more features such as syntax highlighting and autocomplete).
+- pyenv
+    - Installed with: yay
+    - Description: Tool to install and manage different python versions.
 
 - git
     - Installed with: pacman
@@ -127,6 +127,11 @@
 - jdk
     - Installed with: yay (AUR package) 
     - Description: The Oracle Java development kit for the Java programming language.
+
+### Clojure
+- lein
+    - Installed with: pacman
+    - Description: Leiningen, a build automation and dependency management / package manager tool for Clojure.
 
 ### Haskell
 - ghc
@@ -199,6 +204,10 @@
 - neovim
     - Installed with: pacman
     - Description: Text editor, forked and newer version of vim.
+
+- emacs
+    - Installed with: pacman
+    - Description: Text editor, installed for use with Clojure (it's written in Lisp and has great support for Clojure development, such as the live REPL).
 
 - rsync
     - Installed with: pacman

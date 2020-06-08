@@ -16,7 +16,7 @@ set $movemod Mod1
 
 # Run startup script. This is useful for switching between the Apple keyboard and the built-in
 # ThinkPad keyboard.
-bindsym Control+grave exec autorandr hdmi2 && /home/piyush/scripts/startup.sh
+bindsym Control+grave exec /home/piyush/scripts/startup.sh && autorandr hdmi2
 
 # start a terminal
 bindsym $mod+Return exec env WINIT_HIDPI_FACTOR=1 alacritty

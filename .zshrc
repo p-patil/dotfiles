@@ -335,7 +335,8 @@ function gph() {
     OUTPUT=$(git push 2>&1)
     [[ $? -eq 0 ]] && return;
 
-    if echo $OUTPUT | grep -qF "has no upstream branch"; then
+    if echo $OUTPUT | grep -qF "has no upstream branch" || \
+       echo $OUTPUT | grep -qF "upstream branch of your current branch does not match"; then
         echo "Push failed. Attempting to create new remote branch."
         git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)
     elif echo $OUTPUT | grep -qF "! [rejected]"; then
@@ -512,6 +513,8 @@ function hib() {
         echo "Unknown OS"
     fi
 }
+
+alias killpython='kill -9 $(ps | grep python | cut -d " " -f 1)'
 
 ## Pretty printed version of "ls -lah".
 unalias l # First remove zsh's default alias
