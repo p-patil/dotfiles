@@ -26,6 +26,7 @@ Plug 'mhinz/vim-signify'
 Plug 'othree/eregex.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
+Plug 'svermeulen/vim-yoink'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 Plug 'tpope/vim-surround'
@@ -67,10 +68,11 @@ function! s:goyo_enter()
 endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 
-""" nerdtree settings
-map <C-n> :NERDTreeToggle<CR>
-map <Leader>N :NERDTreeFind<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Close vim if the only open window left is nerdtree
+""" vim-yoink settings
+nmap <C-n> <plug>(YoinkPostPasteSwapBack)
+nmap <C-p> <plug>(YoinkPostPasteSwapForward)
+nmap p <plug>(YoinkPaste_p)
+nmap P <plug>(YoinkPaste_P)
 
 """ vim-signify settings
 let g:signify_realtime = 1
@@ -166,7 +168,7 @@ vnoremap <C-r> "hy:%s/\<<C-r>h\>//gc<left><left><left>
 :nnoremap <Leader>a :Ag<CR> 
 
 """ Search recursively over files names in current directory
-:nnoremap <C-p> :Files<CR> 
+:nnoremap <C-t> :Files<CR> 
 
 
 
