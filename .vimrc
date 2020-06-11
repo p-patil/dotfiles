@@ -26,6 +26,7 @@ Plug 'mhinz/vim-signify'
 Plug 'othree/eregex.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'sheerun/vim-polyglot'
+Plug 'svermeulen/vim-cutlass'
 Plug 'svermeulen/vim-yoink'
 Plug 'terryma/vim-smooth-scroll'
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
@@ -73,6 +74,17 @@ nmap <C-n> <plug>(YoinkPostPasteSwapBack)
 nmap <C-p> <plug>(YoinkPostPasteSwapForward)
 nmap p <plug>(YoinkPaste_p)
 nmap P <plug>(YoinkPaste_P)
+let g:yoinkIncludeDeleteOperations = 1 " Include delete operations in yank history
+let g:yoinkSwapClampAtEnds = 0 " Allow cycling through yank history
+let g:yoinkSyncSystemClipboardOnFocus = 1 " Don't include system clipboard in yank history
+
+""" vim-cutlass settings
+"""" Use m to cut (delete and copy). So now using d will perform deletions (without copying) and m
+"""" will perform cuts.
+nnoremap m d
+xnoremap m d
+nnoremap mm dd
+nnoremap M D
 
 """ vim-signify settings
 let g:signify_realtime = 1
