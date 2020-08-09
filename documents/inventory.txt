@@ -71,10 +71,6 @@
     - Installed with: pacman
     - Description: Lists hardware information.
 
-- grub
-    - Installed with: pacman
-    - Description: Grand Unified Bootloader, used to boot into different operating systems.
-
 ## Terminal
 - alacritty
     - Installed with: yay (AUR package)
