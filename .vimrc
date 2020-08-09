@@ -141,8 +141,10 @@ noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 2)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 2)<CR>
 
 "" Jump between files quickly
-noremap L 20j
-noremap H 20k
+noremap ) 5j
+noremap ( 5k
+noremap L 10j
+noremap H 10k
 
 
 
