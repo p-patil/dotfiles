@@ -1,3 +1,4 @@
+NOTE: This list is duplicated in Roam under the title "017b2 List of packages installed on Arch Linux".
 - # Essential Arch install
     - base, base-devel
         - Installed with: pacman
