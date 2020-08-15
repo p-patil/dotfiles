@@ -71,6 +71,10 @@
     - Installed with: pacman
     - Description: Lists hardware information.
 
+- tzupdate
+    - Installed with: yay (AUR package)
+    - Description: Automatically update system timezone using geolocation of IP address.
+
 ## Terminal
 - alacritty
     - Installed with: yay (AUR package)
