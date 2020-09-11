@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# NOTE: Make sure this file is executable.
+ExecUpPost="tzupdate"
