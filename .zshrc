@@ -816,21 +816,6 @@ fi
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# bd
-. $HOME/.zsh/plugins/bd/bd.zsh
-
 # NOTE: Additional installs, not found here, correspond to .zsh scripts in ~/.oh-my-zsh/custom
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Ubuntu specific stuff
-if [[ $(uname -a) == *"Ubuntu"* ]]; then
-    alias nuro_vpn="nmcli con up id \"Nuro VPN\" --ask"
-    alias nuro_vpn_down="nmcli con down id \"Nuro VPN\""
-
-    alias on_tv="xrandr --output eDP-1 --primary --auto --output HDMI-2 --right-of eDP-1 --mode 1920x1080"
-    alias off_tv="xrandr --output eDP-1 --primary --auto --output HDMI-2 --off"
-fi
-
-# Xoba specific stuff
-alias prunelocal="git branch --merged development | grep -vE '^[+*]|master|development' | xargs git branch -d"
