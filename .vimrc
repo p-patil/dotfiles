@@ -218,7 +218,9 @@ nnoremap <expr> tu getline('.')=~'^\s*$' ?":call TodoComment('TODO(piyush) uncom
 "" Make a copy of the current line right below it, and comment out the original. Useful for
 "" debugging purposes.
 nnoremap <Leader>n Ypk:call NERDComment('n', 'Comment')<CR>j
-
+"" Insert the code 'import sys; sys.exit()' This is useful for python debugging.
+"" TODO(oiyush) Figure out how to call tr (mapped above) after, to insert a remove-todo comment.
+nnoremap tp Aimport sys; sys.exit()<ESC>
 
 
 " GENERAL SETTINGS
