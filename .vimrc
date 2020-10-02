@@ -141,7 +141,7 @@ noremap H 10k
 " SEARCH-RELATED
 
 "" Regex search (depends on eregex)
-nnoremap <Leader>/ :M/
+nnoremap <Leader>\ :M/
 
 "" Only highlight word under cursor, don't jump to next match or scroll.
 "" Explanation:
@@ -162,11 +162,12 @@ vnoremap <C-r> "hy:%s/\<<C-r>h\>//gc<left><left><left>
 
 "" Fuzzy search (depends on fzf.vim) stuff below
 
-""" Search in current buffer
-:nnoremap \ :BLines<CR> 
+""" Remap default search to fuzzy search in current buffer, and use backslash for default search.
+:nnoremap \ /
+:nnoremap / :BLines<CR> 
 
 """ Search in all open buffers
-:nnoremap <Leader>\ :Lines<CR>
+:nnoremap <Leader>/ :Lines<CR>
 
 """ Search recursively in files in current directory, using ag
 :nnoremap <Leader>a :Ag<CR> 
@@ -220,7 +221,7 @@ nnoremap <expr> tu getline('.')=~'^\s*$' ?":call TodoComment('TODO(piyush) uncom
 nnoremap <Leader>n Ypk:call NERDComment('n', 'Comment')<CR>j
 "" Insert the code 'import sys; sys.exit()' This is useful for python debugging.
 "" TODO(oiyush) Figure out how to call tr (mapped above) after, to insert a remove-todo comment.
-nnoremap tp Aimport sys; sys.exit()<ESC>
+nnoremap tp Aimport sys; sys.exit() # TODO(piyush) remove<ESC>
 
 
 " GENERAL SETTINGS
