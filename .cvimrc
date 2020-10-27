@@ -10,7 +10,3 @@ set noautofocus
 " Key bindings go here
 map F createActiveTabbedHint
 map D createTabbedHint
-
-" Store path to this file, and tell cvim to load configuration from here
-let configpath = "~/.cvimrc"
-set localconfig
