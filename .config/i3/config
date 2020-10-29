@@ -46,6 +46,11 @@ bindsym XF86AudioMicMute exec amixer set Capture toggle
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
+# Keyboard shortcut to toggle touchscreen.
+bindsym $movemod+t exec xinput enable "ELAN Touchscreen"
+bindsym $movemod+Shift+t exec xinput disable "ELAN Touchscreen"
+
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
 font xft:Monaco 8.5
