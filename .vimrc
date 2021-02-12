@@ -28,7 +28,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'svermeulen/vim-cutlass'
 Plug 'svermeulen/vim-yoink'
 Plug 'terryma/vim-smooth-scroll'
+"TODO(piyush) Fix why codota isn't working (you sent their support an email)
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+"Plug 'codota/tabnine-vim'
 Plug 'tpope/vim-surround'
 
 "" Vim plugins
@@ -224,8 +226,8 @@ nnoremap <Leader>n Ypk:call NERDComment('n', 'Comment')<CR>j
 "" instead of hard coding.
 """ Insert the code 'import sys; sys.exit()'
 nnoremap tp Aimport sys; sys.exit() # TODO(piyush) remove<ESC>
-""" Insert the code 'import code; code.interact(local=locals())'
-nnoremap tc Aimport code; code.interact(local=locals()) # TODO(piyush) remove<ESC>
+""" Insert the code 'import code, sys; code.interact(local=locals()); sys.exit()'
+nnoremap tc Aimport code, sys; code.interact(local=locals()); sys.exit() # TODO(piyush) remove<ESC>
 
 
 " GENERAL SETTINGS

@@ -281,6 +281,8 @@ function copy_pgn() {
     sed '/^\[.*\]$/d' "$1" | tr '\n' ' ' | xclip -in
 }
 
+alias ct="cd $(mktemp -d)"  # Create and change into a temporary directory
+
 function dockerclean() {
     if [[ $# -gt 0 ]] && [[ $1 == "--all" ]]; then
         CONTAINERS=$(docker ps -aq)
@@ -772,6 +774,7 @@ function scrambler() {
 alias screenshot="$HOME/scripts/screenshot.sh"
 alias switch_mouse="$HOME/scripts/mouse/switch.sh --left"
 alias sz="source $HOME/.zshrc"
+alias tor="cd /opt/tor-browser_en-US && ./start-tor-browser.desktop"
 alias ts_enable="$HOME/scripts/touchscreen.sh --enable"
 alias ts_disable="$HOME/scripts/touchscreen.sh --disable"
 alias umount_sdb1="$HOME/scripts/mount/umount_sdb1"
